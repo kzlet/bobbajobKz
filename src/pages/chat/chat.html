@@ -1,0 +1,55 @@
+<ion-content class="has-header" no-bounce>
+    <div>
+        <ion-icon name="ios-close" style="color:white;padding: 15px; margin-top:3%;" (click)="back()"></ion-icon>
+        <p style="margin-top: -6%; text-align: center;color: white">{{worker}}</p>
+    </div>
+    <ion-buttons end>
+      <button style="margin-top: -15%; background-color: transparent;" ion-button icon-only (click)="back()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  
+<div class = "chatwindow"> 
+    <ion-list no-lines>
+       <ion-item *ngFor = "let item of showMsg; let i = index" text-wrap style="background-color:transparent">
+        
+        <ion-card style="background-color:white">
+        <!--ion-avatar item-left *ngIf="item.sender">
+           <img src="imgs/userp.png">
+         </ion-avatar-->
+         <div class="bubble me" *ngIf="item.sender" style="background-color:white">
+           <h3 style="color:black">{{item.sender}}</h3>
+         </div>
+         </ion-card>
+
+         <ion-card style="background-color:#491594">
+         <!--ion-avatar item-right *ngIf="item.rec">
+           <img src="{{profile_picture}}">
+         </ion-avatar-->
+         <div class="bubble1 you" *ngIf="item.rec" style="background-color:#491594">
+           <h3 style="color:white">{{item.rec}}</h3>
+         </div>
+        </ion-card>
+
+       </ion-item>
+     </ion-list>
+    </div>
+
+    <ion-fab right bottom style="margin-top:-20px; color:#491594">
+      <button ion-fab color="dark"><ion-icon name="arrow-dropup"></ion-icon></button>
+      <ion-fab-list side="top">
+        <button ion-fab (click)="assign()"><ion-icon name="ios-chatboxes-outline"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
+
+    
+</ion-content>
+
+<ion-footer style="background-color:transparent">
+  <ion-item style="width:60%;background-color:transparent" no-lines>
+    <ion-input type="text" placeholder="New Message" style="color:white" [(ngModel)]="message"></ion-input>
+  </ion-item>
+  <div align="right" style="margin-top: -40px;">
+    <img src="imgs/sendbtn3.png" style="width:12%" (click)="sendMessage()"/>
+  </div>
+</ion-footer>

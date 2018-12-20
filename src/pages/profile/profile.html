@@ -1,0 +1,68 @@
+<ion-content no-bounce class="has-header">
+    <div>
+      <ion-icon name="arrow-back" style="color:white;padding: 15px; margin-top:3%;" (click)="back()"></ion-icon>
+      <h5 style="margin-top: -8%; text-align: center;color: white">Profile</h5>
+  </div>
+
+  <div align="left" style="margin-top:6%;padding-left:5px">
+    <ion-item *ngFor="let post of posts" no-lines style="background-color: transparent">
+      <ion-avatar item-start>
+          <img src="{{post.profile_picture}}">
+        </ion-avatar>
+          <h2 style="color: white">{{post.name}}</h2>
+          <rating [(ngModel)]="rate"  readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>   <!--(ngModelChange)="onModelChange($event)"-->
+      </ion-item>
+  </div>
+
+       
+<div *ngFor="let post of posts" style="margin-top:-20px">
+
+  <div *ngIf="post.available === yes || post.available === 'yes'" style="background-color: #418bb8; margin-top:60px;">
+    <img src="imgs/green.png" style="width: 6%;padding-left:5px; padding-top:5px"/><p style="color:white;margin-top: -19px;margin-left: 24px;">Available <b style="float: right;padding-right: 49px;">{{current_time}}</b></p>
+</div>
+
+<div *ngIf="post.available === no || post.available === 'no'" style="background-color: #418bb8; margin-top:60px;">
+    <img src="imgs/red.png" style="width: 6%;padding-left:5px; padding-top:5px"/><p style="color:white;margin-top: -19px;margin-left: 24px;">Un-Available <b style="float: right;padding-right: 49px;">{{current_time}}</b></p>
+</div>
+
+<div *ngIf="post.available === busy || post.available === 'busy'" style="background-color: #418bb8; margin-top:60px;">
+    <img src="imgs/yellow.png" style="width: 6%;padding-left:5px; padding-top:5px"/><p style="color:white;margin-top: -19px;margin-left: 24px;">Busy <b style="float: right;padding-right: 49px;">{{current_time}}</b></p>
+</div>
+</div>
+
+      <!-- <div *ngFor="let post of posts" align="left">
+          <h4 style="color:white;" >Number: &nbsp;{{post.number}}</h4>
+          <h4 style="color:white;" >Email: &nbsp; {{post.email}}</h4>
+      </div> -->
+
+    <div *ngFor="let host of posts">
+      <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%; " ion-button  (click)=name(host.email); >
+        <p>Qualification & Experience</p>
+      </button>
+      <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%" ion-button  (click)=price(host.email);>
+        <p>Service & Price</p>
+      </button>
+      <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%;height:12%;" ion-button (click)=special(host.email);>
+      
+        <ion-label>Special Condition<br/></ion-label>
+      </button>
+
+      <button style="border-radius:10px 10px; background-color:#fd571d;margin-left:2%;width: 95%; margin-top:15%;" ion-button icon-left (click)="checkemail()" >
+        <ion-icon name="md-mail"></ion-icon>
+        EMAIL
+      </button>
+      <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%; margin-top:1%;" ion-button icon-left (click)="chat(host.email,  host.name, host.profile_picture)">
+        <ion-icon name="md-chatbubbles"></ion-icon>
+        CHAT
+      </button>
+      <button style="border-radius:10px 10px; background-color:#4de262;margin-left:2%;width: 95%; margin-top:1%;" ion-button icon-left (click)="call()">
+        <ion-icon name="md-call"></ion-icon>
+        CALL
+      </button>
+      <!--button style="border-radius:10px 10px; background-color:lightcoral;margin-left:2%;width: 95%; margin-top:1%;" ion-button icon-left (click)="job(host.email, host.name)">
+        <ion-icon name="done-all"></ion-icon>
+        Assign Job
+      </button-->
+    </div>
+
+</ion-content>

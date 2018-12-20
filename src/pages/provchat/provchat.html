@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons  (click)="do()">
+            <button ion-button icon-only  (click)="do()">
+              <ion-icon name="ios-menu-outline" style="color:white" (click)="do()"></ion-icon>
+            </button>
+          </ion-buttons>
+          
+      <ion-title><p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Chats</p></ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content class="has-header" no-bounce>
+    
+      <ion-list *ngFor="let post of fosts">
+          <ion-item (click)="chating(post.client , post.worker , post.sender , post.reciever)">
+            <ion-avatar item-start>
+              <img src="imgs/userp.png">
+            </ion-avatar>
+            <h2>{{post.client}}</h2>
+          </ion-item>
+        </ion-list>
+    
+
+</ion-content>
+  

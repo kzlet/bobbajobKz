@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons  (click)="do()">
+            <button ion-button icon-only  (click)="do()">
+              <ion-icon name="ios-menu-outline" style="color:white" (click)="do()"></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title style="margin-top: -47px; margin-left: 73px;"><p style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Active Jobs</p></ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content no-bounce class="color-background">
+
+    <ion-list *ngFor="let post of posts">
+
+        <h4 style="color: white;padding-left:5px">{{post.cust_name}}</h4>
+        <div style="background-color:#6325b6; width:100%">
+       <p style="color:white;padding-left: 6px;padding-top: 4px;">Date &nbsp;-&nbsp; Time</p>
+       <ion-icon style="color:yellow;float: right;margin-top: -33px;padding-right: 49px;" name="ios-chatbubbles-outline"></ion-icon> 
+ <ion-icon style="color:orange;float: right;margin-top: -33px;padding-right: 26px;" name="md-text"></ion-icon> 
+        </div>
+
+ </ion-list>
+
+
+ <!-- <ion-list>
+
+  <h4 style="color: white;padding-left:5px">{{cust_name}}</h4>
+  <div style="background-color:#6325b6; width:100%">
+ <p style="color:white;padding-left: 6px;padding-top: 4px;">{{date}} &nbsp;-&nbsp; {{time}}</p>
+ <ion-icon style="color:yellow;float: right;margin-top: -33px;padding-right: 49px;" name="ios-chatbubbles-outline"></ion-icon> 
+ <ion-icon style="color:orange;float: right;margin-top: -33px;padding-right: 26px;" name="md-text"></ion-icon> 
+
+  </div> -->
+
+
+
+
+
+
+</ion-content>

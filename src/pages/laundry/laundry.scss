@@ -1,0 +1,24 @@
+.laundry1{
+    background: linear-gradient(to bottom, #418bb8, #418bb8);
+}
+
+page-laundry {
+    .swiper-pagination-bullet-active {
+        background: #007aff;
+        opacity: 1;
+    }
+    .list-md {
+        margin: -1px 20px 32px;
+        border-top: 6px;
+        border-top-color: red;
+    }
+}
+
+.card-positioner1 {
+    position: absolute;
+    top: 2%;
+    font-size: 1.5em;
+    width: 100%;
+    font-weight: bold;
+    padding-left: 5px;
+}

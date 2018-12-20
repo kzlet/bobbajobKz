@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title><p style="color:white"></p></ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="close()"><p>Close</p></button>
+        </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+      <ion-slides pager effect="cube">
+
+          <ion-slide style="background-color: lightgray; border-radius:12px 12px">
+            <div align="center">
+            <h2 class="card-positioner1">Enter Job Description</h2>
+
+            <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+                <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                  <ion-input type="text" placeholder="Email" [(ngModel)]="job_description"></ion-input>
+                </ion-item>
+              </div>
+
+            <button ion-button color="primary" (click)="goToSlide2()">Next</button>
+          </div>
+          </ion-slide>
+        
+          <ion-slide style="background-color: lightgray; border-radius:12px 12px">
+            
+              <div align="center">
+                  <h2 class="card-positioner1">Enter Location / Schedule</h2>
+      
+                  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+                      <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                        <ion-input type="text" placeholder="Your Location" [(ngModel)]="location"></ion-input>
+                      </ion-item>
+                    </div>
+
+                    <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+                        <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                            <ion-label>Month</ion-label>
+                            <ion-select [(ngModel)]="Month">
+                              <ion-option value="01">January</ion-option>
+                              <ion-option value="02">February</ion-option>
+                              <ion-option value="03">March</ion-option>
+                              <ion-option value="04">April</ion-option>
+                              <ion-option value="05">May</ion-option>
+                              <ion-option value="06">June</ion-option>
+                              <ion-option value="07">July</ion-option>
+                              <ion-option value="08">August</ion-option>
+                              <ion-option value="09">September</ion-option>
+                              <ion-option value="10">October</ion-option>
+                              <ion-option value="11">November</ion-option>
+                              <ion-option value="12" checked="true">December</ion-option>
+                            </ion-select>
+                            <ion-select [(ngModel)]="Date">
+                              <ion-option>1</ion-option>
+                              <ion-option>2</ion-option>
+                              <ion-option>3</ion-option>
+                              <ion-option>4</ion-option>
+                              <ion-option>5</ion-option>
+                              <ion-option checked="true">6</ion-option>
+                              <ion-option>7</ion-option>
+                              <ion-option>8</ion-option>
+                              <ion-option>9</ion-option>
+                              <ion-option>10</ion-option>
+                              <ion-option>11</ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </div>
+            
+                  <button ion-button color="primary" (click)="goToSlide3()">Next</button>
+                </div>
+
+          </ion-slide>
+        
+          <ion-slide style="background-color: lightgray; border-radius:12px 12px">
+
+              <div align="center">
+                  <h2 class="card-positioner1">Enter Rough Budget</h2>
+      
+                  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+                      <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                        <ion-input type="number" placeholder="Budget" [(ngModel)]="budget"></ion-input>
+                      </ion-item>
+                    </div>
+              </div>
+            <button ion-button color="primary" (click)="next()">Next</button>
+          </ion-slide>
+        
+
+        
+
+        </ion-slides>
+  </ion-content>

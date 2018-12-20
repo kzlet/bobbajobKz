@@ -1,0 +1,32 @@
+<ion-content no-bounce class="name1">
+
+
+  <div>
+    <ion-icon name="arrow-back" style="color:white;padding: 15px; margin-top:3%;" (click)="profile1()"></ion-icon>
+</div>
+
+<div style="background-color:#5a3a8d">
+  <button Class="any" ion-button color="light" clear>Qualifications</button>
+</div>
+
+<div *ngFor="let post of posts">
+  <ion-item no-lines style="background-color:transparent" (click)="download(post.file)">
+    <p style="color:white;margin-left: 5%">{{post.q_name}}</p>
+    <ion-icon style="color:white" name="ios-download-outline" item-end></ion-icon>
+  </ion-item>
+</div>
+
+<div style="background-color:#5a3a8d">
+  <button class="any" ion-button color="light" clear>Experience</button>
+</div>
+
+<div *ngFor="let post of posts">
+
+<ion-label>
+  <P style="color:white;margin-left: 5%">{{post.past_exp}}</P>
+</ion-label>
+
+</div>
+
+
+</ion-content>

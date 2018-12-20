@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+      <ion-buttons start>
+        <button ion-button icon-only (click)="do()">
+        <ion-icon name="ios-menu-outline" style="color:white;padding: 5px;"></ion-icon>
+      </button>
+        </ion-buttons>
+    <ion-title>User Dashboard</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="addRoom()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce class="has-header">
+
+  <ion-grid>
+        <ion-row>
+          <ion-col col-4 *ngFor="let post of dash_data">
+          <ion-card style="border-radius:12px 12px;background-color:#418bb8;width:90%" (click)="get_value(post.title, post.id);">
+          <img  style="width:50%;margin-left: 24%; margin-top: 7px;" src="{{post.image}}">
+          <p style="color:white;text-align: center;margin: 5px 6px 15px;
+          font-size: 1.0rem;">{{post.title}}</p>
+        </ion-card>
+        </ion-col>
+        </ion-row>
+  </ion-grid>
+
+     
+
+</ion-content>

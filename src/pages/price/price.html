@@ -1,0 +1,16 @@
+<ion-content no-bounce class="price1">
+  <div>
+    <ion-icon name="arrow-back" style="color:white;padding: 15px; margin-top:3%;" (click)="profile2()"></ion-icon>
+</div>
+<div style="background-color:#5a3a8d">
+  <button class="any" ion-button color="light" clear>Service & Pricing</button>
+</div>
+<ion-list>
+  <ion-item style="background-color:transparent" *ngFor="let post of posts">
+    <h2 style="color:white;">{{post.category}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AED &nbsp;{{post.price}}</h2>
+  </ion-item>
+</ion-list>
+
+
+
+</ion-content>

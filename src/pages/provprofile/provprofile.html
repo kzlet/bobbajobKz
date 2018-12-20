@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+      <ion-buttons  (click)="do()">
+          <button ion-button icon-only  (click)="do()">
+            <ion-icon name="ios-menu-outline" style="color:white" (click)="do()"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title style="margin-top: -47px; margin-left: 73px;"><p style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profile</p></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-bounce class="home-background">
+
+
+<div align="left" style="margin-top:6%;padding-left:5px">
+  <ion-item *ngFor="let post of posts" no-lines style="background-color: transparent">
+    <ion-avatar item-start>
+        <img src="{{profile_picture}}">
+      </ion-avatar>
+        <h2 style="color: white">{{name}}</h2>
+    </ion-item>
+    <p style="color: white;padding-left:10px">Email : <b style="color: white">{{email}}</b></p>
+    <p style="color: white;padding-left:10px">Number : <b style="color: white">{{number}}</b></p>
+</div>
+
+<!-- <div align="left" style="margin-top:6%;padding-left:5px">
+  <ion-item  no-lines style="background-color: transparent">
+    <ion-avatar item-start>
+        <img src="{{profile_picture}}">
+      </ion-avatar>
+        <h2 style="color: white">{{name}}</h2>
+    </ion-item>
+
+
+<p style="color: white;padding-left:10px">Email : <b style="color: white">{{email}}</b></p>
+<p style="color: white;padding-left:10px">Number : <b style="color: white">{{number}}</b></p>
+
+</div> -->
+     
+<div *ngIf="available === 1 || available === '1'" style="background-color: #6823b1; margin-top:60px;">
+  <img src="imgs/green.png" style="width: 6%;padding-left:5px; padding-top:5px"/><p style="color:white;margin-top: -19px;margin-left: 24px;">Available <b style="float: right;padding-right: 49px;">{{current_time}}</b></p>
+</div>
+
+<div *ngIf="available === 0 || available === '0'" style="background-color: #6823b1; margin-top:60px;">
+  <img src="imgs/red.png" style="width: 6%;padding-left:5px; padding-top:5px"/><p style="color:white;margin-top: -19px;margin-left: 24px;">Un-Available <b style="float: right;padding-right: 49px;">{{current_time}}</b></p>
+</div>
+
+<div *ngIf="available === 2 || available === '2'" style="background-color: #6823b1; margin-top:60px;">
+  <img src="imgs/yellow.png" style="width: 6%;padding-left:5px; padding-top:5px"/><p style="color:white;margin-top: -19px;margin-left: 24px;">Busy <b style="float: right;padding-right: 49px;">{{current_time}}</b></p>
+</div>
+   
+
+
+    <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%; " ion-button  (click)=qualification(); >
+      <p>Qualification & Experience</p>
+    </button>
+    <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%" ion-button  (click)=price();>
+      <p>Service & Price</p>
+    </button>
+    <button style="border-radius:10px 10px; background-color:#3f197c;margin-left:2%;width: 95%;height:12%;" ion-button>
+      <ion-label>Special Condition<br/></ion-label>
+    </button>
+
+    
+    <button style="border-radius:10px 10px; background-color:#2e3192;margin-left:2%;width: 95%; margin-top:20%;" ion-button icon-left (click)="edit()">
+      <ion-icon name="done-all"></ion-icon>
+      Edit Profile
+    </button>
+
+
+</ion-content>

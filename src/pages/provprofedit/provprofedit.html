@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar style="color:white">
+    <ion-title style="margin-left: 24px;"><p style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit Profile</p></ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="color-background">
+ 
+
+
+
+
+  <div align="center" (click)="presentActionSheet()">
+    <img *ngIf="!imageURI" src="{{profile_picture}}" style="width:27%">
+    <img *ngIf="imageURI" src="{{imageURI}}" style="width: 27%;"/>
+    <p style="color:white;margin-top: 3%;">Change picture</p>
+  </div>
+
+
+ 
+
+  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+      <ion-item class="item-ios" style="border-radius: 12px 12px;">
+        <ion-input type="text" placeholder="" [(ngModel)]="name"></ion-input>
+      </ion-item>
+    </div>
+
+      <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+          <ion-item class="item-ios" style="border-radius: 12px 12px;">
+            <ion-input type="number" placeholder="" [(ngModel)]="number"></ion-input>
+          </ion-item>
+        </div>
+
+        <!-- <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+          <ion-item class="item-ios" style="border-radius: 12px 12px;">
+            <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+          <ion-item class="item-ios" style="border-radius: 12px 12px;">
+            <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="conpassword"></ion-input>
+          </ion-item>
+        </div> -->
+
+          <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+              <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                <ion-input type="text" placeholder="" [(ngModel)]="address"></ion-input>
+              </ion-item>
+            </div>
+
+        
+
+            <!--div align="center" style="padding-top:5px">
+                <button ion-button color="light" round outline style="width: 94%;background-color:#5f27be" (click)="edit()">Edit Qualifications</button>
+              </div-->
+
+              <!-- <div align="center" style="padding-top:5px">
+                  <button ion-button color="light" round outline (click)="signup()" style="width: 94%;background-color:#5f27be" (click)="signup()">Change my Services</button>
+                </div> -->
+
+
+            <div align="center" style="padding-top:5px">
+                <button ion-button color="light" round outline style="width: 94%;background-color:#418bb8" (click)="signup()">Save and Update</button>   <!--(click)="signup()"-->
+              </div>
+
+
+</ion-content>

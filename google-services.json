@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "234181533936",
+    "firebase_url": "https://bobbajob-f14c9.firebaseio.com",
+    "project_id": "bobbajob-f14c9",
+    "storage_bucket": "bobbajob-f14c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234181533936:android:28f0edf11fdff1a7",
+        "android_client_info": {
+          "package_name": "io.ionic.bobbajob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234181533936-6jlbu2jchgmh2kv67dth93ouc8d2gns9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.bobbajob",
+            "certificate_hash": "d773e0fe56ff0589a9a5e006bd4968ba4786cf44"
+          }
+        },
+        {
+          "client_id": "234181533936-ccn3snp84pcsta3645kae95v4t9chv0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsMFALNMioXM7ax3g340IlW9jBHSDfWKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234181533936-ccn3snp84pcsta3645kae95v4t9chv0i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

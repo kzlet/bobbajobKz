@@ -1,0 +1,95 @@
+<ion-content no-bounce class="new_bg">
+<div align="left" style="margin-top: -9px;">
+    <ion-icon name="arrow-back" style="color:white;padding: 15px; margin-top:3%;" (click)="laundry()"></ion-icon>
+</div>
+
+<div align="center" style="margin-top: -31px;">
+    <p style="margin-top: -6%; text-align: center;color: white">{{catid}}</p>
+</div>
+
+<div align="right" style="margin-top: -36px;padding-bottom: 5px;padding-right: 7px;">
+    <ion-icon name="home" style="color:white;padding: 5px;" (click)="home()"></ion-icon>
+</div>
+
+
+  
+        <ion-segment style="background-color: #418bb8;" [(ngModel)]="pet">
+          <ion-segment-button value="Availability">
+            <ion-icon name="ios-swap-outline"></ion-icon>
+            Availability
+          </ion-segment-button>
+          <ion-segment-button value="Rating">
+              <ion-icon name="ios-swap-outline"></ion-icon>
+            Rating
+          </ion-segment-button>
+          <ion-segment-button value="Price">
+              <ion-icon name="ios-swap-outline"></ion-icon>
+           Price
+          </ion-segment-button>
+        </ion-segment>
+    
+
+      <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'Availability'">
+            <ion-list  no-lines *ngFor="let post of posts">
+                <ion-item (click)="profile1(post.email)" style="background-color: transparent;">
+                  <ion-avatar item-start >
+                    <img src="{{post.profile_picture}}">
+                  </ion-avatar>
+                  <h2 style="color: white;margin-top: 14px;">{{post.name}}</h2>
+                  <p style="color: white; margin-left: 200px;margin-top: -17px;">AED&nbsp;{{post.price}}</p>
+                  <rating [(ngModel)]="rate"  readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>   <!--(ngModelChange)="onModelChange($event)"-->
+                </ion-item>
+                <img style="margin-top: 9px;" src="imgs/white.png"/>
+              </ion-list>
+        </ion-list>
+
+        
+       <!-- <ion-list *ngSwitchCase="'Availability'">
+          <ion-list no-lines>
+              <ion-item (click)="profile1(post.email)" style="background-color: transparent;">
+                <ion-avatar item-start >
+                  <img src="imgs/userp.png">
+                </ion-avatar>
+                <h2 style="color: white;margin-top: 14px;">Name</h2>
+                  <p style="color: white; margin-left: 200px;margin-top: -17px;">AED&nbsp;Price</p>
+                <rating [(ngModel)]="rate"  readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating> 
+              </ion-item>
+              <img style="margin-top: 9px;" src="imgs/white.png"/>
+            </ion-list>
+      </ion-list>  -->
+
+
+    
+        <ion-list *ngSwitchCase="'Rating'">
+          <ion-list *ngFor="let post of posts">
+            <ion-item style="background-color: transparent;">
+              <ion-avatar item-start>
+                <img src="{{post.profile_picture}}">
+              </ion-avatar>
+              <h2 style="color: white">{{post.name}}</h2>
+              <img src="imgs/white.png"/>
+            </ion-item>
+          </ion-list>
+        </ion-list>
+    
+
+        <ion-list *ngSwitchCase="'Price'">
+            <ion-list *ngFor="let post of posts">
+                <ion-item style="background-color: transparent;">
+                  <ion-avatar item-start>
+                    <img src="{{post.profile_picture}}">
+                  </ion-avatar>
+                  <h2 style="color: white">{{post.name}}</h2>
+                  <img src="imgs/white.png"/>
+                </ion-item>
+              </ion-list>
+              <div style="background-color:rgb(105, 23, 182);height: 45px;">
+                <P style="text-align:center;">Advertise Here</P>
+              </div>
+          
+        </ion-list>
+      </div>
+ 
+
+</ion-content>
