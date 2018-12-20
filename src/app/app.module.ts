@@ -60,6 +60,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { Firebase } from '@ionic-native/firebase';
+import { FilterPage } from '../pages/filter/filter';
 
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
@@ -107,7 +108,8 @@ const firebaseAuth = {
     EditqualificationsPage,
     UpdateprovpasswordPage,
     UpdateuserpasswordPage,
-    UserprofilePage
+    UserprofilePage,
+    FilterPage
   
     
   ],
@@ -157,7 +159,8 @@ const firebaseAuth = {
     EditqualificationsPage,
     UpdateprovpasswordPage,
     UpdateuserpasswordPage,
-    UserprofilePage
+    UserprofilePage,
+    FilterPage
   ],
   providers: [
     StatusBar,

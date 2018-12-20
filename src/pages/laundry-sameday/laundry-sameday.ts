@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Platform, LoadingController, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { FilterPage } from '../filter/filter';
 
 @Component({
   selector: 'page-laundry-sameday',
@@ -21,7 +22,7 @@ export class LaundrySamedayPage {
   pet: string = "Availability";
   isAndroid: boolean = false;
 
-  constructor(platform: Platform, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http){
+  constructor(public modalCtrl: ModalController, platform: Platform, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http){
     this.isAndroid = platform.is('android');
   }
 
@@ -36,6 +37,17 @@ export class LaundrySamedayPage {
   }
   profile1(email : string){
     this.navCtrl.push(ProfilePage, {email : email, catid : this.catid})
+  }
+
+  search()
+  {
+
+  }
+
+  filter()
+  {
+    const modal = this.modalCtrl.create(FilterPage);
+    modal.present();
   }
 
 }
