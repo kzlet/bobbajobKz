@@ -8,25 +8,27 @@
   </ion-header>
 
   <ion-content>
-      <ion-slides pager effect="cube">
+      <ion-slides effect="cube">
 
-          <ion-slide style="background-color: lightgray; border-radius:12px 12px">
+          <ion-slide class="slider-controller-class" style="background-color: white; border-radius:12px 12px;margin-top: 60px;">
+
             <div align="center">
-            <h2 class="card-positioner1">Enter Job Description</h2>
-
-            <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-                <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                  <ion-input type="text" placeholder="Email" [(ngModel)]="job_description"></ion-input>
-                </ion-item>
+              <ion-card class="home-background"> 
+                <h2 class="card-positioner1">Enter Job Description</h2>
+                <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+                    <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                        <ion-input type="text" placeholder="Job Description" [(ngModel)]="job_description"></ion-input>
+                      </ion-item>
               </div>
-
             <button ion-button color="primary" (click)="goToSlide2()">Next</button>
+          </ion-card>
           </div>
           </ion-slide>
         
-          <ion-slide style="background-color: lightgray; border-radius:12px 12px">
+          <ion-slide class="slider-controller-class" style="background-color: white; border-radius:12px 12px;margin-top: 60px;">
             
               <div align="center">
+                  <ion-card class="home-background"> 
                   <h2 class="card-positioner1">Enter Location / Schedule</h2>
       
                   <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
@@ -69,23 +71,36 @@
                     </div>
             
                   <button ion-button color="primary" (click)="goToSlide3()">Next</button>
+                  </ion-card>
                 </div>
 
           </ion-slide>
         
-          <ion-slide style="background-color: lightgray; border-radius:12px 12px">
+          <ion-slide class="slider-controller-class" style="background-color: white; border-radius:12px 12px;margin-top: 60px;">
 
               <div align="center">
+                <ion-card class="home-background"> 
                   <h2 class="card-positioner1">Enter Rough Budget</h2>
-      
                   <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
                       <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                        <ion-input type="number" placeholder="Budget" [(ngModel)]="budget"></ion-input>
-                      </ion-item>
-                    </div>
-              </div>
-            <button ion-button color="primary" (click)="next()">Next</button>
-          </ion-slide>
+                          <ion-input type="text" placeholder="Rough Budget" [(ngModel)]="budget"></ion-input>
+                        </ion-item>
+                </div>
+
+                <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
+                    <ion-item class="item-ios" style="border-radius: 12px 12px;">
+                        <ion-label>Currency</ion-label>
+                        <ion-select [(ngModel)]="currency">
+                          <ion-option value="usd">USD</ion-option>
+                          <ion-option value="euro">Euro</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </div>
+
+              <button ion-button color="primary" (click)="next()">Post Job</button>
+            </ion-card>
+            </div>
+            </ion-slide>
         
 
         

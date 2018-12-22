@@ -7,6 +7,7 @@ import { ProfilePage } from '../profile/profile';
 import { ProvideractiveservicesPage } from '../provideractiveservices/provideractiveservices';
 import { ProviderjobPage } from '../providerjob/providerjob';
 import { ProvprofilePage } from '../provprofile/provprofile';
+import { LaundrySamedayPage } from '../laundry-sameday/laundry-sameday';
 
 @Component({
   selector: 'page-provdashboard',
@@ -33,9 +34,7 @@ export class ProvdashboardPage {
       content: "Loading your settings..."
     });
     loader.present();
-
-
-    this.nativeStorage.getItem('email')
+    this.nativeStorage.getItem('provider_email')
     .then(
       data => {
         console.log("Checking for City name:" + data);
@@ -44,38 +43,11 @@ export class ProvdashboardPage {
       error => console.error(error)
     );
 
-    this.nativeStorage.getItem('available')
+    this.nativeStorage.getItem('provider_name')
     .then(
       data => {
         console.log("Checking for available:" + data);
-        this.available = data;
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('name')
-    .then(
-      data => {
-        console.log("Checking for name:" + data);
         this.name = data;
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('profile_picture')
-    .then(
-      data => {
-        console.log("Checking for profile picture:" + data);
-        this.profile_picture = data;
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('id')
-    .then(
-      data => {
-        console.log("Checking for profile picture:" + data);
-        this.id = data;
       },
       error => console.error(error)
     );
@@ -84,7 +56,7 @@ export class ProvdashboardPage {
 
   do()
   {
-    this.events.publish('user:login');
+    this.events.publish('provider:login');
     console.log("Clicked menu 2");
     this.activeMenu = 'menu2';
     this.menuCtrl.enable(false, 'menu1');
@@ -108,35 +80,7 @@ export class ProvdashboardPage {
   }
 send()
 {
-  this.navCtrl.push(ProviderjobPage);
+  this.navCtrl.push(LaundrySamedayPage);
 }
-
-// call()
-// {
-//  const confirm = this.alertCtrl.create({
-//   title: 'Proceed to call MyCity ?',
-//   message: 'You will be directed to our representative!',
-//   buttons: [
-//     {
-//       text: 'Disagree',
-//       handler: () => {
-//         console.log('Disagree clicked');
-//       }
-//     },
-//     {
-//       text: 'Agree',
-//       handler: () => {
-//         console.log('Agree clicked');
-//         this.number  = '00000000000';
-//         this.callNumber.callNumber(this.number , true)
-//        .then(res => console.log('Launched dialer!', res))
-//        .catch(err => console.log('Error launching dialer', err));
-//       }
-//     }
-//   ]
-// });
-// confirm.present();
-
-// }
 
 }

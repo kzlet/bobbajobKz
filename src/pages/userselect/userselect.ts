@@ -11,6 +11,8 @@ import { UserloginPage } from '../userlogin/userlogin';
 })
 export class UserselectPage {
 
+  buttonColor: string = "transparent";
+  buttonColor2: string = "#0077c8";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

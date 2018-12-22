@@ -1,16 +1,21 @@
-<ion-content padding class="has-header">
-  <div align="left">
-      <ion-icon name="arrow-back" style="color:white;padding: 5px;" (click)="back()"></ion-icon>
-  </div>
-   
-   <div align="center" style="margin-top:96px">
-   <h1 style="color:white">Are You..?</h1>
+<ion-content padding class="color-background">
+  
+   <div align="center" style="margin-top:0px">
+ <img src="imgs/logo.png"/>
    </div>
 
-  <div align="center" style="padding-top:10px">
+  <div align="center" style="padding-top:50px">
 
-    <img src="imgs/user.png" style="width: 96%;" (click)="user()"/>
-    <img src="imgs/provider.png" style="width: 96%;" (click)="next()"/>
+    <!-- <img src="imgs/user.png" style="width: 96%;" (click)="user()"/>
+    <img src="imgs/provider.png" style="width: 96%;" (click)="next()"/> -->
+
+    <div align="center" style="padding-left:15px; padding-right:15px;padding-top:10px">
+      <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="next()">Find Work</button>
+      </div>
+
+      <div align="center" style="padding-left:15px; padding-right:15px;padding-top:10px">
+        <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="user()">Find Help</button>
+        </div>
 
   </div>
 

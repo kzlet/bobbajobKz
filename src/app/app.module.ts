@@ -48,6 +48,7 @@ import { EditqualificationsPage } from '../pages/editqualifications/editqualific
 import { UpdateprovpasswordPage } from '../pages/updateprovpassword/updateprovpassword';
 import { UpdateuserpasswordPage } from '../pages/updateuserpassword/updateuserpassword';
 import { UserprofilePage } from '../pages/userprofile/userprofile';
+import { OneSignal } from '@ionic-native/onesignal';
 
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
@@ -177,6 +178,7 @@ const firebaseAuth = {
     Toast,
     DocumentViewer,
     AndroidPermissions,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

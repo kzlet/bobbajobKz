@@ -5,8 +5,7 @@ import { ProvdashboardPage } from '../provdashboard/provdashboard';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { HomePage } from '../home/home';
-
+import { ProvservicenamePage } from '../provservicename/provservicename';
 
 @Component({
   selector: 'page-serlogin',
@@ -14,9 +13,9 @@ import { HomePage } from '../home/home';
 })
 export class SerloginPage {
 
-  password: string;
-  email: string;
-  apiUrl: string;
+  password: any;
+  email: any;
+  apiUrl: any;
   constructor(private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
   }
 
@@ -34,8 +33,8 @@ export class SerloginPage {
   }
 
   signIn() { 
-    
-    this.apiUrl = 'http://secedu.info/mycity/custlogin.php?email=' + this.email + '&password=' + this.password;
+    console.log("here");
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/custlogin.php?email=' + this.email + '&password=' + this.password;
     console.log(this.apiUrl)
 
      if (this.email === undefined || this.password === undefined) {
@@ -62,54 +61,29 @@ export class SerloginPage {
 
        var str = data.Status;
 
+       if(data.is_active === '1' || data.is_active === 1)
+       {
+
        if (str === 'success') {
 
         let alert = this.alertCtrl.create({
           title: 'Login Successful',
-          subTitle: 'Welcome to InTechCall',
+          subTitle: 'Welcome to BobbaJob',
           buttons: ['OK']
         });
-        alert.present();
-
-        this.nativeStorage.setItem('id', data.id)
-        .then(
-          () => console.log('ID Stored!'),
-          error => console.error('Error storing item', error)
-        );
-
-        this.nativeStorage.setItem('email', data.email)
+        alert.present();      
+        this.nativeStorage.setItem('provider_email', data.email)
         .then(
           () => console.log('Email Stored!'),
           error => console.error('Error storing item', error)
         );
 
-        this.nativeStorage.setItem('name', data.name)
+        this.nativeStorage.setItem('provider_name', data.name)
         .then(
           () => console.log('Name Stored!'),
           error => console.error('Error storing item', error)
         );
-
-        this.nativeStorage.setItem('number', data.number)
-        .then(
-          () => console.log('number Stored!'),
-          error => console.error('Error storing item', error)
-        );
-
-        this.nativeStorage.setItem('profile_picture', data.profile_picture)
-        .then(
-          () => console.log('Picture Stored!'),
-          error => console.error('Error storing item', error)
-        );
-
-        this.nativeStorage.setItem('available', data.available)
-        .then(
-          () => console.log('available Stored!'),
-          error => console.error('Error storing item', error)
-        );
-          
           this.navCtrl.push(ProvdashboardPage);
-
-
        } else if (str === 'failed') {
          let alert = this.alertCtrl.create({
            title: 'Authentication Failed',
@@ -118,6 +92,54 @@ export class SerloginPage {
          });
          alert.present();
        }
+      }
+      else if (data.is_active === '2' || data.is_active === 2)
+      {
+        let alert = this.alertCtrl.create({
+          title: 'Profile In-complete',
+          subTitle: 'Please complete your profile in order to continue, Thank You',
+          buttons: ['OK']
+        });
+        alert.present();
+        this.navCtrl.setRoot(ProvservicenamePage , {email : this.email});
+      }
+
+      else if (data.is_active === '3' || data.is_active === 3)
+      {
+        let alert = this.alertCtrl.create({
+          title: 'Profile Request',
+          subTitle: 'Your profile is currently under observation, Once complete you will be notified. Thank You',
+          buttons: ['OK']
+        });
+        alert.present();
+        this.navCtrl.setRoot(SerloginPage);
+      }
+
+      else if (data.is_active === '4' || data.is_active === 4)
+      {
+        let alert = this.alertCtrl.create({
+          title: 'Profile Suspended',
+          subTitle: 'Your profile is suspended due to voilation of our rules, Once we check every thing you will be notified. Thank You',
+          buttons: ['OK']
+        });
+        alert.present();
+        this.navCtrl.setRoot(SerloginPage);
+      }
+      else if (data.is_active === '5' || data.is_active === 5)
+      {
+        let alert = this.alertCtrl.create({
+          title: 'Profile Deleted',
+          subTitle: 'Your profile has been deletd due to some activities. Thank You',
+          buttons: ['OK']
+        });
+        alert.present();
+        this.navCtrl.setRoot(SerloginPage);
+      }
+      else
+      {
+
+      }
+
      }, error => {
        console.log(error); // Error getting the data
  

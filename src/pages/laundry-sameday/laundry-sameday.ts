@@ -24,6 +24,7 @@ export class LaundrySamedayPage {
 
   constructor(public modalCtrl: ModalController, platform: Platform, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http){
     this.isAndroid = platform.is('android');
+    this.get_jobs();
   }
 
   ionViewDidLoad() {
@@ -39,15 +40,36 @@ export class LaundrySamedayPage {
     this.navCtrl.push(ProfilePage, {email : email, catid : this.catid})
   }
 
-  search()
-  {
-
-  }
-
   filter()
   {
     const modal = this.modalCtrl.create(FilterPage);
     modal.present();
   }
 
+  get_jobs() 
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Loading Jobs..."
+    });
+    loader.present();
+
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_jobs.php';
+
+    console.log(this.apiUrl);
+
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+
+        this.posts = data;
+          loader.dismiss();
+      }, error => {
+        console.log(error); // Error getting the data
+      });
+  }
+
+  view_job()
+  {
+
+  }
+  
 }

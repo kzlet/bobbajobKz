@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
-import { ProvservicePage } from '../provservice/provservice';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -9,7 +8,6 @@ import { SerloginPage } from '../serlogin/serlogin';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { File } from '@ionic-native/file';
-
 
 
 @Component({
@@ -26,29 +24,17 @@ export class ProvservicenamePage {
   past_exp: any;
   q_name: any;
   apiUrl: string;
-  email: any;
+  email: any = 'allan@gmail.com';
   per = 'HOUR';
-  // private dirs:any;
+  work_exp: any;
+
+  resume_value: any = '0';
+  passport_value: any = '0';
+  paermit_value: any = '0';
+  address_value: any = '0';
 
   constructor(private fileTransfer: FileTransferObject, private fileChooser: FileChooser, private transfer: FileTransfer, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
- //   const fileTransfer: FileTransferObject = this.transfer.create();
-    this.nativeStorage.getItem('email')
-      .then(
-        data => {
-          console.log("Checking for City name:" + data);
-          this.email = data;
-        },
-        error => console.error(error)
-      );
-
-    this.nativeStorage.getItem('cat')
-      .then(
-        data => {
-          console.log("Checking for City name:" + data);
-          this.cat = data;
-        },
-        error => console.error(error)
-      );
+    // this.email = this.navParams.get('email');
   }
 
   ionViewDidLoad() {
@@ -56,248 +42,283 @@ export class ProvservicenamePage {
 
   }
 
-
-  back4() {
-    this.navCtrl.push(ProvservicePage);
-  }
-
   send() {
+   console.log(this.email);
+   console.log(this.past_exp);
+   console.log(this.resume_value);
+   console.log(this.passport_value);
+   console.log(this.paermit_value);
+   console.log(this.address_value);
 
-    if (this.email === undefined) {
-      let alert = this.alertCtrl.create({
-        title: 'Oops something went wrong ! Reload Application',
-        buttons: ['OK']
-      });
-      alert.present();
-    }
-
-    else if (this.q_name === undefined || this.past_exp === undefined || this.price === undefined || this.special_condition === undefined) {
-
+    if (this.email === undefined || this.past_exp === undefined || this.resume_value === '0' || this.passport_value === '0' || this.paermit_value === '0' || this.address_value === '0') {
       let alert = this.alertCtrl.create({
         title: 'All fields are required',
         buttons: ['OK']
       });
       alert.present();
-
     }
     else {
-
       let loader = this.loadingCtrl.create({
-        content: "Updating Prices..."
+        content: "Validating Experiences..."
       });
       loader.present();
-
-      this.apiUrl = 'http://secedu.info/mycity/setprice.php?email=' + this.email + '&category=' + this.cat + '&price=' + this.price;
-
-
-      var data = { email: this.email, price: this.price };
-      console.log(data);
-
-
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_exp.php?email=' + this.email + '&past_exp=' + this.past_exp;
       this.http.get(this.apiUrl).map(res => res.json())
         .subscribe(data => {
           loader.dismiss();
-
           console.log(data);
-
           var status = data.Status;
-
           if (status === 'failed') {
             let alert = this.alertCtrl.create({
-              title: 'Updation failed ! Server Problem',
+              title: 'Uploading failed ! Try again later',
               buttons: ['OK']
             });
             alert.present();
           }
           else {
-
-            let alert = this.alertCtrl.create({
-              title: 'Pricing Updated Successfully',
-              buttons: ['OK']
-            });
-            alert.present();
-
-
+            this.uploadresume();    // to upload file to serevr
+            this.uploadpassport();
+            this.uploadcurrent_address();
+            this.uploadwork_permit();
           }
         }, error => {
-          console.log(error);// Error getting the data
-        });
-
-
-
-      let loader2 = this.loadingCtrl.create({
-        content: "Updating Experiences..."
-      });
-      loader.present();
-
-      this.apiUrl = 'http://secedu.info/mycity/expupdate.php?email=' + this.email + '&q_name=' + this.q_name + '&past_exp=' + this.past_exp + '&price=' + this.price + '&special_condition=' + this.special_condition;
-
-
-      var newdata = { email: this.email, q_name: this.q_name, past_exp: this.past_exp, price: this.price, special_condition: this.special_condition };
-      console.log(newdata);
-
-
-      this.http.get(this.apiUrl).map(res => res.json())
-        .subscribe(data => {
-          loader2.dismiss();
-
-          console.log(newdata);
-
-          var status = data.Status;
-
-          if (status === 'failed') {
-            let alert = this.alertCtrl.create({
-              title: 'Updation failed ! Server Problem',
-              buttons: ['OK']
-            });
-            alert.present();
-          }
-          else {
-
-            this.uploadImage();    // to upload file to serevr
-
-            let alert = this.alertCtrl.create({
-              title: 'Experience Updated Successfully ! Login to proceed',
-              buttons: ['OK']
-            });
-            alert.present();
-
-            this.navCtrl.push(SerloginPage);
-
-          }
-        }, error => {
-          console.log(error);// Error getting the data
+          console.log(error);
         });
     }
 
   }
 
 
-  uploadresume() {
-   // this.q_name = 'abc123';
+  get_resume() {
+    this.resume_value = '1';
     this.fileChooser.open()
       .then(uri => {
         console.log(uri)
-        this.nativeStorage.setItem('uri', uri)
-        .then(
-          () => console.log('uri Stored!'),
-          error => console.error('Error storing item', error)
-        );
-         
+        this.nativeStorage.setItem('resume', uri)
+          .then(
+            () => console.log('Resume Stored!'),
+            error => console.error('Error storing item', error)
+          );
+
       })
       .catch(e => console.log(e));
   }
 
- upload()
- {
-  
-  this.nativeStorage.getItem('uri')
-  .then(
-    data => {
-      console.log("Checking for uri name:" + data);
-      this.uri = data;
-    },
-    error => console.error(error)
-  );
+  get_passport() {
+    this.passport_value = '1';
+    this.fileChooser.open()
+      .then(uri => {
+        console.log(uri)
+        this.nativeStorage.setItem('passport', uri)
+          .then(
+            () => console.log('Resume Stored!'),
+            error => console.error('Error storing item', error)
+          );
 
-  const fileTransfer: FileTransferObject = this.transfer.create();
-  this.url2 = "http://secedu.info/mycity/uploads.php?email=" + this.email +'&q_name=' + this.q_name;
+      })
+      .catch(e => console.log(e));
+  }
 
-  fileTransfer.upload(this.uri, this.url2)
+  get_address() {
+    this.paermit_value = '1';
+    this.fileChooser.open()
+      .then(uri => {
+        console.log(uri)
+        this.nativeStorage.setItem('current_address', uri)
+          .then(
+            () => console.log('Resume Stored!'),
+            error => console.error('Error storing item', error)
+          );
 
- // fileTransfer.upload(uri, this.url2, options1, trustAllHosts)
+      })
+      .catch(e => console.log(e));
+  }
 
-    //  fileTransfer.upload(uri, "http://secedu.info/mycity/uploads.php?email=" + this.email, options1)
-    .then((data) => {
-      // success
-      alert("success" + JSON.stringify(data));
-      console.log("success" + JSON.stringify(data));
+  get_permit() {
+    this.address_value = '1';
+    this.fileChooser.open()
+      .then(uri => {
+        console.log(uri)
+        this.nativeStorage.setItem('work_permit', uri)
+          .then(
+            () => console.log('Resume Stored!'),
+            error => console.error('Error storing item', error)
+          );
 
-    }, (err) => {
-      // error
-      alert("error" + JSON.stringify(err));
-      console.log("error" + JSON.stringify(err));
-    });
- }
-
-
- sample()
- {
- // this.q_name = 'abc123';
-  this.fileChooser.open()
-  .then(uri => {
-    console.log(uri)
-
-  // const fileTransfer: FileTransferObject = this.transfer.create();
-  //   let options: FileUploadOptions = {
-  //      fileKey: 'file',
-  //      fileName: 'name.pdf',
-  //      headers: ({'Content-Type': 'multipart/form-data'})
-      
-  //   }
-  //   this.url2 = "http://secedu.info/mycity/uploads.php?email=" + this.email +'&q_name=' + this.q_name;
-
-  //   fileTransfer.upload(uri, this.url2 , options)
-  //    .then((data) => {
-  //      console.log("Success");
-  //    }, (err) => {
-  //     console.log("Error:" + JSON.stringify(err));
-  //    })
-    })
-    .catch(e => console.log(e));
+      })
+      .catch(e => console.log(e));
   }
 
 
-  public uploadImage() {
-   // this.q_name = 'abc123';
-    this.nativeStorage.getItem('uri')
-  .then(
-    data => {
-      console.log("Checking for uri name:" + data);
-      this.uri = data;
-  
+  uploadresume() {
+    this.nativeStorage.getItem('resume')
+      .then(
+        data => {
+          console.log("Checking for resume:" + data);
+          this.uri = data;
+          console.log(this.uri)
+          var targetPath = this.uri
+          var filename = this.uri;
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "application/pdf",
+            headers: {}
+          };
+          const fileTransfer: FileTransferObject = this.transfer.create();
+          let loadingCtrl = this.loadingCtrl.create({
+            content: 'Uploading Resume...',
+          });
+          loadingCtrl.present();
+          this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_resume.php?email=" + this.email;
+          console.log(this.url2)
+          fileTransfer.upload(this.uri, this.url2, options).then(data => {
+            loadingCtrl.dismissAll()
+            console.log("image uploaded");
+            console.log("data", data)
+          }, err => {
+            loadingCtrl.dismissAll()
+            console.log("Failed uploading image", err);
+          });
+        },
+        error => console.error(error)
+      );
 
-    console.log(this.uri)
-    var targetPath = this.uri
-  
-    
-    var filename = this.uri;
-  
-    var options = {
-      fileKey: "file",
-      fileName:filename,
-      chunkedMode: false,
-      mimeType: "application/pdf",
-      headers: {}
-    };
-  
-    const fileTransfer: FileTransferObject = this.transfer.create();
-  
-    let loadingCtrl = this.loadingCtrl.create({
-      content: 'Validating Resources...',
-    });
-    loadingCtrl.present();
-   
-    this.url2 = "http://secedu.info/mycity/upload.php?email=" + this.email + '&q_name=' + this.q_name;
-   
-      console.log(this.url2)
-
-      fileTransfer.upload(this.uri, this.url2, options).then(data => {
-       
-      loadingCtrl.dismissAll()
-   
-      console.log("image uploaded");
-      console.log("data",data)
-    }, err => {
-      loadingCtrl.dismissAll()
-      //this.presentToast('Error while uploading file.');
-      console.log("Failed uploading image", err);
-    });
-  },
-  error => console.error(error)
-);
-  
   }
- 
+
+  uploadpassport() {
+    this.nativeStorage.getItem('passport')
+      .then(
+        data => {
+          console.log("Checking for passport:" + data);
+          this.uri = data;
+          console.log(this.uri)
+          var targetPath = this.uri
+          var filename = this.uri;
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "image/jpeg",
+            params: { 'fileName': filename }
+          };
+          const fileTransfer: FileTransferObject = this.transfer.create();
+          let loadingCtrl = this.loadingCtrl.create({
+            content: 'Uploading Passport...',
+          });
+          loadingCtrl.present();
+          this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_passport.php?email=" + this.email;
+          console.log(this.url2)
+          fileTransfer.upload(this.uri, this.url2, options).then(data => {
+            loadingCtrl.dismissAll()
+            console.log("image uploaded");
+            console.log("data", data)
+          }, err => {
+            loadingCtrl.dismissAll()
+            console.log("Failed uploading image", err);
+          });
+        },
+        error => console.error(error)
+      );
+  }
+
+  uploadcurrent_address() {
+    this.nativeStorage.getItem('current_address')
+      .then(
+        data => {
+          console.log("Checking for current_address:" + data);
+          this.uri = data;
+          console.log(this.uri)
+          var targetPath = this.uri
+          var filename = this.uri;
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "image/jpeg",
+            params: { 'fileName': filename }
+          };
+          const fileTransfer: FileTransferObject = this.transfer.create();
+          let loadingCtrl = this.loadingCtrl.create({
+            content: 'Uploading Address Document...',
+          });
+          loadingCtrl.present();
+          this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_address.php?email=" + this.email;
+          console.log(this.url2)
+          fileTransfer.upload(this.uri, this.url2, options).then(data => {
+            loadingCtrl.dismissAll()
+            console.log("image uploaded");
+            console.log("data", data)
+          }, err => {
+            loadingCtrl.dismissAll()
+            console.log("Failed uploading image", err);
+          });
+        },
+        error => console.error(error)
+      );
+
+  }
+  uploadwork_permit() {
+    this.nativeStorage.getItem('work_permit')
+      .then(
+        data => {
+          console.log("Checking for work_permit:" + data);
+          this.uri = data;
+          console.log(this.uri)
+          var targetPath = this.uri
+          var filename = this.uri;
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "image/jpeg",
+            params: { 'fileName': filename }
+          };
+          const fileTransfer: FileTransferObject = this.transfer.create();
+          let loadingCtrl = this.loadingCtrl.create({
+            content: 'Uploading Work Permit...',
+          });
+          loadingCtrl.present();
+          this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_permit.php?email=" + this.email;
+          console.log(this.url2)
+          fileTransfer.upload(this.uri, this.url2, options).then(data => {
+            loadingCtrl.dismissAll()
+            console.log("image uploaded");
+
+         this.update_status();
+            console.log("data", data)
+          }, err => {
+            loadingCtrl.dismissAll()
+            console.log("Failed uploading image", err);
+          });
+        },
+        error => console.error(error)
+      );
+  }
+
+update_status()
+{
+  this.url2 = "https://purpledimes.com/BoobaJob/WebServices/update_status.php?email=" + this.email;
+  this.http.get(this.apiUrl).map(res => res.json())
+        .subscribe(data => {
+          if(data.status === 'success')
+          {
+            let alert = this.alertCtrl.create({
+              title: 'Profile Completed Successfully! Login to Proceed',
+              buttons: ['OK']
+            });
+            alert.present();
+            this.navCtrl.push(SerloginPage);
+          }
+          else
+          {
+
+          }
+        },
+        error => console.error(error)
+      );
+}
+
 
 }

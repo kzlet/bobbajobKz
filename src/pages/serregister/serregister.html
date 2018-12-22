@@ -1,9 +1,7 @@
-<ion-content padding class="has-header">
-    <ion-icon name="arrow-back" style="color:white;padding: 5px;" (click)="back()">
-    </ion-icon>
-
-
+<ion-content padding class="home-background">
+    
     <div align="center" (click)="presentActionSheet()">
+        <img *ngIf="!imageURI" src="imgs/profile.png" style="width:27%"/>
       <img *ngIf="imageURI" src="{{imageURI}}" style="width: 27%;"/>
       <p style="color:white;margin-top: 3%;">Upload your picture</p>
     </div>
@@ -45,13 +43,15 @@
                 </ion-item>
               </div>
 
-              <div align="center" style="padding-top:5px">
-                  <button ion-button color="light" round outline (click)="signup()" style="width: 94%;background-color:#418bb8">Continue</button>
-                </div>
+                <div align="center" style="padding-left:15px; padding-right:15px;padding-top:10px">
+                    <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="signup()">Continue</button>
+                    </div>
 
 
 </ion-content>
 
-<ion-footer>
-    <button ion-button full style="background-color:#5f27be" (click)="back1()">Already have account ? Log In</button>
- </ion-footer>
+ <ion-footer style="background-color:white">
+  <div align="center">
+  <p style="color:#9a4081;font-size: 1.25em;" (click)="back1()">Already have account ? Log In</p>
+</div>
+</ion-footer>

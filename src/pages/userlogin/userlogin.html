@@ -1,7 +1,13 @@
-<ion-content padding class="has-header">
+<ion-header>
+  <ion-navbar>
+    <ion-title>User Login</ion-title>
+  </ion-navbar>
+</ion-header>
 
-  <div align="center" style="padding-left:8px;margin-top: 38px;">
-      <img src="imgs/logo.png" style="width:57%">
+<ion-content padding class="home-background">
+
+  <div align="center" style="padding-left:8px;margin-top: 15px;">
+      <img src="imgs/logo.png" style="width:66%">
     </div>
 
   <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
@@ -20,18 +26,15 @@
      <h5 style="color:white">Forget Password </h5>
     </div>
 
-    <div align="center">
-        <img src="imgs/login.png" (click)="signIn()"/>
-      </div>
+      <div align="center" style="padding-left:15px; padding-right:15px;padding-top:10px">
+        <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="signIn()">Login</button>
+        </div>
 
 </ion-content>
 
 
-<ion-footer>
-  <ion-toolbar>
+<ion-footer style="background-color:white">
     <div align="center">
-    <p style="color:white;font-size: 1.25em;" (click)="reg()"><b>Register</b></p>
+    <p style="color:#9a4081;font-size: 1.25em;" (click)="reg()"><b>Register</b></p>
   </div>
-   </ion-toolbar>
-
 </ion-footer>

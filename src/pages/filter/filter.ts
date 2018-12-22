@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ViewController, LoadingController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-filter',
@@ -7,22 +9,20 @@ import { NavController, NavParams, AlertController, ViewController } from 'ionic
 })
 export class FilterPage {
   public first: string = '';
-  textcolor: string = '#0073b9';
-  buttonColor: string = 'white';
-  textcolor2: string = '#0073b9';
-  buttonColor2: string = 'white';
-  buttonColor3: string = 'white';
   posted: string;
   prices: string;
   available: string;
   filter: string;
   buttonValue: string;
+  apiUrl: string;
+  posts: any;
 
-  constructor(private view: ViewController, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(private loadingCtrl: LoadingController, private http: Http, private view: ViewController, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FiltersPage');
+    this.get_data();
   }
 
   close() {
@@ -37,59 +37,31 @@ export class FilterPage {
     console.log("Product Condition:" + this.buttonValue);
   }
 
+  send()
+  {
+    this.view.dismiss();
+  }
 
-  clear() {
-    const confirm = this.alertCtrl.create({
-      title: 'Are you sure ?',
-      message: 'By pressing Ok, All your settings will be sent back to deafult',
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            console.log('Agree clicked');
-            this.posted = '20';
-            this.prices = '0';
-            this.first = '';
-            this.textcolor = '#0073b9';
-            this.buttonColor = 'white';
-            this.textcolor2 = '#0073b9';
-            this.buttonColor2 = 'white';
-            this.available = '0';
-          }
-        }
-      ]
+  get_data()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Loading Data..."
     });
-    confirm.present();
+    loader.present();
+
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_category.php';
+
+    console.log(this.apiUrl);
+
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+
+        this.posts = data;
+          loader.dismiss();
+      }, error => {
+        console.log(error); // Error getting the data
+      });
   }
 
-  send1() {
-    this.textcolor = 'white';
-    this.buttonColor = '#0073b9';
-    this.textcolor2 = '#0073b9';
-    this.buttonColor2 = 'white';
-    this.buttonValue = 'new';
-  }
-
-  send2() {
-    this.textcolor2 = 'white';
-    this.buttonColor2 = '#0073b9';
-    this.textcolor = '#0073b9';
-    this.buttonColor = 'white';
-    this.buttonValue = 'used';
-  }
-
-  send3() {
-    this.textcolor2 = 'white';
-    this.buttonColor2 = '#0073b9';
-    this.textcolor = '#0073b9';
-    this.buttonColor = 'white';
-    this.buttonValue = 'used';
-  }
 
 }

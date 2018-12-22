@@ -19,40 +19,30 @@ export class HomePage {
   apiUrl: string;
   expenses: any[];
   activeMenu: string;
-  email: any;
+  user_email: any = "v@gmail.com";
   posts: any;
   data: string;
   dash_data: { "id": string; "image": string; "title": string; }[];
+  slides: { 'title': string; }[];
   constructor(public events: Events, public platform: Platform, public menuCtrl: MenuController , private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, public modalCtrl: ModalController) {
-
+  this.get_data();
     if (this.platform.is('android')) {
       console.log('I am an android Device!');
     }
-    this.nativeStorage.getItem('s_email')
+    this.nativeStorage.getItem('user_email')
     .then(
       data => {
-        console.log("Checking for City name:" + data);
-        this.email = data;
+        console.log("Checking for User email:" + data);
+        this.user_email = data;
       },
       error => console.error(error)
     );
 
-    this.dash_data = [
-      {"id": "1", "image":"imgs/ic_laundry.png" , "title":"Handyman"},
-      {"id": "2", "image":"imgs/ic_gym.png" , "title":"Cleaning"},
-      {"id": "3", "image":"imgs/ic_laundry.png" , "title":"Delivery"},
-      {"id": "4", "image":"imgs/ic_laundry.png" , "title":"Removals"},
-      {"id": "5", "image":"imgs/ic_laundry.png" , "title":"Painting"},
-      {"id": "6", "image":"imgs/ic_laundry.png" , "title":"Gardening"},
-      {"id": "7", "image":"imgs/ic_laundry.png" , "title":"Accounting"},
-      {"id": "8", "image":"imgs/ic_laundry.png" , "title":"Admin"},
-      {"id": "9", "image":"imgs/ic_laundry.png" , "title":"Aircon Installation"},
-      {"id": "10", "image":"imgs/ic_laundry.png" , "title":"Appliance Repair"},
-      {"id": "11", "image":"imgs/ic_laundry.png" , "title":"Mobile App Design"},
-      {"id": "12", "image":"imgs/ic_laundry.png" , "title":"Asbestos Removal"},
-      {"id": "13", "image":"imgs/ic_laundry.png" , "title":"Assembly"},
-      {"id": "14", "image":"imgs/ic_laundry.png" , "title":"Bathroom Renovations"},
-    ]
+    this.slides = [
+      {'title':'Advertisement Here'},
+      {'title':'Advertisement Here'},
+      {'title':'Advertisement Here'}
+      ];
   }
 
   do()
@@ -65,18 +55,32 @@ export class HomePage {
     this.menuCtrl.open(this.activeMenu);
   }
 
+  get_data()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Loading Data..."
+    });
+    loader.present();
 
-  laundry(Id: String) {
-    this.data = "laundry";
-    Id = this.data;
-    this.navCtrl.push(LaundrySamedayPage, { survey_id : Id});
-    console.log("From Home" + Id);
-   } 
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_category.php';
+
+    console.log(this.apiUrl);
+
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+
+        this.posts = data;
+          loader.dismiss();
+      }, error => {
+        console.log(error); // Error getting the data
+      });
+  }
 
    get_value(title:string, id:string)
    {
     console.log(title);
     console.log(id);
+    console.log(this.user_email);
     const modal = this.modalCtrl.create(LaundryPage, {title: title, id : id});
     modal.present();
    }

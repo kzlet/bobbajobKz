@@ -2,7 +2,7 @@
     <ion-navbar>
       <ion-title><p style="color:white"></p></ion-title>
       <ion-buttons end>
-        <button ion-button (click)="close()"><p>Close</p></button>
+        <button ion-button (click)="close()"><p style="color:white">Close</p></button>
         </ion-buttons>
     </ion-navbar>
   </ion-header>
@@ -12,28 +12,28 @@
 
       <div align="center" style="margin-top:-15px">
     
-        <p style="font-size:1.1em">POSTED</p>
+        <p style="font-size:1.1em">Work Location</p>
         <ion-item no-lines style="margin-top: -38px;background-color: transparent;">
-          <ion-range min="20" max="100" pin="true" [(ngModel)]="posted" color="primary">
-            <ion-label range-left class="small-text" style="color:white">20</ion-label>
-            <ion-label range-right style="color:white">0</ion-label>
+          <ion-range min="20" max="100" pin="true" [(ngModel)]="work_location" color="primary">
+            <ion-label range-left class="small-text" style="color:white">5</ion-label>
+            <ion-label range-right style="color:white">100</ion-label>
           </ion-range>
         </ion-item>
     
         <ion-grid style="margin-top: -37px;">
           <ion-row>
             <ion-col col-6>
-              <p style="text-align:left">20 Days</p>
+              <p style="text-align:left">5 KM</p>
             </ion-col>
             <ion-col col-6>
-              <p style="text-align:right">All</p>
+              <p style="text-align:right">100 KM</p>
             </ion-col>
           </ion-row>
         </ion-grid>
     
         <p style="font-size:1.1em">Budget</p>
         <ion-item no-lines style="margin-top: -38px;background-color: transparent;">
-          <ion-range min="20" max="100" pin="true" [(ngModel)]="posted" color="primary">
+          <ion-range min="20" max="100" pin="true" [(ngModel)]="budget" color="primary">
             <ion-label range-left class="small-text" style="color:white">4000</ion-label>
             <ion-label range-right style="color:white">0</ion-label>
           </ion-range>
@@ -53,18 +53,17 @@
   
     
         <div>
-          <p style="padding-top: 10px">JOB TYPE</p>
-    
-          <button [ngStyle]="{'background-color': buttonColor, 'color': textcolor}" ion-button round class="button-class" (click)="send1()">REMOTE</button>
-    
-          <button [ngStyle]="{'background-color': buttonColor2, 'color': textcolor2}" ion-button round class="button-class" (click)="send2()">IN PERSON</button>
-
-          <button [ngStyle]="{'background-color': buttonColor3, 'color': textcolor3}" ion-button round class="button-class" (click)="send3()">All</button>
+          <ion-item>
+            <ion-label>Job Category</ion-label>
+            <ion-select [(ngModel)]="job_category">
+              <ion-option *ngFor="let post of posts" value="{{post.title}}">{{post.title}}</ion-option>
+            </ion-select>
+          </ion-item>
         </div>
     
   
     
-        <button ion-button round full style="width:80%; color:white;background-color:#f9c04c;margin-top:25px" (click)="apply()">APPLY</button>
+        <button ion-button round full style="width:80%; color:white;background-color:#f9c04c;margin-top:25px" (click)="send()">APPLY</button>
       </div>
     
     
