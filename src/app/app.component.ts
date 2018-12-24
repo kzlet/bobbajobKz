@@ -26,6 +26,7 @@ import { LaundrySamedayPage } from '../pages/laundry-sameday/laundry-sameday';
 import { FilterPage } from '../pages/filter/filter';
 import { OneSignal } from '@ionic-native/onesignal';
 import { ProvservicenamePage } from '../pages/provservicename/provservicename';
+import { MypostingsPage } from '../pages/mypostings/mypostings';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -53,6 +54,7 @@ export class MyApp {
   rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   history = HistoryPage;
   fav = FavoritePage;
+  posting = MypostingsPage;
   serlogin = SerloginPage;
   chat = ProvchatPage;
   home  = HomePage;

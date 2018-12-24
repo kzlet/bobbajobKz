@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div align="center">
+        <p style="color:white;margin-left: 36px;">Enter Your Offer</p>
+      </div>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="close()">
+        <p>Close</p>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="home-background">
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Select Day</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Select Time</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Enter Budget</ion-label>
+      <ion-input type="number" [(ngModel)]="amount"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea [(ngModel)]="proposal" ></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="give_offer()">Post Offer</button>
+
+
+</ion-content>

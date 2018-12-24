@@ -72,7 +72,7 @@ export class HomePage {
         this.posts = data;
           loader.dismiss();
       }, error => {
-        console.log(error); // Error getting the data
+        console.log(error); 
       });
   }
 

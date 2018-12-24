@@ -1,0 +1,8 @@
+page-offer {
+    ion-list:first-child {
+        margin-top: 32px;
+      }
+      ion-list + ion-list {
+        margin-top: 0;
+      }
+}

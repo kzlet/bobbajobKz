@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+          <button ion-button icon-only (click)="do()">
+          <ion-icon name="ios-menu-outline" style="color:white;padding: 5px;"></ion-icon>
+        </button>
+          </ion-buttons>
+     <ion-title><div align="center"><p style="color:white;margin-left:-15px">My Postings</p></div></ion-title>
+    </ion-navbar>
+    <ion-segment [(ngModel)]="postings">
+        <ion-segment-button value="all">
+          All
+        </ion-segment-button>
+        <ion-segment-button value="progress">
+          In-Progress
+        </ion-segment-button>
+      </ion-segment>
+  </ion-header>
+
+
+<ion-content no-bounce class="home-background">
+
+    <div [ngSwitch]="postings">
+        <ion-list *ngSwitchCase="'all'">
+            <ion-item *ngFor="let post of posts, let i = index" (click)="view_job(post.id)">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-10>
+                       <b>{{i+1}}</b>). {{post.jd}}
+                    </ion-col>
+                    <ion-col col-2>
+                      ${{post.budget}}
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <h3>Job Type: &nbsp;{{post.title}}</h3>
+                <p>{{post.date}} {{post.month}}</p>
+                <p *ngIf="post.progress === 1 || post.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
+              </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'progress'">
+            <ion-item *ngFor="let cost of costs" (click)="check_status(post.user_email, post.id, post.jd)">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-10>
+                        {{cost.jd}}
+                    </ion-col>
+                    <ion-col col-2>
+                      ${{cost.budget}}
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <h3>Job Type: &nbsp;{{cost.title}}</h3>
+                <p>{{cost.date}} {{cost.month}}</p>
+              </ion-item>
+          </ion-list>
+        
+        
+        </div>
+</ion-content>

@@ -67,9 +67,9 @@ export class LaundrySamedayPage {
       });
   }
 
-  view_job()
+  view_job(client_email : string, project_id : string, project_title: string)
   {
-
+    this.navCtrl.push(ProfilePage, {client_email : client_email, project_id: project_id, project_title : project_title });
   }
   
 }

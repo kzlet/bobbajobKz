@@ -20,7 +20,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let post of posts" (click)="view_job()">
+        <ion-item *ngFor="let post of posts" (click)="view_job(post.user_email, post.id, post.jd)">
           <ion-grid>
             <ion-row>
               <ion-col col-10>
