@@ -3,7 +3,6 @@ import { NavController, NavParams, AlertController, LoadingController } from 'io
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ProvdashboardPage } from '../provdashboard/provdashboard';
 import { SerloginPage } from '../serlogin/serlogin';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -24,7 +23,7 @@ export class ProvservicenamePage {
   past_exp: any;
   q_name: any;
   apiUrl: string;
-  email: any = 'allan@gmail.com';
+  email: any;
   per = 'HOUR';
   work_exp: any;
 
@@ -32,9 +31,10 @@ export class ProvservicenamePage {
   passport_value: any = '0';
   paermit_value: any = '0';
   address_value: any = '0';
+  tests: any;
 
   constructor(private fileTransfer: FileTransferObject, private fileChooser: FileChooser, private transfer: FileTransfer, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
-    // this.email = this.navParams.get('email');
+     this.email = this.navParams.get('email');
   }
 
   ionViewDidLoad() {
@@ -77,9 +77,6 @@ export class ProvservicenamePage {
           }
           else {
             this.uploadresume();    // to upload file to serevr
-            this.uploadpassport();
-            this.uploadcurrent_address();
-            this.uploadwork_permit();
           }
         }, error => {
           console.log(error);
@@ -176,6 +173,7 @@ export class ProvservicenamePage {
           fileTransfer.upload(this.uri, this.url2, options).then(data => {
             loadingCtrl.dismissAll()
             console.log("image uploaded");
+            this.uploadpassport();
             console.log("data", data)
           }, err => {
             loadingCtrl.dismissAll()
@@ -213,6 +211,7 @@ export class ProvservicenamePage {
           fileTransfer.upload(this.uri, this.url2, options).then(data => {
             loadingCtrl.dismissAll()
             console.log("image uploaded");
+            this.uploadcurrent_address();
             console.log("data", data)
           }, err => {
             loadingCtrl.dismissAll()
@@ -249,6 +248,7 @@ export class ProvservicenamePage {
           fileTransfer.upload(this.uri, this.url2, options).then(data => {
             loadingCtrl.dismissAll()
             console.log("image uploaded");
+            this.uploadwork_permit();
             console.log("data", data)
           }, err => {
             loadingCtrl.dismissAll()
@@ -285,8 +285,7 @@ export class ProvservicenamePage {
           fileTransfer.upload(this.uri, this.url2, options).then(data => {
             loadingCtrl.dismissAll()
             console.log("image uploaded");
-
-         this.update_status();
+            this.update_status();
             console.log("data", data)
           }, err => {
             loadingCtrl.dismissAll()
@@ -297,28 +296,30 @@ export class ProvservicenamePage {
       );
   }
 
-update_status()
+  update_status()
 {
-  this.url2 = "https://purpledimes.com/BoobaJob/WebServices/update_status.php?email=" + this.email;
-  this.http.get(this.apiUrl).map(res => res.json())
+      let loader = this.loadingCtrl.create({
+        content: "Updating Profile..."
+      });
+      loader.present();
+  
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_status.php?email=' + this.email;
+  
+      console.log(this.apiUrl);
+  
+      this.http.get(this.apiUrl).map(res => res.json())
         .subscribe(data => {
-          if(data.status === 'success')
+          loader.dismiss();
+          this.tests = data;
+          console.log("Status:" + this.tests.status);
+          if (this.tests.status === 'success')
           {
-            let alert = this.alertCtrl.create({
-              title: 'Profile Completed Successfully! Login to Proceed',
-              buttons: ['OK']
-            });
-            alert.present();
-            this.navCtrl.push(SerloginPage);
+            this.navCtrl.setRoot(SerloginPage);
           }
-          else
-          {
-
-          }
-        },
-        error => console.error(error)
-      );
+            
+        }, error => {
+          console.log(error); 
+        });
 }
-
 
 }

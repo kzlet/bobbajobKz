@@ -3,7 +3,6 @@ import { NavController, MenuController, NavParams, AlertController, LoadingContr
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { FavoritePage } from '../favorite/favorite';
 import { LaundrySamedayPage } from '../laundry-sameday/laundry-sameday';
 import { LaundryPage } from '../laundry/laundry';
 
@@ -47,7 +46,7 @@ export class HomePage {
 
   do()
   {
-    this.events.publish('user:login');
+   // this.events.publish('user:login');
     console.log("Clicked menu 1");
     this.activeMenu = 'menu1';
     this.menuCtrl.enable(true, 'menu1');
@@ -84,11 +83,5 @@ export class HomePage {
     const modal = this.modalCtrl.create(LaundryPage, {title: title, id : id});
     modal.present();
    }
-
-
-  push()
-  {
-    this.navCtrl.push(FavoritePage);
-  }
 
 }

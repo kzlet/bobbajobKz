@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, AlertController, Events } from 'ionic-angular';
+import { NavController, NavParams, MenuController, LoadingController, AlertController, Events } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { ProfilePage } from '../profile/profile';
-import { ProvideractiveservicesPage } from '../provideractiveservices/provideractiveservices';
-import { ProviderjobPage } from '../providerjob/providerjob';
 import { ProvprofilePage } from '../provprofile/provprofile';
 import { LaundrySamedayPage } from '../laundry-sameday/laundry-sameday';
 
@@ -69,15 +66,7 @@ export class ProvdashboardPage {
     this.navCtrl.push(ProvprofilePage);
   }
 
-  prof()
-  {
-    //this.navCtrl.push(ProfilePage,{id : this.id});
-  }
 
-  services()
-  {
-    this.navCtrl.push(ProvideractiveservicesPage);
-  }
 send()
 {
   this.navCtrl.push(LaundrySamedayPage);

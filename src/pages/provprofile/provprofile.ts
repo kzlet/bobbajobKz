@@ -3,9 +3,6 @@ import { IonicPage, NavController, NavParams, MenuController, LoadingController,
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { NamePage } from '../name/name';
-import { ProvnamePage } from '../provname/provname';
-import { ProvpricePage } from '../provprice/provprice';
 import { ProvprofeditPage } from '../provprofedit/provprofedit';
 
 @Component({
@@ -117,16 +114,16 @@ export class ProvprofilePage {
       });
     }
 
-    qualification(email : string)
-    {
-      this.navCtrl.push(ProvnamePage, { email :this.email});
-    }
+    // qualification(email : string)
+    // {
+    //   this.navCtrl.push(ProvnamePage, { email :this.email});
+    // }
 
 
-    price(email : string)
-    {
-      this.navCtrl.push(ProvpricePage, { email :this.email});
-    }
+    // price(email : string)
+    // {
+    //   this.navCtrl.push(ProvpricePage, { email :this.email});
+    // }
 
     edit()
     {

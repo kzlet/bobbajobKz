@@ -3,6 +3,7 @@ import { NavController, NavParams, MenuController, LoadingController } from 'ion
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { ViewjobPage } from '../viewjob/viewjob';
 
 @Component({
   selector: 'page-mypostings',
@@ -83,8 +84,7 @@ export class MypostingsPage {
   view_job(project_id : string)
   {
     console.log("project_id" + project_id);
-    //view in another page get all proposals 
-    //get_proposals.php
+    this.navCtrl.push(ViewjobPage, {project_id : project_id}); 
   }
 
 

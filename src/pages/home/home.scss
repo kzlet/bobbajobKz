@@ -7,13 +7,14 @@
     background: #9a4081;
 }
 
-
-
-
 .home-background {
     position:fixed;
     background: -webkit-linear-gradient(#9a4081, white); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#9a4081, white); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#9a4081, white); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#9a4081, white); /* Standard syntax */
+}
+
+.home-sick {
+    background: linear-gradient(to bottom, #7a7378, white);
 }

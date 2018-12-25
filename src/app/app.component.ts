@@ -3,15 +3,9 @@ import { Nav, Platform, MenuController, NavController, Events } from 'ionic-angu
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { IntroPage } from '../pages/intro/intro';
 import { ProvdashboardPage } from '../pages/provdashboard/provdashboard';
-import { HistoryPage } from '../pages/history/history';
-import { FavoritePage } from '../pages/favorite/favorite';
 import { SerloginPage } from '../pages/serlogin/serlogin';
-import { ProvchatPage } from '../pages/provchat/provchat';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { ProvideractiveservicesPage } from '../pages/provideractiveservices/provideractiveservices';
 import { ProvprofilePage } from '../pages/provprofile/provprofile';
 import { ProviderjobPage } from '../pages/providerjob/providerjob';
 import { UserloginPage } from '../pages/userlogin/userlogin';
@@ -19,14 +13,11 @@ import { UpdateuserpasswordPage } from '../pages/updateuserpassword/updateuserpa
 import { UpdateprovpasswordPage } from '../pages/updateprovpassword/updateprovpassword';
 import { UserprofilePage } from '../pages/userprofile/userprofile';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-
 import * as firebase from 'firebase';
 import { UserselectPage } from '../pages/userselect/userselect';
-import { LaundrySamedayPage } from '../pages/laundry-sameday/laundry-sameday';
-import { FilterPage } from '../pages/filter/filter';
 import { OneSignal } from '@ionic-native/onesignal';
-import { ProvservicenamePage } from '../pages/provservicename/provservicename';
 import { MypostingsPage } from '../pages/mypostings/mypostings';
+import { ViewjobPage } from '../pages/viewjob/viewjob';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -51,15 +42,15 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
-  history = HistoryPage;
-  fav = FavoritePage;
+  rootPage: any = HomePage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  
+
   posting = MypostingsPage;
   serlogin = SerloginPage;
-  chat = ProvchatPage;
+
   home  = HomePage;
   dash = ProvdashboardPage;
-  provservices = ProvideractiveservicesPage;
+
   provprofile = ProvprofilePage;
   provjob = ProviderjobPage;
   userpass = UpdateuserpasswordPage;
@@ -90,63 +81,6 @@ export class MyApp {
     });
    // this.getOnesignaldata();
     this.filePermission();
-    this.nativeStorage.getItem('s_name')
-    .then(
-      data => {
-        console.log("Checking s_name:" + data);
-        this.s_name = data;
-      },
-      error => console.error(error)
-    );
-    this.nativeStorage.getItem('name')
-    .then(
-      data => {
-        console.log("Checking s_name:" + data);
-        this.name = data;
-      },
-      error => console.error(error)
-    );
-
-
-    this.nativeStorage.getItem('auth')
-    .then(
-      data => {
-        console.log("Checking Auth value:" + data);
-        this.auth = data;
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('onetimelogin')
-    .then(
-      data => {
-        console.log("Checking onetimelogin:" + data);
-        this.onetimelogin = data;
-
-      },
-      error => console.error(error)
-    );
-
-
-    this.nativeStorage.getItem('onetimeloginprov')
-    .then(
-      data => {
-        console.log("Checking onetimeloginprov:" + data);
-        this.onetimeloginprov = data;
-
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('profile_picture')
-    .then(
-      data => {
-        console.log("Checking onetimeloginprov:" + data);
-        this.profile_picture = data;
-
-      },
-      error => console.error(error)
-    );
   }
 
   filePermission() {
@@ -188,13 +122,13 @@ export class MyApp {
   }
 
   reloaduser(){
-  this.nav.push(UserloginPage);
+  this.nav.push(UserselectPage);
   this.menuCtrl.close();
  
   }
 
   reloadprov(){
-    this.nav.push(SerloginPage);
+    this.nav.push(UserselectPage);
     this.menuCtrl.close();
   }
 
@@ -206,7 +140,7 @@ export class MyApp {
       () => console.log('Successfully logged out'),
       error => console.error('Error storing item', error)
     );
-    this.nav.setRoot(IntroPage);
+    this.nav.setRoot(UserloginPage);
   }
 
 
@@ -218,7 +152,7 @@ export class MyApp {
       () => console.log('Successfully logged out'),
       error => console.error('Error storing item', error)
     );
-    this.nav.setRoot(IntroPage);
+    this.nav.setRoot(SerloginPage);
   }
 
   getOnesignaldata()

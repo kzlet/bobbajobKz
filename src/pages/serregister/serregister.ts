@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, ToastController, ActionSheetController } from 'ionic-angular';
 import { SerloginPage } from '../serlogin/serlogin';
-import { ProvservicePage } from '../provservice/provservice';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -52,10 +51,6 @@ imageFileName:any;
     this.navCtrl.push(SerloginPage);
   }
 
-  goto1()
-  {
-    this.navCtrl.push(ProvservicePage);
-  }
 
   signup() {
     if (this.name === undefined ||  this.email === undefined || this.number === undefined || this.address === undefined|| this.password === undefined) {

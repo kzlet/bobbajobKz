@@ -11,19 +11,23 @@ import { NativeStorage } from '@ionic-native/native-storage';
 })
 export class LaundryPage {
   @ViewChild(Slides) slides: Slides;
-
   data: any;
   title: any;
   id: any;
   job_description: any;
   location: any;
-  Month : any;
-  Date : any;
   budget: any;
   currentEvents: { year: number; month: number; date: number; }[];
   user_email: any;
   currency: any;
   apiUrl: string;
+
+ //calender
+ public event = {
+  month: new Date().toJSON().slice(0,10),
+  timeStarts: new Date().toTimeString().split(" ")[0],
+}
+
   constructor(private nativeStorage: NativeStorage, private view: ViewController, public navCtrl: NavController, public navParams: NavParams,private http: Http, public alertCtrl: AlertController, private loadingCtrl: LoadingController) {
      this.title = this.navParams.get('title');
      this.id = this.navParams.get('id');
@@ -54,23 +58,10 @@ export class LaundryPage {
     this.slides.slideTo(2, 500);
   }
 
-  next() {
-    console.log(this.job_description);
-    console.log(this.location);
-    console.log(this.Month);
-    console.log(this.Date);
-    console.log(this.budget);
-    console.log(this.title);
-    console.log(this.id);
-    console.log(this.user_email);
-    console.log(this.currency);
-    this.post_job();
-    //this.navCtrl.setRoot(LaundrySamedayPage, {jd : this.job_description, location: this.location, month : this.Month, date: this.Date, budget : this.budget, title:this.title, id: this.id, user_email :this.user_email, currency: this.currency});
-  }
-
   post_job()
   {
-    if (this.job_description === undefined ||  this.location === undefined || this.Month === undefined || this.Date === undefined|| this.budget === undefined || this.title === undefined || this.user_email === undefined || this.currency === undefined) {
+    this.currency = '£';
+    if (this.job_description === undefined ||  this.location === undefined || this.event.month === undefined || this.event.timeStarts === undefined|| this.budget === undefined || this.title === undefined || this.user_email === undefined || this.currency === undefined) {
         let alert = this.alertCtrl.create({
             title: 'All fields are required',
             buttons: ['OK']
@@ -85,7 +76,7 @@ export class LaundryPage {
         });
         loader.present();
 
-        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/post_job.php?jd=' + this.job_description + '&location=' + this.location +'&month=' + this.Month + '&date='+ this.Date + '&budget='+ this.budget+ '&title='+ this.title + '&user_email='+ this.user_email + '&currency='+ this.currency;
+        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/post_job.php?jd=' + this.job_description + '&location=' + this.location +'&month=' + this.event.month + '&date='+ this.event.timeStarts + '&budget='+ this.budget+ '&title='+ this.title + '&user_email='+ this.user_email + '&currency='+ this.currency;
        
         this.http.get(this.apiUrl).map(res => res.json())
           .subscribe(data => {

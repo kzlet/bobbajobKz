@@ -37,38 +37,17 @@
                       </ion-item>
                     </div>
 
-                    <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-                        <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                            <ion-label>Month</ion-label>
-                            <ion-select [(ngModel)]="Month">
-                              <ion-option value="01">January</ion-option>
-                              <ion-option value="02">February</ion-option>
-                              <ion-option value="03">March</ion-option>
-                              <ion-option value="04">April</ion-option>
-                              <ion-option value="05">May</ion-option>
-                              <ion-option value="06">June</ion-option>
-                              <ion-option value="07">July</ion-option>
-                              <ion-option value="08">August</ion-option>
-                              <ion-option value="09">September</ion-option>
-                              <ion-option value="10">October</ion-option>
-                              <ion-option value="11">November</ion-option>
-                              <ion-option value="12" checked="true">December</ion-option>
-                            </ion-select>
-                            <ion-select [(ngModel)]="Date">
-                              <ion-option>1</ion-option>
-                              <ion-option>2</ion-option>
-                              <ion-option>3</ion-option>
-                              <ion-option>4</ion-option>
-                              <ion-option>5</ion-option>
-                              <ion-option checked="true">6</ion-option>
-                              <ion-option>7</ion-option>
-                              <ion-option>8</ion-option>
-                              <ion-option>9</ion-option>
-                              <ion-option>10</ion-option>
-                              <ion-option>11</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </div>
+                    <ion-item>
+                      <ion-label>Select Day</ion-label>
+                      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+                    </ion-item>
+                
+                
+                    <ion-item>
+                      <ion-label>Select Time</ion-label>
+                      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
+                    </ion-item>
+                
             
                   <button ion-button color="primary" (click)="goToSlide3()">Next</button>
                   </ion-card>
@@ -80,24 +59,15 @@
 
               <div align="center">
                 <ion-card class="home-background"> 
-                  <h2 class="card-positioner1">Enter Rough Budget</h2>
+                  <h2 class="card-positioner1">Enter Rough Budget in <b>£</b></h2>
                   <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
                       <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                          <ion-input type="text" placeholder="Rough Budget" [(ngModel)]="budget"></ion-input>
+                          <ion-input type="number" placeholder="Rough Budget" [(ngModel)]="budget"></ion-input>
                         </ion-item>
                 </div>
 
-                <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-                    <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                        <ion-label>Currency</ion-label>
-                        <ion-select [(ngModel)]="currency">
-                          <ion-option value="usd">USD</ion-option>
-                          <ion-option value="euro">Euro</ion-option>
-                        </ion-select>
-                    </ion-item>
-                </div>
 
-              <button ion-button color="primary" (click)="next()">Post Job</button>
+              <button ion-button color="primary" (click)="post_job()">Post Job</button>
             </ion-card>
             </div>
             </ion-slide>
