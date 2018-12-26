@@ -46,7 +46,7 @@ export class HomePage {
 
   do()
   {
-   // this.events.publish('user:login');
+    this.events.publish('user:login');
     console.log("Clicked menu 1");
     this.activeMenu = 'menu1';
     this.menuCtrl.enable(true, 'menu1');

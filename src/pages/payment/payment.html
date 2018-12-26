@@ -2,12 +2,29 @@
   <ion-navbar>
     <ion-title>Payment</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="close()"><p>Close</p></button>
-      </ion-buttons>
+      <button ion-button (click)="close()">
+        <p>Close</p>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+
+      <form name="paymentForm">
+        <ion-item>
+          <ion-label floating>Amount</ion-label>
+          <ion-input type="number" name="amount" readonly="{{isReadonly}}" [(ngModel)]="value1"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Currency</ion-label>
+            <ion-input type="text" name="currency" readonly="{{isReadonly}}" [(ngModel)]="value2"></ion-input>
+          </ion-item>
+        <p>
+          <button ion-button block color="secondary" (click)="transaction()">MAKE PAYMENT</button>
+        </p>
+      </form>
+   
 
 </ion-content>

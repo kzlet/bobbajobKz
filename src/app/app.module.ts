@@ -33,6 +33,9 @@ import { UpdateuserpasswordPage } from '../pages/updateuserpassword/updateuserpa
 import { UserprofilePage } from '../pages/userprofile/userprofile';
 import { OneSignal } from '@ionic-native/onesignal';
 
+//PAyment Integration
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
+
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -49,6 +52,8 @@ import { OfferPage } from '../pages/offer/offer';
 import { MypostingsPage } from '../pages/mypostings/mypostings';
 import { ViewjobPage } from '../pages/viewjob/viewjob';
 import { PaymentPage } from '../pages/payment/payment';
+import { UserConnectionsPage } from '../pages/user-connections/user-connections';
+import { UserChatPage } from '../pages/user-chat/user-chat';
 
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
@@ -84,7 +89,9 @@ const firebaseAuth = {
     OfferPage,
     MypostingsPage,
     ViewjobPage,
-    PaymentPage
+    PaymentPage,
+    UserConnectionsPage,
+    UserChatPage
   
   ],
   imports: [
@@ -121,7 +128,9 @@ const firebaseAuth = {
     OfferPage,
     MypostingsPage,
     ViewjobPage,
-    PaymentPage
+    PaymentPage,
+    UserConnectionsPage,
+    UserChatPage
   ],
   providers: [
     StatusBar,
@@ -139,6 +148,7 @@ const firebaseAuth = {
     DocumentViewer,
     AndroidPermissions,
     OneSignal,
+    PayPal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

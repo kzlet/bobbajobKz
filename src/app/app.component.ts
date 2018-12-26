@@ -18,6 +18,7 @@ import { UserselectPage } from '../pages/userselect/userselect';
 import { OneSignal } from '@ionic-native/onesignal';
 import { MypostingsPage } from '../pages/mypostings/mypostings';
 import { ViewjobPage } from '../pages/viewjob/viewjob';
+import { UserConnectionsPage } from '../pages/user-connections/user-connections';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -43,14 +44,11 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
-  
-
   posting = MypostingsPage;
   serlogin = SerloginPage;
-
   home  = HomePage;
+  userconn = UserConnectionsPage;
   dash = ProvdashboardPage;
-
   provprofile = ProvprofilePage;
   provjob = ProviderjobPage;
   userpass = UpdateuserpasswordPage;
