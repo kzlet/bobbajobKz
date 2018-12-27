@@ -42,6 +42,11 @@ export class PaymentPage {
     this.payPal.prepareToRender(this.payPalEnvironment, new PayPalConfiguration({})).then(() => {
       this.payPal.renderSinglePaymentUI(payment).then((response) => {
         alert(`Successfully paid. Status = ${response.response.state}`);
+
+
+        //Task add function here... And then naviagate to Home Screen.
+
+
         console.log(response);
       }, () => {
         console.error('Error or render dialog closed without being successful');

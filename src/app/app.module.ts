@@ -54,6 +54,13 @@ import { ViewjobPage } from '../pages/viewjob/viewjob';
 import { PaymentPage } from '../pages/payment/payment';
 import { UserConnectionsPage } from '../pages/user-connections/user-connections';
 import { UserChatPage } from '../pages/user-chat/user-chat';
+import { ReviewproviderPage } from '../pages/reviewprovider/reviewprovider';
+import { RateproviderPage } from '../pages/rateprovider/rateprovider';
+import { ProvidertabPage } from '../pages/providertab/providertab';
+import { ProvsettingsPage } from '../pages/provsettings/provsettings';
+import { ProviderConnectionsPage } from '../pages/provider-connections/provider-connections';
+import { ProviderChatPage } from '../pages/provider-chat/provider-chat';
+import { JobHistoryPage } from '../pages/job-history/job-history';
 
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
@@ -91,8 +98,14 @@ const firebaseAuth = {
     ViewjobPage,
     PaymentPage,
     UserConnectionsPage,
-    UserChatPage
-  
+    UserChatPage,
+    ReviewproviderPage,
+    RateproviderPage,
+    ProvidertabPage,
+    ProvsettingsPage,
+    ProviderConnectionsPage,
+    ProviderChatPage,
+    JobHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -130,7 +143,14 @@ const firebaseAuth = {
     ViewjobPage,
     PaymentPage,
     UserConnectionsPage,
-    UserChatPage
+    UserChatPage,
+    ReviewproviderPage,
+    RateproviderPage,
+    ProvidertabPage,
+    ProvsettingsPage,
+    ProviderConnectionsPage,
+    ProviderChatPage,
+    JobHistoryPage
   ],
   providers: [
     StatusBar,

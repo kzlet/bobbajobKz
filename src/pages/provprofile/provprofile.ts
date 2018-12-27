@@ -20,73 +20,44 @@ export class ProvprofilePage {
   name: any;
   activeMenu: string;
   current_time: any = new Date(new Date().getTime()).toLocaleDateString();
+  provider_email: any;
+  provider_name: any;
+  rate : any = '3.5';
+
   constructor( public events: Events, private loadingCtrl: LoadingController, private http: Http, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
-     
-    this.nativeStorage.getItem('name')
-    .then(
-      data => {
-        console.log("Checking for name:" + data);
-        this.name = data;  //user email
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('available')
-    .then(
-      data => {
-        console.log("Checking for available:" + data);
-        this.available = data;
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('number')
-    .then(
-      data => {
-        console.log("Checking for available:" + data);
-        this.number = data;
-      },
-      error => console.error(error)
-    );
-
-    
-    this.nativeStorage.getItem('profile_picture')
-    .then(
-      data => {
-        console.log("Checking for profile picture:" + data);
-        this.profile_picture = data;
-      },
-      error => console.error(error)
-    );
-
-    this.nativeStorage.getItem('email')
-    .then(
-      data => {
-        console.log("Checking for profile picture:" + data);
-        this.email = data;
-        this.fetchdata();
-      },
-      error => console.error(error)
-    );
-
-  //   this.name = 'kumail';
-  // this.email = 'mku@hmail.com';
-  // this.number = '123456789';
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProvprofilePage');
+    this.nativeStorage.getItem('provider_email')
+    .then(
+      data => {
+        console.log("Checking for name:" + data);
+        this.provider_email = data;  //user email
+      },
+      error => console.error(error)
+    );
+
+    this.nativeStorage.getItem('profile_picture')
+    .then(
+      data => {
+        console.log("Checking for name:" + data);
+        this.profile_picture = data;  //user email
+      },
+      error => console.error(error)
+    );
+
+    this.nativeStorage.getItem('provider_name')
+    .then(
+      data => {
+        console.log("Checking for name:" + data);
+        this.provider_name = data;  //user email
+      },
+      error => console.error(error)
+    );
+
   }
 
-  do()
-  {
-    this.events.publish('user:login');
-    console.log("Clicked menu 2");
-    this.activeMenu = 'menu2';
-    this.menuCtrl.enable(false, 'menu1');
-    this.menuCtrl.enable(true, 'menu2');
-    this.menuCtrl.open(this.activeMenu);
-  }
 
   fetchdata()
   {

@@ -4,41 +4,43 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { UserChatPage } from '../user-chat/user-chat';
+import { ProviderChatPage } from '../provider-chat/provider-chat';
 
 @Component({
-  selector: 'page-user-connections',
-  templateUrl: 'user-connections.html',
+  selector: 'page-provider-connections',
+  templateUrl: 'provider-connections.html',
 })
-export class UserConnectionsPage {
+export class ProviderConnectionsPage {
   client_email: any;
   apiUrl: string;
   posts: any;
   client_name: any;
-  toasts: any;
+  provider_email: any;
+  provider_name: any;
 
   constructor(public modalCtrl: ModalController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
-    this.nativeStorage.getItem('user_email')
+    this.nativeStorage.getItem('provider_email')
     .then(
       data => {
         console.log("Checking for cleint email:" + data);
-        this.client_email = data;
+        this.provider_email = data;
         this.get_caller_data();
       },
       error => console.error(error)
     );
 
-    this.nativeStorage.getItem('user_name')
+    this.nativeStorage.getItem('provider_name')
     .then(
       data => {
         console.log("Checking for cleint email:" + data);
-        this.client_name = data;
+        this.provider_name = data;
       },
       error => console.error(error)
     );
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserConnectionsPage');
+    console.log('ionViewDidLoad Provider Connection pages');
   }
 
   get_caller_data()
@@ -48,7 +50,7 @@ export class UserConnectionsPage {
     });
     loader.present();
 
-    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_caller_data.php?client_email=' + this.client_email;
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_user_caller_data.php?provider_email=' + this.provider_email;
 
     console.log(this.apiUrl);
 
@@ -56,6 +58,7 @@ export class UserConnectionsPage {
       .subscribe(data => {
 
         this.posts = data;
+    //    this.posts= Array.of(this.posts);
         console.log(this.posts);
 
 
@@ -76,9 +79,10 @@ export class UserConnectionsPage {
       });
   }
 
-  open_chatbox(provider_email: string, name : string, title : string, playerid : string, client_email: string, client_name : string)
+  open_chatbox(client_email: string, name : string, title : string, playerid : string, provider_email: string, client_name : string)
   {
-    const modal = this.modalCtrl.create(UserChatPage, {provider_email ,name ,title , playerid, client_email : this.client_email, client_name : this.client_name});
+    const modal = this.modalCtrl.create(ProviderChatPage, {client_email ,name ,title , playerid, provider_email : this.provider_email, provider_name : this.provider_name});
     modal.present();
   }
 }
+

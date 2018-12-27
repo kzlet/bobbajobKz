@@ -6,6 +6,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ProvservicenamePage } from '../provservicename/provservicename';
+import { ProvidertabPage } from '../providertab/providertab';
 
 @Component({
   selector: 'page-serlogin',
@@ -83,7 +84,14 @@ export class SerloginPage {
           () => console.log('Name Stored!'),
           error => console.error('Error storing item', error)
         );
-          this.navCtrl.push(ProvdashboardPage);
+
+        this.nativeStorage.setItem('profile_picture', data.profile_picture)
+        .then(
+          () => console.log('Name Stored!'),
+          error => console.error('Error storing item', error)
+        );
+
+          this.navCtrl.push(ProvidertabPage);
        } else if (str === 'failed') {
          let alert = this.alertCtrl.create({
            title: 'Authentication Failed',

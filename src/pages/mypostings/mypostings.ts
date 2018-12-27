@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { ViewjobPage } from '../viewjob/viewjob';
+import { ReviewproviderPage } from '../reviewprovider/reviewprovider';
 
 @Component({
   selector: 'page-mypostings',
@@ -72,7 +73,6 @@ export class MypostingsPage {
 
     this.http.get(this.apiUrl).map(res => res.json())
       .subscribe(data => {
-
         this.coasts = data;
         console.log(this.coasts);
           loader.dismiss();
@@ -88,8 +88,9 @@ export class MypostingsPage {
   }
 
 
-  check_status()
+  check_status(project_id : string)
   {
-
+   console.log("Project id:" + project_id);
+   this.navCtrl.push(ReviewproviderPage , {project_id : project_id});
   }
 }

@@ -7,11 +7,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 @Component({
-  selector: 'page-user-chat',
-  templateUrl: 'user-chat.html',
+  selector: 'page-provider-chat',
+  templateUrl: 'provider-chat.html',
 })
-export class UserChatPage {
-
+export class ProviderChatPage {
   @ViewChild(Content) contentArea: Content;
  
 
@@ -34,15 +33,14 @@ export class UserChatPage {
   sub: Subscription;
 
   constructor(public view: ViewController, private loadingCtrl: LoadingController, public alertCtrl: AlertController, private nativeStorage: NativeStorage, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    this.provider_email = this.navParams.get('provider_email');
+    this.provider_email = this.navParams.get('client_email');
     this.provider_name = this.navParams.get('name');
-
-    console.log("Provider name:" + this.provider_name);
+    this.client_email = this.navParams.get('provider_email');
+    this.client_name = this.navParams.get('client_name');
 
     this.title = this.navParams.get('title');
     this.playerid = this.navParams.get('playerid');
-    this.client_email = this.navParams.get('client_email');
-    this.client_name = this.navParams.get('client_name');
+   
     //get messages
     this.fetchmsgs();
   }

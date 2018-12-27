@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController, NavController, Events } from 'ionic-angular';
+import { Nav, Platform, MenuController, NavController, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
@@ -19,6 +19,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 import { MypostingsPage } from '../pages/mypostings/mypostings';
 import { ViewjobPage } from '../pages/viewjob/viewjob';
 import { UserConnectionsPage } from '../pages/user-connections/user-connections';
+import { JobHistoryPage } from '../pages/job-history/job-history';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -43,7 +44,7 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   posting = MypostingsPage;
   serlogin = SerloginPage;
   home  = HomePage;
@@ -57,7 +58,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(private oneSignal: OneSignal, private androidPermissions: AndroidPermissions,  public events: Events, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public alertCtrl : AlertController ,private oneSignal: OneSignal, private androidPermissions: AndroidPermissions,  public events: Events, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     //firebase.initializeApp(config);
     events.subscribe('user:login', () => {
@@ -132,25 +133,57 @@ export class MyApp {
 
   logout()
   {
-    let onetimelogin = 0;
-    this.nativeStorage.setItem('onetimelogin', onetimelogin)
-    .then(
-      () => console.log('Successfully logged out'),
-      error => console.error('Error storing item', error)
-    );
-    this.nav.setRoot(UserloginPage);
+     const confirm = this.alertCtrl.create({
+      title: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+            this.menuCtrl.close();
+          }
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Agree clicked');
+            this.nav.setRoot(UserselectPage);
+            this.menuCtrl.close();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
+  close()
+  {
+    this.menuCtrl.close();
+  }
 
   logoutprov()
   {
-    let onetimeloginprov = 0;
-    this.nativeStorage.setItem('onetimeloginprov', onetimeloginprov)
-    .then(
-      () => console.log('Successfully logged out'),
-      error => console.error('Error storing item', error)
-    );
-    this.nav.setRoot(SerloginPage);
+    const confirm = this.alertCtrl.create({
+      title: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+            this.menuCtrl.close();
+          }
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Agree clicked');
+            this.nav.setRoot(SerloginPage);
+            this.menuCtrl.close();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   getOnesignaldata()

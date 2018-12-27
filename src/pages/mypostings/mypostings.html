@@ -41,7 +41,7 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'progress'">
-            <ion-item *ngFor="let cost of costs" (click)="check_status(post.user_email, post.id, post.jd)">
+            <ion-item *ngFor="let cost of coasts" (click)="check_status(cost.id)">
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10>
@@ -54,9 +54,10 @@
                 </ion-grid>
                 <h3>Job Type: &nbsp;{{cost.title}}</h3>
                 <p>{{cost.date}} {{cost.month}}</p>
+                <p *ngIf="cost.progress === 2 || cost.progress === '2'" style="color:red"><b>Status:</b>&nbsp;In-progress</p>
+                <p align="right" style="color:red;margin-top:-20px">View Job Details</p>
               </ion-item>
           </ion-list>
-        
-        
         </div>
+        
 </ion-content>

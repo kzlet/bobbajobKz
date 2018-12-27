@@ -1,68 +1,29 @@
-<ion-menu [content]="content" id="menu1">
-  
-  
-  <ion-content style="background-color:white">
-
-
-
-    <div align="left" style="margin-top:6%;">
-        <ion-item no-lines style="background-color:transparent">
-        <ion-avatar align="center">
-          <img src="imgs/userp.png" style="width: 32%;height: 77px;margin-left: 1px;"/>
-          </ion-avatar>
-          </ion-item>
-        </div>
-
-        <div align="right" style="padding-right: 85px;margin-top: -81px;">
-        <h4 style="color:black;margin-left: -8px;">{{s_name}}</h4>   <!--{{s_name}}-->
-      </div>
-        
-
-    <ion-list no-lines style="background-color:transparent;margin-top: 46px;padding-left: 21px;">
-
-        <ion-item style="background-color:transparent" (click)="OnLoad(home)">
-            <ion-icon name="ios-home-outline" item-start style="color:#418bb8"></ion-icon>
-              <b style="color:#418bb8">Home</b>
-          </ion-item>
-    
-
-      <ion-item style="background-color:transparent" (click)="OnLoad(posting)">
-        <ion-icon name="ios-heart-outline" item-start style="color:#418bb8"></ion-icon>
-          <b style="color:#418bb8">My Postings</b>
-      </ion-item>
-
-      <ion-item style="background-color:transparent" (click)="OnLoad(userconn)">
-          <ion-icon name="ios-heart-outline" item-start style="color:#418bb8"></ion-icon>
-            <b style="color:#418bb8">My Connections</b>
-        </ion-item>
-
-      <ion-item style="background-color:transparent" (click)="OnLoad(userprof)">
-        <ion-icon name="ios-person" item-start style="color:#418bb8"></ion-icon>
-        <b style="color:#418bb8">Edit Profile</b>
-      </ion-item>
-
-      <ion-item style="background-color:transparent" (click)="OnLoad(userpass)">
-        <ion-icon ios="ios-cog" md="md-cog" item-start style="color:#418bb8"></ion-icon>
-        <b style="color:#418bb8">Change Password</b>
-      </ion-item>
-
-      <ion-item style="background-color:transparent; margin-top:118px" (click)="reloadprov()">
-        <ion-icon name="ios-contacts" item-start style="color:black"></ion-icon>
-        <b style="color:black">Switch to Provider</b>
-      </ion-item>
-
-      <ion-item style="background-color:transparent" (click)="logout()">
-        <ion-icon name="ios-log-out-outline" item-start style="color:black"></ion-icon>
-        <b style="color:black">Logout</b>
-      </ion-item>
-    </ion-list>
-
-
+<ion-menu [content]="content" id="menu1" [swipeEnabled]="false">
+  <ion-content class="new-header">
+    <ion-icon ios="ios-close" md="md-close" style="padding-left:40px;color:grey;padding-top:30px" (click)="close()"></ion-icon>
+    <div style="margin-top: 17%;">
+      <p style="color:grey;padding-left:40px;font-size:1.2em" (click)="OnLoad(home)"><b>Home</b></p>
+      <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(posting)"><b>My Postings</b></p>   <!-- (click)="OnLoad(profile)" -->
+      <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(userconn)"><b>My Connections</b></p>
+      <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(userprof)"><b>Edit Profile</b></p>
+      <!-- <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(userpass)"><b>Change Password</b></p> -->
+    </div>
   </ion-content>
-
+  <ion-footer no-border>
+      <div align="center">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+              </ion-col>
+              <ion-col col-6 (click)="logout()">
+                <ion-icon name="ios-log-out-outline" style="color:grey"></ion-icon>
+                <p style="color:grey">LOGOUT</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+  </ion-footer>
 </ion-menu>
-
-
 
 
 
