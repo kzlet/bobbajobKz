@@ -5,6 +5,7 @@ import { ProvsettingsPage } from '../provsettings/provsettings';
 import { ProviderConnectionsPage } from '../provider-connections/provider-connections';
 import { ProvprofilePage } from '../provprofile/provprofile';
 import { JobHistoryPage } from '../job-history/job-history';
+import { ProvprofeditPage } from '../provprofedit/provprofedit';
 
 @Component({
   selector: 'page-providertab',
@@ -16,7 +17,7 @@ export class ProvidertabPage {
   tab2Root = ProviderConnectionsPage;
   tab3Root = LaundrySamedayPage;
   tab4Root = JobHistoryPage;
-  tab5Root = ProvsettingsPage;
+  tab5Root = ProvprofeditPage;
 
   constructor() {
 

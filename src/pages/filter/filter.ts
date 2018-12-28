@@ -16,6 +16,9 @@ export class FilterPage {
   buttonValue: string;
   apiUrl: string;
   posts: any;
+  job_category: any;
+  budget: any;
+  work_location: any;
 
   constructor(private loadingCtrl: LoadingController, private http: Http, private view: ViewController, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
@@ -29,17 +32,10 @@ export class FilterPage {
     this.view.dismiss();
   }
 
-  apply() {
-    console.log("Posted:"            + this.posted);
-    console.log("Prices:"            + this.prices);
-    console.log("Filter:"            + this.filter);
-    console.log("Available:"         + this.available);
-    console.log("Product Condition:" + this.buttonValue);
-  }
-
-  send()
+  send(job_category : string, budget : string, work_location : string)
   {
-    this.view.dismiss();
+    let data = { job_category : this.job_category , budget : this.budget, work_location : this.work_location};
+    this.view.dismiss(data);
   }
 
   get_data()

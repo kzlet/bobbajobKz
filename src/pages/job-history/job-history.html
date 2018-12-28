@@ -20,59 +20,55 @@
 
     <div [ngSwitch]="archive">
         <ion-list *ngSwitchCase="'Going'">
-            <ion-item *ngFor="let post of posts, let i = index" (click)="view_job(post.id)">
+            <ion-item *ngFor="let post of posts, let i = index">
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10>
                        <b>{{i+1}}</b>). {{post.jd}}
                     </ion-col>
                     <ion-col col-2>
-                      ${{post.budget}}
+                      ${{post.amount}}
                       </ion-col>
                   </ion-row>
                 </ion-grid>
                 <h3>Job Type: &nbsp;{{post.title}}</h3>
-                <p>{{post.date}} {{post.month}}</p>
                 <p *ngIf="post.progress === 1 || post.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
                 <p align="right" style="color:green;margin-top:-20px">View Proposals</p>
               </ion-item>
           </ion-list>
 
           <ion-list *ngSwitchCase="'Completed'">
-              <ion-item *ngFor="let post of posts, let i = index" (click)="view_job(post.id)">
+              <ion-item *ngFor="let cost of coasts, let i = index">
                   <ion-grid>
                     <ion-row>
                       <ion-col col-10>
-                         <b>{{i+1}}</b>). {{post.jd}}
+                         <b>{{i+1}}</b>). {{cost.jd}}
                       </ion-col>
                       <ion-col col-2>
-                        ${{post.budget}}
+                        ${{cost.amount}}
                         </ion-col>
                     </ion-row>
                   </ion-grid>
-                  <h3>Job Type: &nbsp;{{post.title}}</h3>
-                  <p>{{post.date}} {{post.month}}</p>
-                  <p *ngIf="post.progress === 1 || post.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
-                  <p align="right" style="color:green;margin-top:-20px">View Proposals</p>
+                  <h3>Job Type: &nbsp;{{cost.title}}</h3>
                 </ion-item>
             </ion-list>
 
             <ion-list *ngSwitchCase="'proposals'">
-                <ion-item *ngFor="let post of posts, let i = index" (click)="view_job(post.id)">
-                    <ion-grid>
-                      <ion-row>
-                        <ion-col col-10>
-                           <b>{{i+1}}</b>). {{post.jd}}
-                        </ion-col>
-                        <ion-col col-2>
-                          ${{post.budget}}
-                          </ion-col>
-                      </ion-row>
-                    </ion-grid>
-                    <h3>Job Type: &nbsp;{{post.title}}</h3>
-                    <p>{{post.date}} {{post.month}}</p>
-                    <p *ngIf="post.progress === 1 || post.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
-                    <p align="right" style="color:green;margin-top:-20px">View Proposals</p>
+              <ion-item *ngFor="let tost of toast, let i = index">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-10>
+                       <b>{{i+1}}</b>). {{tost.jd}}
+                    </ion-col>
+                    <ion-col col-2>
+                      ${{tost.amount}}
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <h3>Job Type: &nbsp;{{tost.title}}</h3>
+                    <p *ngIf="tost.progress === 1 || tost.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
+                    <p *ngIf="tost.progress === 2 || tost.progress === '2'" style="color:red"><b>Status:</b>&nbsp;On Going</p>
+                    <p *ngIf="tost.progress === 3 || tost.progress === '3'" style="color:blue"><b>Status:</b>&nbsp;Completed</p>
                   </ion-item>
               </ion-list>
 

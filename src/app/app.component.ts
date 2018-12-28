@@ -20,6 +20,8 @@ import { MypostingsPage } from '../pages/mypostings/mypostings';
 import { ViewjobPage } from '../pages/viewjob/viewjob';
 import { UserConnectionsPage } from '../pages/user-connections/user-connections';
 import { JobHistoryPage } from '../pages/job-history/job-history';
+import { ProvidertabPage } from '../pages/providertab/providertab';
+import { ProvprofeditPage } from '../pages/provprofedit/provprofedit';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -44,7 +46,7 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  rootPage: any = ProvprofeditPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   posting = MypostingsPage;
   serlogin = SerloginPage;
   home  = HomePage;
@@ -57,6 +59,7 @@ export class MyApp {
   userprof = UserprofilePage;
 
   pages: Array<{title: string, component: any}>;
+  email: any;
 
   constructor(public alertCtrl : AlertController ,private oneSignal: OneSignal, private androidPermissions: AndroidPermissions,  public events: Events, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -66,7 +69,6 @@ export class MyApp {
     });
 
     events.subscribe('provider:login', () => {
-     // this.reload_provider_data();
     });
 
   }
@@ -208,4 +210,5 @@ export class MyApp {
        );
    });
   }
+
 }

@@ -28,9 +28,9 @@ export class ProvprofeditPage {
   email: any;
   url: string;
   imageURI:any;
-imageFileName:any;
+  imageFileName:any;
+  
   constructor(public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
-   
     this.nativeStorage.getItem('profile_picture')
     .then(
       data => {
@@ -39,205 +39,123 @@ imageFileName:any;
       },
       error => console.error(error)
     );
-
     
-    this.nativeStorage.getItem('email')
+    this.nativeStorage.getItem('provider_email')
     .then(
       data => {
-        console.log("Checking for City name:" + data);
+        console.log("Checking for PRovider name:" + data);
         this.email = data;
-        //this.fetchprice();
+        this.fetch_user_data();
+      });
 
-        let loader = this.loadingCtrl.create({
-          content: "Loading Data..."
+      this.nativeStorage.getItem('provider_name')
+      .then(
+        data => {
+          console.log("Checking for PRovider name:" + data);
+          this.name = data;
         });
-        loader.present();
-    
-        this.apiUrl = 'http://secedu.info/mycity/getlogindetails.php?email=' + this.email;
-         console.log(this.apiUrl);
-    
-         this.http.get(this.apiUrl).map(res => res.json())
-         .subscribe(data => {
-            
-          this.posts = data;
-          console.log(this.posts);
-    
-          this.name = this.posts[0].name;
-          this.number = this.posts[0].number;
-          this.address = this.posts[0].address;
-    
-          console.log("name from posts" + this.name);
-          console.log( this.number);
-          console.log( this.address);
-    
-          loader.dismiss();
-          console.log(this.posts);
-     
-          }, error => {
-            console.log(error); // Error getting the data
-      
-          });
 
-      },
-      error => console.error(error)
-    );
-
-    //this.email = 'sajid@gmail.com'; 
-  //  this.fetchprice();
-//   this.name = 'kumail';
- //  this.number = '03452130046';
- //  this.address= '221 Bakers Street'; 
-
-   console.log('Here it comes');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProvprofeditPage');
   }
 
-  // fetchprice()
-  // {
-  //  console.log("From fetch price function");
-  //  console.log("Email:" + this.email);
-  //   let loader = this.loadingCtrl.create({
-  //     content: "Loading Data..."
-  //   });
-  //   loader.present();
+  ionViewDidEnter() {
+    console.log('Testing View Enter');
+  }
 
-  //   this.apiUrl = 'http://secedu.info/mycity/getlogindetails.php?email=' + this.email;
-  //    console.log(this.apiUrl);
+  fetch_user_data()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Loading Profile..."
+    });
+    loader.present();
 
-  //    this.http.get(this.apiUrl).map(res => res.json())
-  //    .subscribe(data => {
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_provider_data.php?email=' + this.email;
+     console.log(this.apiUrl);
+
+     this.http.get(this.apiUrl).map(res => res.json())
+     .subscribe(data => {
         
-  //     this.posts = data;
-  //     console.log(this.posts);
+      this.posts = data;
+      console.log(this.posts);
 
-  //     this.name = this.posts[0].name;
-  //     this.number = this.posts[0].number;
-  //     this.address = this.posts[0].address;
-
-  //     console.log("name from posts" + this.name);
-  //     console.log( this.number);
-  //     console.log( this.address);
-
-  //     loader.dismiss();
-  //     console.log(this.posts);
- 
-  //     }, error => {
-  //       console.log(error); // Error getting the data
-  
-  //     });
-  //   }
-
- check()
- {
-  console.log("name from signup" + this.name);
-  console.log( this.number);
-  console.log( this.address);
- }
-
-  signup() {
-    if (this.name === undefined ||  this.number === undefined || this.address === undefined) {
-
-        let alert = this.alertCtrl.create({
-            title: 'No Change Occured',
-            buttons: ['OK']
-          });
-          alert.present();        
-    }
-
-    else {
-
-      console.log("name from signup" + this.name);
-      console.log( this.number);
-      console.log( this.address);
-      console.log( this.email);
-
-         let loader = this.loadingCtrl.create({
-            content: "Updating Profile..."
-        });
-        loader.present();
-
-        this.apiUrl = 'http://secedu.info/mycity/custupdate.php?name=' + this.name + '&address='+ this.address + '&number=' + this.number + '&email=' + this.email;
-
-    
-        var data = { name: this.name, address: this.address, number : this.number, email: this.email };
-        console.log(data);
-       
-        this.http.get(this.apiUrl).map(res => res.json())
-          .subscribe(data => {
-           loader.dismiss();
-
-                console.log("After upload" + JSON.stringify(data));
+      this.name = this.posts.name;
+      this.number = this.posts.number;
+      this.address = this.posts.address;
+      this.profile_picture = this.posts.profile_picture;
       
-                var status = data.Status;
+      console.log("name from posts" + this.name);
+      console.log( this.number);
 
-                if(status === 'success')
-                {
-                  let alert = this.alertCtrl.create({
-                    title: 'Updated Successful',
-                    buttons: ['OK']
-                  });
-                  alert.present();
-
-                  this.nativeStorage.setItem('name', this.name)
-                  .then(
-                    () => console.log('Name Stored!'),
-                    error => console.error('Error storing item', error)
-                  );
-          
-                  this.nativeStorage.setItem('number', this.number)
-                  .then(
-                    () => console.log('number Stored!'),
-                    error => console.error('Error storing item', error)
-                  );
-
-                  this.nativeStorage.setItem('profile_picture', this.imageURI)
-                  .then(
-                    () => console.log('Image Stored!'),
-                    error => console.error('Error storing item', error)
-                  );
+      loader.dismiss();
+      console.log(this.posts);
+ 
+      }, error => {
+        console.log(error); // Error getting the data
+  
+      });
+  }
 
 
-                  let loader = this.loadingCtrl.create({
-                    content: "Validating Resources..."
-                });
-                loader.present();
-              
-                console.log("Image URI" + this.imageURI);
+//   signup() {
+//     if (this.name === undefined ||  this.number === undefined ||  this.address === undefined ) {
+
+//         let alert = this.alertCtrl.create({
+//             title: 'You cannot leave these fields empty ! ',
+//             buttons: ['OK']
+//           });
+//           alert.present();        
+//     }
+
+//     else {
+//          let loader = this.loadingCtrl.create({
+//             content: "Updating Profile..."
+//         });
+//         loader.present();
+
+//         this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_user_profile.php?name=' + this.name + '&number=' + this.number + '&email=' + this.user_email;
+       
+//         this.http.get(this.apiUrl).map(res => res.json())
+//           .subscribe(data => {
+//            loader.dismiss();
+
+//                 console.log("After upload" + JSON.stringify(data));
+      
+//                 var status = data.Status;
+
+//                 if(status === 'success')
+//                 {
+//                   let alert = this.alertCtrl.create({
+//                     title: 'Updated Successful',
+//                     buttons: ['OK']
+//                   });
+//                   alert.present();
+
+//                   if(this.image_value === '1')
+//                   {
+//                     this.uploadImage();
+//                   }
+//                   else{
+//                     this.events.publish('user:provider'); //refresh native storage
+//                     this.navCtrl.push(UserprofilePage);
+//                   }
+//         }
+//               else
+//                 {
+//                   let alert = this.alertCtrl.create({
+//                     title: 'Profile Updation Failed ! Server Problem',
+//                     buttons: ['OK']
+//                   });
+//                   alert.present();
+//                 }
                
-                if(this.imageURI === 'undefined' || this.imageURI === undefined)
-                {
-                  loader.dismiss();
-
-                  this.navCtrl.push(ProvdashboardPage);
-                  
-                }
-                else
-                {
-                this.uploadImage();
-                loader.dismiss();
-
-                    this.navCtrl.push(ProvdashboardPage);
-                }
-
-
-        }
-              else
-                {
-                  let alert = this.alertCtrl.create({
-                    title: 'Profile Updation Failed ! Server Problem',
-                    buttons: ['OK']
-                  });
-                  alert.present();
-                }
-               
-            }, error => {
-                console.log(error);// Error getting the data
-            });
-    }
-}
+//             }, error => {
+//                 console.log(error);// Error getting the data
+//             });
+//     }
+// }
 
 
  //Upload image:
@@ -297,15 +215,10 @@ private presentToast(text) {
   toast.present();
 }
 
-// Always get the accurate path to your apps folder
-
 
 public uploadImage() {
- 
-  // File for Upload
   console.log(this.imageURI)
   var targetPath = this.imageURI
-
   var temp= this.imageURI.replace(".png?","_");
   var temp1=temp.replace(".jpg?","_");
   // File name only
@@ -322,25 +235,22 @@ public uploadImage() {
   const fileTransfer: FileTransferObject = this.transfer.create();
 
   let loadingCtrl = this.loadingCtrl.create({
-    content: 'Uploading...',
+    content: 'Validating Resources...',
   });
   loadingCtrl.present();
  
-     this.url = "http://secedu.info/mycity/image.php?email=" + this.email; 
-  //  this.url = "http://www.luxurri.com/luxurri_App/uploadphoto/UploadNIC.php"
+     this.url = "https://purpledimes.com/BoobaJob/WebServices/provider_image.php?email=" + this.email; 
     console.log(this.url)
     fileTransfer.upload(this.imageURI, this.url, options).then(data => {
       console.log("FiletransferObject URl",this.imageURI)
     loadingCtrl.dismissAll()
-   // this.signup();
-    //this.presentToast('Image succesful uploaded.');
     console.log("image uploaded");
-    console.log("data",data)
     let alert = this.alertCtrl.create({
-      title: 'Profile Created Successfully!',
+      title: 'Registeration Successful',
       buttons: ['OK']
     });
     alert.present();
+    console.log("data",data)
   }, err => {
     loadingCtrl.dismissAll()
     //this.presentToast('Error while uploading file.');
