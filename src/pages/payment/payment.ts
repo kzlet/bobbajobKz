@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
+import { HomePage } from '../home/home';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-payment',
@@ -19,9 +22,16 @@ export class PaymentPage {
 
   payPalEnvironmentSandbox : any = 'AXg409-ZD7lFcgk2JdHkLkggX8u7LnT7cfkGL2AG0y7bx5OAvOmErpKKz5D68kzXRxbfe_KRlFf681rk';
   payPalEnvironmentProduction: any  = '';
+  client_email: any;
+  provider_email: any;
+  project_id: any;
+  apiUrl: string;
 
-  constructor(private payPal: PayPal, private view: ViewController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, private payPal: PayPal, private view: ViewController, public navCtrl: NavController, public navParams: NavParams) {
   this.value1 = this.navParams.get('amount_charged');
+  this.client_email = this.navParams.get("client_email");
+  this.provider_email = this.navParams.get("provider_email"); 
+  this.project_id = this.navParams.get("project_id");
   }
 
   ionViewDidLoad() {
@@ -45,7 +55,35 @@ export class PaymentPage {
 
 
         //Task add function here... And then naviagate to Home Screen.
+        //Assign job function Started
 
+        console.log("Post job function called");
+        let loader = this.loadingCtrl.create({
+          content: "Updating Prayer Timings..."
+        });
+        loader.present();
+        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/assign_job.php?provider_email=' + this.provider_email + '&client_email=' + this.client_email + '&project_id=' + this.project_id + '&amount_charged=' + this.value1;  //change api
+        this.http.get(this.apiUrl).map(res => res.json())
+          .subscribe(data => {
+            console.log(data);
+            var status = data.Status;
+            if (status === 'success') {
+              let alert = this.alertCtrl.create({
+                title: 'Assigning your Job ! Please wait...',
+                buttons: ['OK']
+              });
+              alert.present();
+              loader.dismiss();
+              this.navCtrl.setRoot(HomePage);  
+            }
+            else {
+              loader.dismiss();
+            }
+          }, error => {
+            console.log(error);
+          });
+    
+        //Assign job function completed
 
         console.log(response);
       }, () => {

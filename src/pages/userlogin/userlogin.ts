@@ -105,6 +105,13 @@ export class UserloginPage {
           () => console.log('name Stored!'),
           error => console.error('Error storing item', error)
         );
+
+        this.nativeStorage.setItem('user_profile_pic', data.profile_pic)
+        .then(
+          () => console.log('profile_pic Stored!'),
+          error => console.error('Error storing item', error)
+        );
+
          this.navCtrl.setRoot(HomePage);
  
        } else if (str === 'failed') {

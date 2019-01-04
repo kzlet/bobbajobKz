@@ -19,6 +19,14 @@ export class ProviderConnectionsPage {
   provider_name: any;
 
   constructor(public modalCtrl: ModalController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad Provider Connection pages');
+  }
+
+  ionViewWillEnter()
+  {
     this.nativeStorage.getItem('provider_email')
     .then(
       data => {
@@ -37,10 +45,6 @@ export class ProviderConnectionsPage {
       },
       error => console.error(error)
     );
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Provider Connection pages');
   }
 
   get_caller_data()

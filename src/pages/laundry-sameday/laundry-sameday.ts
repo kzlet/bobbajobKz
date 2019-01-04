@@ -27,12 +27,17 @@ export class LaundrySamedayPage {
 
   constructor(public alertCtrl : AlertController, public modalCtrl: ModalController, platform: Platform, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http){
     this.isAndroid = platform.is('android');
-    this.get_jobs();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LaundrySamedayPage');
   }
+
+  ionViewWillEnter()
+  {
+    this.get_jobs();
+  }
+
   laundry(){
     this.navCtrl.push(HomePage)
   }

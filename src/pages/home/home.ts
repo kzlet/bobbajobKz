@@ -3,9 +3,7 @@ import { NavController, MenuController, NavParams, AlertController, LoadingContr
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { LaundrySamedayPage } from '../laundry-sameday/laundry-sameday';
 import { LaundryPage } from '../laundry/laundry';
-
 
 @Component({
   selector: 'page-home',
@@ -22,7 +20,7 @@ export class HomePage {
   posts: any;
   data: string;
   dash_data: { "id": string; "image": string; "title": string; }[];
-  slides: { 'title': string; }[];
+  slides: { 'title': string; 'bg_image': string}[];
   constructor(public events: Events, public platform: Platform, public menuCtrl: MenuController , private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, public modalCtrl: ModalController) {
   this.get_data();
     if (this.platform.is('android')) {
@@ -38,19 +36,15 @@ export class HomePage {
     );
 
     this.slides = [
-      {'title':'Advertisement Here'},
-      {'title':'Advertisement Here'},
-      {'title':'Advertisement Here'}
+      {'title':'Advertisement Here', 'bg_image' : 'imgs/Chritmis-banner.png'},
+      {'title':'Advertisement Here', 'bg_image' : 'imgs/Chritmis-banner.png'},
+      {'title':'Advertisement Here', 'bg_image' : 'imgs/Chritmis-banner.png'}
       ];
   }
 
   do()
   {
-    this.events.publish('user:login');
-    console.log("Clicked menu 1");
     this.activeMenu = 'menu1';
-    this.menuCtrl.enable(true, 'menu1');
-    this.menuCtrl.enable(false, 'menu2');
     this.menuCtrl.open(this.activeMenu);
   }
 

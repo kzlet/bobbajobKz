@@ -115,7 +115,8 @@ export class UserprofilePage {
                   }
                   else{
                     this.events.publish('user:login'); //refresh native storage
-                    this.navCtrl.push(UserprofilePage);
+                    //this.navCtrl.push(Home);
+                    this.fetch_user_data();
                   }
         }
               else

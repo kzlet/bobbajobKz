@@ -1,26 +1,56 @@
 <ion-menu [content]="content" id="menu1" [swipeEnabled]="false">
   <ion-content class="new-header">
-    <ion-icon ios="ios-close" md="md-close" style="padding-left:40px;color:grey;padding-top:30px" (click)="close()"></ion-icon>
-    <div style="margin-top: 17%;">
+
+      <div align="center" style="background-color: #8b4782;">
+          <ion-item no-lines style="background-color:transparent">
+          <div align="center">
+            <ion-avatar>
+            <img class="circle-pic" src="{{user_profile_pic}}" style="border-radius: 50%;overflow: hidden;width: 100px;height: 100px;"/>
+            </ion-avatar>
+          </div>
+            </ion-item>
+          <h3 style="color:white;margin-top: -4px;">@{{s_name}}</h3>  
+          <h5 style="color:white;margin-top: -7px;padding-bottom: 17px;">{{user_email}}</h5>  
+        </div>
+  
+    <!-- <div style="margin-top: 17%;">
       <p style="color:grey;padding-left:40px;font-size:1.2em" (click)="OnLoad(home)"><b>Home</b></p>
-      <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(posting)"><b>My Postings</b></p>   <!-- (click)="OnLoad(profile)" -->
+      <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(posting)"><b>My Postings</b></p>  
       <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(userconn)"><b>My Connections</b></p>
       <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(userprof)"><b>Edit Profile</b></p>
-      <!-- <p style="color:grey;padding-left:40px;font-size:1.2em;padding-top:16px" (click)="OnLoad(userpass)"><b>Change Password</b></p> -->
+    </div> -->
+
+    <div>
+        <ion-list no-lines>
+            <ion-item (click)="OnLoad(home)">
+              <ion-icon name="ios-home-outline" item-start style="color:#8b4782"></ion-icon>
+              Home
+            </ion-item>
+
+            <ion-item (click)="OnLoad(posting)">
+                <ion-icon name="ios-send-outline" item-start style="color:#8b4782"></ion-icon>
+                My Postings
+              </ion-item>
+
+              <ion-item (click)="OnLoad(userconn)">
+                  <ion-icon name="ios-chatbubbles-outline" item-start style="color:#8b4782"></ion-icon>
+                  My Connections
+                </ion-item>
+
+                <ion-item (click)="OnLoad(userprof)">
+                    <ion-icon name="ios-contact-outline" item-start style="color:#8b4782"></ion-icon>
+                    Edit Profile
+                  </ion-item>
+
+          </ion-list>
     </div>
+
   </ion-content>
+
+
   <ion-footer no-border>
-      <div align="center">
-          <ion-grid>
-            <ion-row>
-              <ion-col col-6>
-              </ion-col>
-              <ion-col col-6 (click)="logout()">
-                <ion-icon name="ios-log-out-outline" style="color:grey"></ion-icon>
-                <p style="color:grey">LOGOUT</p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+      <div align="center" style="padding-bottom: 9px;">
+        <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081; width:75%" (click)="logout()">Logout</button>
         </div>
   </ion-footer>
 </ion-menu>

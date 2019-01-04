@@ -22,6 +22,7 @@ import { UserConnectionsPage } from '../pages/user-connections/user-connections'
 import { JobHistoryPage } from '../pages/job-history/job-history';
 import { ProvidertabPage } from '../pages/providertab/providertab';
 import { ProvprofeditPage } from '../pages/provprofedit/provprofedit';
+import { LaundryPage } from '../pages/laundry/laundry';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -46,7 +47,7 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProvprofeditPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   posting = MypostingsPage;
   serlogin = SerloginPage;
   home  = HomePage;
@@ -60,10 +61,13 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
   email: any;
+  user_profile_pic: any;
+  user_email: any;
 
   constructor(public alertCtrl : AlertController ,private oneSignal: OneSignal, private androidPermissions: AndroidPermissions,  public events: Events, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     //firebase.initializeApp(config);
+    this.reload_user_data();
     events.subscribe('user:login', () => {
       this.reload_user_data();
     });
@@ -75,8 +79,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -106,7 +108,15 @@ export class MyApp {
     .then(
       data => {
         console.log("Checking user_email:" + data);
-        this.name = data;
+        this.user_email = data;
+      },
+      error => console.error(error)
+    ); 
+    this.nativeStorage.getItem('user_profile_pic')
+    .then(
+      data => {
+        console.log("Checking user_profile_pic:" + data);
+        this.user_profile_pic = data;
       },
       error => console.error(error)
     ); 

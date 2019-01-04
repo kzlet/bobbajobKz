@@ -1,79 +1,50 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar  (click)="close()">
       <ion-title><p style="color:white"></p></ion-title>
       <ion-buttons end>
-        <button ion-button (click)="close()"><p>Close</p></button>
+        <ion-icon name="ios-close-circle-outline" style="color:white"></ion-icon>
         </ion-buttons>
     </ion-navbar>
   </ion-header>
 
-  <ion-content>
-      <ion-slides effect="cube">
-
-          <ion-slide class="slider-controller-class" style="background-color: white; border-radius:12px 12px;margin-top: 60px;">
-
-            <div align="center">
-              <ion-card class="home-background"> 
-                <h2 class="card-positioner1">Enter Job Description</h2>
-                <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-                    <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                        <ion-input type="text" placeholder="Job Description" [(ngModel)]="job_description"></ion-input>
-                      </ion-item>
-              </div>
-            <button ion-button color="primary" (click)="goToSlide2()">Next</button>
-          </ion-card>
-          </div>
-          </ion-slide>
-        
-          <ion-slide class="slider-controller-class" style="background-color: white; border-radius:12px 12px;margin-top: 60px;">
-            
-              <div align="center">
-                  <ion-card class="home-background"> 
-                  <h2 class="card-positioner1">Enter Location / Schedule</h2>
+  <ion-content padding no-bounce>
       
-                  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-                      <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                        <ion-input type="text" placeholder="Your Location" [(ngModel)]="location"></ion-input>
-                      </ion-item>
-                    </div>
+    <div align="center" style="margin-top: 85px;">
+              <ion-item class="item-ios" style="border-radius: 30px 30px;">
+                <ion-input type="text" placeholder="Job Description" [(ngModel)]="job_description"></ion-input>
+              </ion-item>
 
-                    <ion-item>
-                      <ion-label>Select Day</ion-label>
-                      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
-                    </ion-item>
-                
-                
-                    <ion-item>
-                      <ion-label>Select Time</ion-label>
-                      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
-                    </ion-item>
-                
+              <ion-item no-lines>
+                <ion-label style="color:grey">Use Current Address</ion-label>
+                <ion-toggle checked="true" [(ngModel)]="current_check"></ion-toggle>
+              </ion-item>
             
-                  <button ion-button color="primary" (click)="goToSlide3()">Next</button>
-                  </ion-card>
+              <div *ngIf="current_check === false">
+                <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;">
+                  <ion-input type="text" placeholder="Your Location" [(ngModel)]="location"></ion-input>
+                </ion-item>
+              </div>
+            
+
+              <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;">
+                <ion-datetime placeholder="Enter Date" displayFormat="MMM DD YYYY" min="{{date}}" max="2019-12-31" [(ngModel)]="event.month"></ion-datetime>
+              </ion-item>
+
+              <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;">
+                <ion-datetime placeholder="Enter Time" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
+              </ion-item>
+
+              <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;">
+                <ion-input type="number" placeholder="Rough Budget (£)" [(ngModel)]="budget"></ion-input>
+              </ion-item>
+         
+        
+
+              <div align="center" style="padding-left:15px; padding-right:15px;margin-top: 12px;">
+                <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="post_job()">Post Job</button>
                 </div>
 
-          </ion-slide>
-        
-          <ion-slide class="slider-controller-class" style="background-color: white; border-radius:12px 12px;margin-top: 60px;">
+              </div>
 
-              <div align="center">
-                <ion-card class="home-background"> 
-                  <h2 class="card-positioner1">Enter Rough Budget in <b>£</b></h2>
-                  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-                      <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                          <ion-input type="number" placeholder="Rough Budget" [(ngModel)]="budget"></ion-input>
-                        </ion-item>
-                </div>
-
-
-              <button ion-button color="primary" (click)="post_job()">Post Job</button>
-            </ion-card>
-            </div>
-            </ion-slide>
-        
-
-        
-
-        </ion-slides>
+  
   </ion-content>

@@ -31,6 +31,15 @@ export class ProvprofeditPage {
   imageFileName:any;
   
   constructor(public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
+    
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ProvprofeditPage');
+  }
+
+  ionViewWillEnter() {
+    console.log('Testing View Enter');
     this.nativeStorage.getItem('profile_picture')
     .then(
       data => {
@@ -55,14 +64,6 @@ export class ProvprofeditPage {
           this.name = data;
         });
 
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProvprofeditPage');
-  }
-
-  ionViewDidEnter() {
-    console.log('Testing View Enter');
   }
 
   fetch_user_data()

@@ -61,6 +61,7 @@ export class ViewjobPage {
             });
             alert.present();
             loader.dismiss();
+            this.navCtrl.pop();
           }
           else
 
@@ -93,7 +94,7 @@ export class ViewjobPage {
           text: 'Ok',
           handler: () => {
             console.log('Agree clicked');
-            const modal = this.modalCtrl.create(PaymentPage, {project_id , amount_charged});
+            const modal = this.modalCtrl.create(PaymentPage, {project_id , amount_charged, client_email : this.client_email, provider_email});
             modal.present();
           }
         }

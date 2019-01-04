@@ -10,10 +10,10 @@ import { RateproviderPage } from '../rateprovider/rateprovider';
   templateUrl: 'reviewprovider.html',
 })
 export class ReviewproviderPage {
-  project_id: any;
+  project_id: any = '17';
   apiUrl: string;
   posts: any;
-
+  rate : any = '3.5';
   constructor(public modalCtrl: ModalController, public alertCtrl : AlertController, private nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.project_id = this.navParams.get('project_id');
     this.get_inprogress_jobs();
@@ -25,6 +25,7 @@ export class ReviewproviderPage {
 
   get_inprogress_jobs() 
   {
+    this.project_id = '17';
     let loader = this.loadingCtrl.create({
       content: "Loading Status..."
     });
@@ -59,8 +60,27 @@ export class ReviewproviderPage {
           text: 'Ok',
           handler: () => {
             console.log('Agree clicked');
-            const modal = this.modalCtrl.create(RateproviderPage, {provider_email , project_id, provider_name});
-            modal.present();
+            console.log("Post job function called");
+            let loader = this.loadingCtrl.create({
+              content: "Reviewing Job Status..."
+            });
+            loader.present();
+            this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_job_status.php?project_id=' + this.project_id;  
+            this.http.get(this.apiUrl).map(res => res.json())
+              .subscribe(data => {
+                console.log(data);
+                var status = data.Status;
+                if (status === 'success') {
+                  loader.dismiss();
+                  const modal = this.modalCtrl.create(RateproviderPage, {provider_email , project_id, provider_name});
+                  modal.present();  
+                }
+                else {
+                  loader.dismiss();
+                }
+              }, error => {
+                console.log(error);
+              });
           }
         }
       ]

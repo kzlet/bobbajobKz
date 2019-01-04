@@ -20,6 +20,11 @@ export class JobHistoryPage {
   }
 
   ionViewDidLoad() {
+   
+  }
+
+  ionViewWillEnter()
+  {
     console.log('ionViewDidLoad JobHistoryPage');
     this.nativeStorage.getItem('provider_email')
     .then(
