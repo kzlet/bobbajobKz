@@ -137,7 +137,7 @@ export class SerloginPage {
       {
         let alert = this.alertCtrl.create({
           title: 'Profile Deleted',
-          subTitle: 'Your profile has been deletd due to some activities. Thank You',
+          subTitle: 'Your profile has been deleted due to some suspicious activities. Thank You',
           buttons: ['OK']
         });
         alert.present();

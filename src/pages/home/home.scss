@@ -4,16 +4,15 @@
 
 .toolbar-background-md {
     border-color: #b2b2b2;
-    background: #9a4081;
+    background: #84527c;
 }
 
-.home-background {
-    position:fixed;
-    background: -webkit-linear-gradient(#9a4081, white); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#9a4081, white); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#9a4081, white); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#9a4081, white); /* Standard syntax */
+.toolbar-background-ios {
+    border-color: #b2b2b2;
+    background: #84527c;
 }
+
+
 
 .home-sick {
     background: linear-gradient(to bottom, #7a7378, white);
@@ -43,3 +42,16 @@
     border-bottom-color:#8b4782;
     border-top-color:#8b4782
 }
+
+.scroll-content {
+    height: 100%
+  }
+
+  #map {
+    border-radius: 12px 12px;
+    width: 96%;
+    height: 40%;
+    margin-left: 7px;
+    margin-top: 7px;
+  }
+

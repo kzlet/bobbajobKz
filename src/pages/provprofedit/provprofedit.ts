@@ -8,6 +8,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ProvdashboardPage } from '../provdashboard/provdashboard';
+import { UserselectPage } from '../userselect/userselect';
+import { ProvprofilePage } from '../provprofile/provprofile';
 
 @Component({
   selector: 'page-provprofedit',
@@ -29,6 +31,9 @@ export class ProvprofeditPage {
   url: string;
   imageURI:any;
   imageFileName:any;
+  image_value: string;
+  city: string;
+  curent_address : any = 'false';
   
   constructor(public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
     
@@ -86,6 +91,7 @@ export class ProvprofeditPage {
       this.number = this.posts.number;
       this.address = this.posts.address;
       this.profile_picture = this.posts.profile_picture;
+      this.city = this.posts.city;
       
       console.log("name from posts" + this.name);
       console.log( this.number);
@@ -100,63 +106,62 @@ export class ProvprofeditPage {
   }
 
 
-//   signup() {
-//     if (this.name === undefined ||  this.number === undefined ||  this.address === undefined ) {
+  signup() {
+    if (this.name === undefined ||  this.number === undefined ||  this.address === undefined ) {
 
-//         let alert = this.alertCtrl.create({
-//             title: 'You cannot leave these fields empty ! ',
-//             buttons: ['OK']
-//           });
-//           alert.present();        
-//     }
+        let alert = this.alertCtrl.create({
+            title: 'You cannot leave these fields empty ! ',
+            buttons: ['OK']
+          });
+          alert.present();        
+    }
 
-//     else {
-//          let loader = this.loadingCtrl.create({
-//             content: "Updating Profile..."
-//         });
-//         loader.present();
+    else {
+         let loader = this.loadingCtrl.create({
+            content: "Updating Profile..."
+        });
+        loader.present();
 
-//         this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_user_profile.php?name=' + this.name + '&number=' + this.number + '&email=' + this.user_email;
+        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_provider_profile.php?name=' + this.name + '&number=' + this.number + '&address=' + this.address + '&city=' + this.city + '&email=' + this.email;
        
-//         this.http.get(this.apiUrl).map(res => res.json())
-//           .subscribe(data => {
-//            loader.dismiss();
+        this.http.get(this.apiUrl).map(res => res.json())
+          .subscribe(data => {
+           loader.dismiss();
 
-//                 console.log("After upload" + JSON.stringify(data));
+                console.log("After upload" + JSON.stringify(data));
       
-//                 var status = data.Status;
+                var status = data.Status;
 
-//                 if(status === 'success')
-//                 {
-//                   let alert = this.alertCtrl.create({
-//                     title: 'Updated Successful',
-//                     buttons: ['OK']
-//                   });
-//                   alert.present();
+                if(status === 'success')
+                {
+                  let alert = this.alertCtrl.create({
+                    title: 'Updated Successful',
+                    buttons: ['OK']
+                  });
+                  alert.present();
 
-//                   if(this.image_value === '1')
-//                   {
-//                     this.uploadImage();
-//                   }
-//                   else{
-//                     this.events.publish('user:provider'); //refresh native storage
-//                     this.navCtrl.push(UserprofilePage);
-//                   }
-//         }
-//               else
-//                 {
-//                   let alert = this.alertCtrl.create({
-//                     title: 'Profile Updation Failed ! Server Problem',
-//                     buttons: ['OK']
-//                   });
-//                   alert.present();
-//                 }
+                  if(this.image_value === '1')
+                  {
+                    this.uploadImage();
+                  }
+                  else{
+                    this.navCtrl.setRoot(ProvprofilePage);
+                  }
+        }
+              else
+                {
+                  let alert = this.alertCtrl.create({
+                    title: 'Profile Updation Failed ! Server Problem',
+                    buttons: ['OK']
+                  });
+                  alert.present();
+                }
                
-//             }, error => {
-//                 console.log(error);// Error getting the data
-//             });
-//     }
-// }
+            }, error => {
+                console.log(error);// Error getting the data
+            });
+    }
+}
 
 
  //Upload image:
@@ -224,7 +229,6 @@ public uploadImage() {
   var temp1=temp.replace(".jpg?","_");
   // File name only
   var filename = temp1;
-
   var options = {
     fileKey: "file",
     fileName:filename,
@@ -232,14 +236,11 @@ public uploadImage() {
     mimeType: "image/jpeg",
     params: { 'fileName': filename }
   };
-
   const fileTransfer: FileTransferObject = this.transfer.create();
-
   let loadingCtrl = this.loadingCtrl.create({
     content: 'Validating Resources...',
   });
   loadingCtrl.present();
- 
      this.url = "https://purpledimes.com/BoobaJob/WebServices/provider_image.php?email=" + this.email; 
     console.log(this.url)
     fileTransfer.upload(this.imageURI, this.url, options).then(data => {
@@ -254,10 +255,30 @@ public uploadImage() {
     console.log("data",data)
   }, err => {
     loadingCtrl.dismissAll()
-    //this.presentToast('Error while uploading file.');
     console.log("Failed uploading image", err);
   });
-
 }
 
+logout()
+{
+  const confirm = this.alertCtrl.create({
+    title: 'Are you sure?',
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: () => {
+          console.log('Disagree clicked');
+        }
+      },
+      {
+        text: 'Ok',
+        handler: () => {
+          console.log('Agree clicked');
+         this.navCtrl.setRoot(UserselectPage);
+        }
+      }
+    ]
+  });
+  confirm.present();
+}
 }

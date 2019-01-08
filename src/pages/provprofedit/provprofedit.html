@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar style="color:white">
-    <ion-title><div align="center"><p style="color:white">Edit Profile</p></div></ion-title>
+    <ion-title><div align="center"><p style="color:white">Profile Settings</p></div></ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding class="color-background">
+<ion-content padding>
 
 
   <div align="center" (click)="presentActionSheet()">
@@ -15,27 +15,49 @@
   </div>
 
 
-  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-      <ion-item class="item-ios" style="border-radius: 12px 12px;">
-        <ion-input type="text" placeholder="" [(ngModel)]="name"></ion-input>
-      </ion-item>
-    </div>
 
-      <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-          <ion-item class="item-ios" style="border-radius: 12px 12px;">
-            <ion-input type="number" placeholder="" [(ngModel)]="number"></ion-input>
-          </ion-item>
-        </div>
+ 
 
-          <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-              <ion-item class="item-ios" style="border-radius: 12px 12px;">
-                <ion-input type="text" placeholder="" [(ngModel)]="address"></ion-input>
-              </ion-item>
-            </div>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>Number</ion-label>
+      <ion-input type="number" [(ngModel)]="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Address</ion-label>
+      <ion-input type="text" [(ngModel)]="address"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Change Address</ion-label>
+      <ion-toggle checked="true" [(ngModel)]="curent_address"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>City</ion-label>
+      <ion-input type="text" [(ngModel)]="city" [disabled]="curent_address != 'true'"></ion-input>
+    </ion-item>
+
+   
+  
+
+
+  
 
             <div align="center" style="padding-top:5px">
                 <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="signup()">Save and Update</button>
               </div>
 
+              <div align="center" style="padding-top:5px">
+                  <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="logout()">LOGOUT</button>
+                </div>
+
 
 </ion-content>
+

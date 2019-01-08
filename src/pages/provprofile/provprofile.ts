@@ -27,13 +27,14 @@ export class ProvprofilePage {
   constructor( public events: Events, private loadingCtrl: LoadingController, private http: Http, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad ProvprofilePage');
     this.nativeStorage.getItem('provider_email')
     .then(
       data => {
         console.log("Checking for name:" + data);
         this.provider_email = data;  //user email
+        this.fetchdata();
       },
       error => console.error(error)
     );
@@ -67,7 +68,7 @@ export class ProvprofilePage {
     });
     loader.present();
 
-    this.apiUrl = 'http://secedu.info/mycity/fetchdata.php?email=' + this.email;
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_provider_profile_data.php?email=' + this.provider_email;
      console.log(this.apiUrl);
 
      this.http.get(this.apiUrl).map(res => res.json())
@@ -84,17 +85,6 @@ export class ProvprofilePage {
   
       });
     }
-
-    // qualification(email : string)
-    // {
-    //   this.navCtrl.push(ProvnamePage, { email :this.email});
-    // }
-
-
-    // price(email : string)
-    // {
-    //   this.navCtrl.push(ProvpricePage, { email :this.email});
-    // }
 
     edit()
     {

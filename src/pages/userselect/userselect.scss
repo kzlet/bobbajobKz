@@ -5,3 +5,9 @@
     background: -moz-linear-gradient(white, #9a4081); /* For Firefox 3.6 to 15 */
     background: linear-gradient(white, #9a4081); /* Standard syntax */
 }
+
+page-userselect{
+ion-tabs.hidden div.tabbar {
+    display: none
+}
+}

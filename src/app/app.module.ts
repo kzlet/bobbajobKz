@@ -107,7 +107,7 @@ const firebaseAuth = {
     ProviderChatPage,
     JobHistoryPage
   ],
-  imports: [
+  imports: [    
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),

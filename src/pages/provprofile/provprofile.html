@@ -1,93 +1,87 @@
-<!-- <ion-content no-bounce class="home-background">
+<ion-content no-bounce>
 
-
-<div align="center">
-  <ion-item no-lines style="background-color: transparent">
-      <div align="center">
-    <ion-avatar>
-        <img class="circle-pic" src="{{profile_picture}}">
-      </ion-avatar>
-        <h2 style="color: white;font-size:3em">{{provider_name}}</h2>
-        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+  <div *ngFor="let post of posts" align="center" style="background-color:#9a4081">
+    <ion-avatar item-start>
+      <img src="{{post.profile_picture}}" style="padding-top:4px">
+    </ion-avatar>
+    <div style="padding-bottom:15px">
+      <h5 style="color:white;margin-top: -2px;">{{post.name}}</h5>
+      <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+        starIconName="star" nullable="false" style="padding-bottom:15px"></rating>
     </div>
-    </ion-item>
-</div>
+  </div>
 
-    <ion-item-group>
-        <ion-item-divider color="light"><b>Qualifications</b></ion-item-divider>
-        <ion-item>Graduated from Charles Stu' University</ion-item>
-        <ion-item>High School from Eoinston's</ion-item>
-      </ion-item-group>
+  <div align="center" style="margin-top:-25px">
+    <ion-card style="border-radius:12px 12px;background-color:#f8f9fd">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <h4><b style="color:#9a4081">Jobs Completed</b></h4>
+            <p>72</p>
+          </ion-col>
 
-      <ion-item-group>
-          <ion-item-divider color="light"><b>Personal Details</b></ion-item-divider>
-          <ion-item>Male</ion-item>
-          <ion-item>Lives in London</ion-item>
-        </ion-item-group>
+          <ion-col col-6>
+            <h4><b style="color:#9a4081">On-going Jobs</b></h4>
+            <p>5</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div>
 
-</ion-content> -->
-      
-      <ion-content no-bounce>
-      
-        <div *ngFor="let post of posts" align="center" style="background-color:#9a4081">
-            <ion-avatar item-start>
-                <img src="{{post.profile_picture}}" style="padding-top:4px">
-              </ion-avatar>
-              <div style="padding-bottom:15px">
-              <h5 style="color:white;margin-top: -2px;">{{post.name}}</h5>
-              <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" style="padding-bottom:15px"></rating>
-            </div>
-        </div>
-      
-        <div align="center" style="margin-top: -36px;">
-          <ion-card style="border-radius:12px 12px;background-color:#f8f9fd">
-             <ion-grid>
-               <ion-row>
-                 <ion-col col-6>
-                   <h4><b style="color:#9a4081">Jobs Completed</b></h4>
-                   <p>72</p>
-                 </ion-col>
-      
-                 <ion-col col-6>
-                    <h4><b style="color:#9a4081">On-going Jobs</b></h4>
-                    <p>5</p>
-                  </ion-col>
-               </ion-row>
-             </ion-grid>    
-          </ion-card>
-        </div>
-      
-        <div align="center">
-      
-          <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;">
-          <ion-grid>
-            <ion-row>
-              <ion-col col-02>
-                  <ion-icon name="information-circle" style="color:#9a4081"></ion-icon>
-              </ion-col>
-      
-              <ion-col col-10>
-                <h6 align="left"><b>About Me:</b></h6>
-                  <p nowrap align="left">{{post.past_exp}}</p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          </ion-card>
-      
-      
-          <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;padding:7px">
-            <h4 align="left"><b>View Proposal:</b></h4>
-              <p align="left" nowrap>{{post.proposal}}</p>
-              <div align="left">
-              <h4 ><b >{{post.amount}} £</b></h4>
-              <h4><p>Day :{{post.day}} / Time: {{post.time}}</p></h4>
-              </div>
-            </ion-card>
-      
-            <div *ngFor="let post of posts" align="center">
-                <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="complete_job(post.provider_email , post.id, post.name)">Job Completed</button>
-                </div>
-      
-        </div>
-      </ion-content>
-      
+  <div align="center">
+
+    <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-02>
+            <ion-icon name="information-circle" style="color:#9a4081"></ion-icon>
+          </ion-col>
+
+          <ion-col col-10>
+            <h6 align="left"><b>About Me:</b></h6>
+            <p nowrap align="left">{{post.past_exp}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;padding:7px">
+    <div align="left"><ion-icon name="information-circle" style="color:#9a4081"><b style="color:black">&nbsp;&nbsp;&nbsp;Personal Details</b></ion-icon></div>
+    <div style="padding-left:10px;padding-top:5px">
+    <p align="left">Email ID:<b>&nbsp;&nbsp;{{post.email}}</b></p>
+    <p align="left">Contact Number:<b>&nbsp;&nbsp;{{post.number}}</b></p>
+    <p align="left">Address:<b>&nbsp;&nbsp;{{post.address}}</b></p>
+    <p align="left">City:<b>&nbsp;&nbsp;{{post.city}}</b></p>
+  </div>
+
+    </ion-card>
+  </div>
+
+  <div align="center" style="padding-bottom:20px">
+      <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;padding:7px;">
+          <h4 align="left"><b>My Profile</b></h4>
+          
+          <ion-item style="background-color: transparent">
+              <ion-icon style="color:#9a4081" name="leaf" item-start></ion-icon>
+                Resume
+              <ion-icon name="ios-download-outline" item-end  (click)="post.resume"></ion-icon>
+            </ion-item>
+            <ion-item style="background-color: transparent">
+                <ion-icon style="color:#9a4081" name="leaf" item-start></ion-icon>
+                  Current Address
+                <ion-icon name="ios-download-outline" item-end (click)="post.current_address"></ion-icon>
+              </ion-item>
+              <ion-item style="background-color: transparent">
+                  <ion-icon style="color:#9a4081" name="leaf" item-start></ion-icon>
+                    Work Permit
+                  <ion-icon name="ios-download-outline" item-end (click)="post.work_permit"></ion-icon>
+                </ion-item>
+                <ion-item style="background-color: transparent">
+                    <ion-icon style="color:#9a4081" name="leaf" item-start></ion-icon>
+                      Passport
+                    <ion-icon name="ios-download-outline" item-end (click)="post.passport"></ion-icon>
+                  </ion-item>
+        </ion-card>
+  </div>
+</ion-content>

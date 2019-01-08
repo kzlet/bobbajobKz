@@ -3,12 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><div align="center"><p style="color:white">Edit Profile</p></div></ion-title>
+    <ion-title><div align="center"><p style="color:white;margin-left:-10px">Edit Profile</p></div></ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding class="color-background">
+<ion-content padding>
  
   <div align="center" (click)="presentActionSheet()">
     <img *ngIf="!imageURI" src="{{profile_picture}}" style="width:27%">
@@ -17,17 +17,16 @@
   </div>
 
 
-  <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-      <ion-item class="item-ios" style="border-radius: 12px 12px;">
-        <ion-input type="text" placeholder="" [(ngModel)]="name"></ion-input>
-      </ion-item>
-    </div>
+ 
+  <ion-item>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
+  </ion-item>
 
-      <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:8px">
-          <ion-item class="item-ios" style="border-radius: 12px 12px;">
-            <ion-input type="number" placeholder="" [(ngModel)]="number"></ion-input>
-          </ion-item>
-        </div>
+  <ion-item>
+    <ion-label floating>Number</ion-label>
+    <ion-input type="number" [(ngModel)]="number"></ion-input>
+  </ion-item>
 
       
             <div align="center" style="padding-top:5px">
