@@ -22,6 +22,12 @@
 
     <div [ngSwitch]="postings">
         <ion-list *ngSwitchCase="'all'">
+
+            <div align="center" *ngIf="job_value === '1'">
+                <img src="imgs/no-posts.png" style="width:50%"/>
+              </div>
+
+
             <ion-item *ngFor="let post of posts, let i = index" (click)="view_job(post.id)">
                 <ion-grid>
                   <ion-row>
@@ -41,6 +47,13 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'progress'">
+
+          
+            <div align="center" *ngIf="progress_value === '1'">
+                <img src="imgs/no-posts.png" style="width:50%"/>
+              </div>
+
+
             <ion-item *ngFor="let cost of coasts" (click)="check_status(cost.id)">
                 <ion-grid>
                   <ion-row>

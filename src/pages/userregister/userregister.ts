@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ActionSheetController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ActionSheetController, ToastController, Events } from 'ionic-angular';
 import { UserloginPage } from '../userlogin/userlogin';
 import { HomePage } from '../home/home';
 import { Http } from '@angular/http';
@@ -27,7 +27,7 @@ export class UserregisterPage {
   url: string;
   imageURI: any;
   playerid: string;
-  constructor(public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
+  constructor(public events : Events, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
   }
 
   ionViewDidLoad() {
@@ -235,6 +235,7 @@ public uploadImage() {
       console.log("FiletransferObject URl",this.imageURI)
     loadingCtrl.dismissAll()
     console.log("image uploaded");
+    this.events.publish('user:login');
     this.navCtrl.setRoot(UserloginPage);
     console.log("data",data)
     let alert = this.alertCtrl.create({

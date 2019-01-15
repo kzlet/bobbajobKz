@@ -11,32 +11,28 @@
 <ion-content no-bounce class="home-background">
 
   <div align="center" style="margin-top:6%;padding-left:5px">
-    <ion-card style="border-radius:12px 12px" *ngFor="let post of posts">
-      <img src="{{post.profile_pic}}" style="width: 35%;"/>
+    <ion-card style="border-radius:12px 12px;padding-top:10px" *ngFor="let post of posts">
+      <img src="{{post.profile_pic}}" style="width: 35%;padding-top:10px"/>
       <h2 style="color: black;font-size: 2.5em;"><b>{{post.name}}</b></h2>
       <p>Posted On: {{post.posted_on}}</p>
-    </ion-card>
-  </div>
-
-<div *ngFor="let post of posts" align="center">
+    
   <h3>Task Budget</h3>
   <h1><b>{{post.budget}}$</b></h1>
-</div>
 
-<div alig="left" *ngFor="let post of posts" style="padding-left:10px">
-  <h3>Description:</h3>
+  <div align="left" style="padding-left:10px">
+  <h2><b>Description:</b></h2>
   <p>{{post.jd}}</p>
-</div>
-
-<div *ngFor="let post of posts" align="center">
+  </div>
 
   <div *ngIf="bid_status === 0 || bid_status === '0'">
-    <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="make_offer(post.user_email)">Make an Offer</button>
+    <button ion-button round full style="padding-left:10px; width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="make_offer(post.user_email)">Make an Offer</button>
   </div>
 
   <div *ngIf="bid_status === 1 || bid_status === '1'">
-      <button ion-button round full color="secondary">Bid Recieved</button>
+      <button ion-button round full color="secondary" style="padding-left:10px;width:75%;">Bid Recieved</button>
     </div>
+
+    </ion-card>
 
 </div>
 

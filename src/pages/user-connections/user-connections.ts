@@ -15,6 +15,7 @@ export class UserConnectionsPage {
   posts: any;
   client_name: any;
   toasts: any;
+  chat_value : any = '0';
 
   constructor(public modalCtrl: ModalController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
     this.nativeStorage.getItem('user_email')
@@ -66,6 +67,7 @@ export class UserConnectionsPage {
             buttons: ['OK']
           });
           alert.present();
+          this.chat_value = '1';
           loader.dismiss();
         }
         else

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ProvprofeditPage } from '../provprofedit/provprofedit';
 
 @Component({
   selector: 'page-provsettings',
@@ -12,6 +13,12 @@ export class ProvsettingsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProvsettingsPage');
+    
+  }
+
+  edit()
+  {
+     this.navCtrl.push(ProvprofeditPage);
   }
 
 }

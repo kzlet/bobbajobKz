@@ -1,6 +1,5 @@
 <ion-header>
   <ion-navbar style="color:white">
-    <ion-title><div align="center"><p style="color:white">Profile Settings</p></div></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,54 +7,46 @@
 <ion-content padding>
 
 
-  <div align="center" (click)="presentActionSheet()">
+  <div align="center" style="padding-top:10px" (click)="presentActionSheet()">
     <img *ngIf="!imageURI" class="circle-pic"  src="{{profile_picture}}" style="width:27%">
     <img *ngIf="imageURI" class="circle-pic" src="{{imageURI}}" style="width: 27%;"/>
-    <p style="color:white;margin-top: 3%;">Change picture</p>
+    <p style="color:black;margin-top: 3%;">Change picture</p>
   </div>
 
-
-
- 
-
-    <ion-item>
+    <ion-item style="background-color: transparent">
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="name"></ion-input>
     </ion-item>
   
-    <ion-item>
+    <ion-item style="background-color: transparent">
       <ion-label floating>Number</ion-label>
       <ion-input type="number" [(ngModel)]="number"></ion-input>
     </ion-item>
 
-    <ion-item>
+  
+    <ion-item style="background-color: transparent">
       <ion-label floating>Address</ion-label>
       <ion-input type="text" [(ngModel)]="address"></ion-input>
     </ion-item>
 
 
-    <ion-item>
-      <ion-label>Change Address</ion-label>
-      <ion-toggle checked="true" [(ngModel)]="curent_address"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>City</ion-label>
-      <ion-input type="text" [(ngModel)]="city" [disabled]="curent_address != 'true'"></ion-input>
-    </ion-item>
-
+    <ion-item no-lines>
+        <ion-label style="color:grey">Use Current City</ion-label>
+        <ion-toggle checked="true" [(ngModel)]="current_check"></ion-toggle>
+      </ion-item>
+    
+      <div *ngIf="current_check === false">
+        <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;background-color: transparent">
+          <ion-input type="text" placeholder="Your City" [(ngModel)]="city"></ion-input>
+        </ion-item>
+      </div>
    
-  
-
-
-  
-
-            <div align="center" style="padding-top:5px">
-                <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="signup()">Save and Update</button>
+            <div align="center" style="padding-top:5px;">
+                <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="signup()">Save and Update</button>
               </div>
 
-              <div align="center" style="padding-top:5px">
-                  <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="logout()">LOGOUT</button>
+              <div align="center" style="padding-top:5px; padding-bottom:20px">
+                  <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="logout()">LOGOUT</button>
                 </div>
 
 

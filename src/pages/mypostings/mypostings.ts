@@ -17,6 +17,8 @@ export class MypostingsPage {
   posts: any;
   email: any;
   coasts: any;
+  job_value : any = '0';
+  progress_value : any = '0';
   constructor(private nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
     this.nativeStorage.getItem('user_email')
     .then(
@@ -55,6 +57,10 @@ export class MypostingsPage {
         this.posts = data;
         console.log(this.posts);
 
+        if(this.posts.Status === 'failed')
+        {
+            this.job_value = '1';
+        }
           loader.dismiss();
       }, error => {
         console.log(error); // Error getting the data
@@ -75,6 +81,12 @@ export class MypostingsPage {
       .subscribe(data => {
         this.coasts = data;
         console.log(this.coasts);
+
+        if(this.coasts.Status === 'failed')
+        {
+            this.progress_value = '1';
+        }
+
           loader.dismiss();
       }, error => {
         console.log(error); // Error getting the data

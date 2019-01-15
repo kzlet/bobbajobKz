@@ -1,11 +1,13 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title><div align="center"><p style="color:white;margin-left:-10px">Edit Profile</p></div></ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+          <button ion-button icon-only (click)="do()">
+          <ion-icon name="ios-menu-outline" style="color:white;padding: 5px;"></ion-icon>
+        </button>
+          </ion-buttons>
+          <ion-title><div align="center"><p style="color:white;margin-left:-10px">Edit Profile</p></div></ion-title>
+    </ion-navbar>
+  </ion-header>
 
 
 <ion-content padding>
@@ -13,7 +15,7 @@
   <div align="center" (click)="presentActionSheet()">
     <img *ngIf="!imageURI" src="{{profile_picture}}" style="width:27%">
     <img *ngIf="imageURI" src="{{imageURI}}" style="width: 27%;"/>
-    <p style="color:white;margin-top: 3%;">Change picture</p>
+    <p style="color:black;margin-top: 3%;">Change picture</p>
   </div>
 
 

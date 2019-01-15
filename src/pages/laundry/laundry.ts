@@ -26,7 +26,6 @@ export class LaundryPage {
   current_check : any = 'true';
 
   public date: string = new Date().toJSON().slice(0,10);
-
  //calender
  public event = {
   month: new Date().toJSON().slice(0,10),
@@ -106,7 +105,8 @@ export class LaundryPage {
                   });
                   alert.present();
                   
-                  this.navCtrl.setRoot(HomePage);
+                  //this.navCtrl.setRoot(HomePage);
+                  this.navCtrl.pop();
                     
                 }
             }, error => {

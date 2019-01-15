@@ -27,6 +27,9 @@ export class HomePage {
   @ViewChild('mapContainer') mapContainer: ElementRef;
   map: any;
   id: any = '10';
+  user_long: any;
+  user_lat: any;
+  got_values: any;
 
   constructor(public events: Events, public platform: Platform, public menuCtrl: MenuController , private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, public modalCtrl: ModalController) {
   this.get_data();
@@ -43,7 +46,25 @@ export class HomePage {
       );
 
       this.platform.ready().then(() => { 
-        this.displayGoogleMap();
+
+        this.nativeStorage.getItem('got_values')
+        .then(
+          data => {
+            console.log("Checking for Values" + data);
+            this.got_values = data;
+
+            if(this.got_values === '1' || this.got_values === 1)
+            {
+              this.get_storage_markers();
+            }
+
+            else  if(this.got_values === '0' || this.got_values === 0)
+            {
+             this.displayGoogleMap();
+            }
+          },
+          error => console.error(error)
+          );
         this.getMarkers();
        });
 
@@ -58,6 +79,7 @@ export class HomePage {
 
   do()
   {
+    //this.events.publish('user:login');
     this.activeMenu = 'menu1';
     this.menuCtrl.open(this.activeMenu);
   }
@@ -94,96 +116,208 @@ export class HomePage {
 
 
    displayGoogleMap() {
-    let latLng = new google.maps.LatLng(24.82935137, 67.07206964);
+            let latLng = new google.maps.LatLng(51.5014, 0.1419);
 
-    let mapOptions = {
-      center: latLng,
-      disableDefaultUI: true,
-      zoom: 2,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: [
-        {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-        {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-        {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-        {
-          featureType: 'administrative.locality',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#d59563'}]
-        },
-        {
-          featureType: 'poi',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#d59563'}]
-        },
-        {
-          featureType: 'poi.park',
-          elementType: 'geometry',
-          stylers: [{color: '#263c3f'}]
-        },
-        {
-          featureType: 'poi.park',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#6b9a76'}]
-        },
-        {
-          featureType: 'road',
-          elementType: 'geometry',
-          stylers: [{color: '#38414e'}]
-        },
-        {
-          featureType: 'road',
-          elementType: 'geometry.stroke',
-          stylers: [{color: '#212a37'}]
-        },
-        {
-          featureType: 'road',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#9ca5b3'}]
-        },
-        {
-          featureType: 'road.highway',
-          elementType: 'geometry',
-          stylers: [{color: '#746855'}]
-        },
-        {
-          featureType: 'road.highway',
-          elementType: 'geometry.stroke',
-          stylers: [{color: '#1f2835'}]
-        },
-        {
-          featureType: 'road.highway',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#f3d19c'}]
-        },
-        {
-          featureType: 'transit',
-          elementType: 'geometry',
-          stylers: [{color: '#2f3948'}]
-        },
-        {
-          featureType: 'transit.station',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#d59563'}]
-        },
-        {
-          featureType: 'water',
-          elementType: 'geometry',
-          stylers: [{color: '#17263c'}]
-        },
-        {
-          featureType: 'water',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#515c6d'}]
-        },
-        {
-          featureType: 'water',
-          elementType: 'labels.text.stroke',
-          stylers: [{color: '#17263c'}]
-        }
-      ]
-    
-    }
-    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+            let mapOptions = {
+              center: latLng,
+              disableDefaultUI: true,
+              zoom: 6,
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              styles: [
+                {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                {
+                  featureType: 'administrative.locality',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#d59563'}]
+                },
+                {
+                  featureType: 'poi',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#d59563'}]
+                },
+                {
+                  featureType: 'poi.park',
+                  elementType: 'geometry',
+                  stylers: [{color: '#263c3f'}]
+                },
+                {
+                  featureType: 'poi.park',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#6b9a76'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'geometry',
+                  stylers: [{color: '#38414e'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#212a37'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#9ca5b3'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'geometry',
+                  stylers: [{color: '#746855'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#1f2835'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#f3d19c'}]
+                },
+                {
+                  featureType: 'transit',
+                  elementType: 'geometry',
+                  stylers: [{color: '#2f3948'}]
+                },
+                {
+                  featureType: 'transit.station',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#d59563'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'geometry',
+                  stylers: [{color: '#17263c'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#515c6d'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'labels.text.stroke',
+                  stylers: [{color: '#17263c'}]
+                }
+              ]
+            
+            }
+            this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+  }
+
+
+  get_storage_markers()
+  {
+
+    this.nativeStorage.getItem('user_lat')
+    .then(
+      data => {
+        console.log("Checking for latitude:" + data);
+        this.user_lat = data;
+        this.nativeStorage.getItem('user_long')
+        .then(
+          data => {
+            console.log("Checking for logtitude:" + data);
+            this.user_long = data;
+
+            let latLng = new google.maps.LatLng(this.user_lat, this.user_long);
+            let mapOptions = {
+              center: latLng,
+              disableDefaultUI: true,
+              zoom: 6,
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              styles: [
+                {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                {
+                  featureType: 'administrative.locality',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#d59563'}]
+                },
+                {
+                  featureType: 'poi',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#d59563'}]
+                },
+                {
+                  featureType: 'poi.park',
+                  elementType: 'geometry',
+                  stylers: [{color: '#263c3f'}]
+                },
+                {
+                  featureType: 'poi.park',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#6b9a76'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'geometry',
+                  stylers: [{color: '#38414e'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#212a37'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#9ca5b3'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'geometry',
+                  stylers: [{color: '#746855'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#1f2835'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#f3d19c'}]
+                },
+                {
+                  featureType: 'transit',
+                  elementType: 'geometry',
+                  stylers: [{color: '#2f3948'}]
+                },
+                {
+                  featureType: 'transit.station',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#d59563'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'geometry',
+                  stylers: [{color: '#17263c'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#515c6d'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'labels.text.stroke',
+                  stylers: [{color: '#17263c'}]
+                }
+              ]
+            
+            }
+            this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+          },
+          error => console.error(error)
+          );
+      },
+      error => console.error(error)
+      );
   }
 
   getMarkers() {

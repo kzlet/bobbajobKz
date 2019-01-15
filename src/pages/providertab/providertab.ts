@@ -17,7 +17,7 @@ export class ProvidertabPage {
   tab2Root = ProviderConnectionsPage;
   tab3Root = LaundrySamedayPage;
   tab4Root = JobHistoryPage;
-  tab5Root = ProvprofeditPage;
+  tab5Root = ProvsettingsPage;
 
   constructor() {
 

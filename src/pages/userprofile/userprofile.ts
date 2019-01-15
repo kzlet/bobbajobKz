@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events, ActionSheetController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events, ActionSheetController, ToastController, MenuController, Platform } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -27,7 +27,8 @@ export class UserprofilePage {
   url: string;
   imageURI: string;
   image_value : any = '0';
-  constructor(public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, public events: Events, public alertCtrl: AlertController, private http: Http, private loadingCtrl: LoadingController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams) {
+  activeMenu: string;
+  constructor(public platform: Platform, public menuCtrl: MenuController , public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private transfer: FileTransfer, private camera: Camera, public events: Events, public alertCtrl: AlertController, private http: Http, private loadingCtrl: LoadingController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams) {
     this.nativeStorage.getItem('user_email')
     .then(
       data => {
@@ -40,6 +41,14 @@ export class UserprofilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserprofilePage');
   }
+
+  do()
+  {
+    this.events.publish('user:login');
+    this.activeMenu = 'menu1';
+    this.menuCtrl.open(this.activeMenu);
+  }
+
 
 
   fetch_user_data()
@@ -61,6 +70,20 @@ export class UserprofilePage {
       this.name = this.posts.name;
       this.number = this.posts.number;
       this.profile_picture = this.posts.profile_pic;
+
+      this.nativeStorage.setItem('user_name', this.name)
+      .then(
+        () => console.log('User name updated!'),
+        error => console.error('Error storing item', error)
+      );
+
+
+      this.nativeStorage.setItem('user_profile_pic', this.profile_picture)
+      .then(
+        () => console.log('User pic updated!'),
+        error => console.error('Error storing item', error)
+      );
+
       
       console.log("name from posts" + this.name);
       console.log( this.number);
@@ -227,7 +250,7 @@ export class UserprofilePage {
       console.log("image uploaded");
 
         this.events.publish('user:login'); //refresh native storage
-        this.navCtrl.push(UserprofilePage);
+        this.navCtrl.setRoot(UserprofilePage);
 
 
       console.log("data",data)

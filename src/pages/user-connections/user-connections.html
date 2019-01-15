@@ -10,6 +10,12 @@
 
 <ion-content no-bounce class="home-background">
     <ion-list>
+
+      <div align="center" *ngIf="chat_value === '1'">
+        <img src="imgs/chats_bg.png" style="width:55%"/>
+      </div>
+
+
         <ion-item *ngFor="let post of posts" (click)="open_chatbox(post.provider_email, post.name, post.title, post.playerid)">
           <ion-avatar item-start>
             <img src="{{post.profile_picture}}">
