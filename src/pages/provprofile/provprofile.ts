@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, Events, Content } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -9,7 +9,10 @@ import { ProvprofeditPage } from '../provprofedit/provprofedit';
   selector: 'page-provprofile',
   templateUrl: 'provprofile.html',
 })
+
+
 export class ProvprofilePage {
+//  @ViewChild('content') content: Content;
 
   number: any;
   available: any;

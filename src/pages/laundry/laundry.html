@@ -9,8 +9,26 @@
 
   <ion-content padding no-bounce>
       
-    <div align="center" style="margin-top: 85px;">
-              <ion-item class="item-ios" style="border-radius: 30px 30px;">
+    <div align="center" style="margin-top: 25px;">
+
+
+      <ion-item no-lines>
+        <ion-label style="color:grey">Upload Job Image</ion-label>
+        <ion-toggle checked="true" [(ngModel)]="upload_image"></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="upload_image === true"> 
+        <div align="center">
+        <ion-card class="item-ios" style="border-radius: 12px 12px;">
+          <img *ngIf="!imageURI" src="imgs/job_image.png" style="width: 22%;padding-top:15px"/>
+        <img *ngIf="imageURI" src="{{imageURI}}" style="width: 27%;padding-top:15px"/>
+        <p (click)="presentActionSheet()" style="padding-top:15px;padding-bottom:15px">Upload Job Image</p>
+      </ion-card>
+       </div>
+       </div>
+
+
+              <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;">
                 <ion-input type="text" placeholder="Job Description" [(ngModel)]="job_description"></ion-input>
               </ion-item>
 
@@ -45,4 +63,4 @@
               </div>
 
   
-  </ion-content>
+   </ion-content>

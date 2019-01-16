@@ -47,7 +47,7 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  rootPage: any = HomePage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   posting = MypostingsPage;
   serlogin = SerloginPage;
   home  = HomePage;

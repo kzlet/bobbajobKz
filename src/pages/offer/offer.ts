@@ -47,7 +47,7 @@ export class OfferPage {
   //make_offer.php
   give_offer()
   {
-    if(this.event.month === undefined || this.event.timeStarts === undefined || this.amount === undefined || this.proposal === undefined)
+    if(this.event.month === undefined || this.event.timeStarts === undefined || this.proposal === undefined)
     {
       let alert = this.alertCtrl.create({
         title: 'All feilds are neccessay...',
@@ -70,7 +70,8 @@ export class OfferPage {
       content: "Uploading your proposal..."
     });
     loader.present();
-    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/make_offer.php?client_email=' + this.client_email + '&provider_email=' + this.provider_email + '&project_id=' + this.project_id + '&day=' + this.event.month + '&time=' + this.event.timeStarts + '&amount=' + this.amount + '&proposal=' + this.proposal;  
+ //   this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/make_offer.php?client_email=' + this.client_email + '&provider_email=' + this.provider_email + '&project_id=' + this.project_id + '&day=' + this.event.month + '&time=' + this.event.timeStarts + '&proposal=' + this.proposal; 
+ this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/make_offer.php?client_email=' + this.client_email + '&provider_email=' + this.provider_email + '&project_id=' + this.project_id; 
     this.http.get(this.apiUrl).map(res => res.json())
       .subscribe(data => {
         console.log(data);

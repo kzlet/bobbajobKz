@@ -26,7 +26,7 @@ export class HomePage {
 
   @ViewChild('mapContainer') mapContainer: ElementRef;
   map: any;
-  id: any = '10';
+  id: any;
   user_long: any;
   user_lat: any;
   got_values: any;
@@ -120,8 +120,9 @@ export class HomePage {
 
             let mapOptions = {
               center: latLng,
+              draggable: false,
               disableDefaultUI: true,
-              zoom: 6,
+              zoom: 12,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               styles: [
                 {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -226,8 +227,9 @@ export class HomePage {
             let latLng = new google.maps.LatLng(this.user_lat, this.user_long);
             let mapOptions = {
               center: latLng,
+              draggable: false,
               disableDefaultUI: true,
-              zoom: 6,
+              zoom: 12,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               styles: [
                 {elementType: 'geometry', stylers: [{color: '#242f3e'}]},

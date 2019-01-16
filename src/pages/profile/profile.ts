@@ -82,14 +82,31 @@ export class ProfilePage {
     make_offer(client_email :string)
     {
       const modal = this.modalCtrl.create(OfferPage, {project_id : this.project_id, client_email : client_email});
-
-      modal.onDidDismiss(() => {
-        // Call the method to do whatever in your home.ts
-           console.log('Modal closed');
-           this.check_status();
-    });
-
-      modal.present();
+      let loader = this.loadingCtrl.create({
+        content: "Uploading your proposal..."
+      });
+      loader.present();
+   //   this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/make_offer.php?client_email=' + this.client_email + '&provider_email=' + this.provider_email + '&project_id=' + this.project_id + '&day=' + this.event.month + '&time=' + this.event.timeStarts + '&proposal=' + this.proposal; 
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/make_offer.php?client_email=' + this.client_email + '&provider_email=' + this.provider_email + '&project_id=' + this.project_id; 
+      this.http.get(this.apiUrl).map(res => res.json())
+        .subscribe(data => {
+          console.log(data);
+          var status = data.Status;
+          if (status === 'success') {
+            let alert = this.alertCtrl.create({
+              title: 'Offer sent Successfully...',
+              buttons: ['OK']
+            });
+            alert.present();
+            loader.dismiss();
+            this.check_status();
+          }
+          else {
+            loader.dismiss();
+          }
+        }, error => {
+          console.log(error);// Error getting the data
+        });
     }
 
    check_status()

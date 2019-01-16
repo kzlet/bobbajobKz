@@ -25,7 +25,7 @@ export class ReviewproviderPage {
 
   get_inprogress_jobs() 
   {
-    this.project_id = '17';
+   // this.project_id = '17';
     let loader = this.loadingCtrl.create({
       content: "Loading Status..."
     });
