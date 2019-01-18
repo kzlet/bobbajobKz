@@ -99,6 +99,7 @@ export class ProfilePage {
             });
             alert.present();
             loader.dismiss();
+            this.post_notification();
             this.check_status();
           }
           else {
@@ -106,6 +107,17 @@ export class ProfilePage {
           }
         }, error => {
           console.log(error);// Error getting the data
+        });
+    }
+
+    post_notification()
+    {
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/make_offer_notification.php?project_id=' + this.project_id;
+      console.log(this.apiUrl);
+      this.http.get(this.apiUrl).map(res => res.json())
+        .subscribe(data => {
+        }, error => {
+          console.log(error); // Error getting the data
         });
     }
 

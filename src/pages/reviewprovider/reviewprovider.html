@@ -57,14 +57,18 @@
       <h4 align="left"><b>View Proposal:</b></h4>
         <p align="left" nowrap>{{post.proposal}}</p>
         <div align="left">
-        <h4 ><b >{{post.amount}} £</b></h4>
-        <h4><p>Day :{{post.day}} / Time: {{post.time}}</p></h4>
+        <h4 ><b >{{post.budget}} £</b></h4>
+        <h4><p>Day :{{post.month}} / Time: {{post.date}}</p></h4>
         </div>
       </ion-card>
 
       <div *ngFor="let post of posts" align="center">
-          <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="complete_job(post.provider_email , post.id, post.name)">Job Completed</button>
+          <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="complete_job(post.provider_email , post.name)">Job Completed</button>
           </div>
 
+  </div>
+
+  <div style="margin-bottom:20%">
+    <p style="color:white">Here</p>
   </div>
 </ion-content>

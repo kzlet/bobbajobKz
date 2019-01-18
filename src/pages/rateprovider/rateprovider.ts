@@ -38,12 +38,15 @@ export class RateproviderPage {
 
   finish()
   {
+    console.log(this.review);
+    console.log(this.rate);
+    console.log(this.project_id);
     console.log("Post job function called");
     let loader = this.loadingCtrl.create({
       content: "Finalizing the Job..."
     });
     loader.present();
-    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_review_rate.php?project_id=' + this.project_id + '&review=' + this.review + '&rating=' + this.rate ;  
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_review_rate.php?project_id=' + this.project_id + '&review=' + this.review + '&rating=' + this.rate;  
     this.http.get(this.apiUrl).map(res => res.json())
       .subscribe(data => {
         console.log(data);

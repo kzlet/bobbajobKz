@@ -31,6 +31,7 @@ export class ProviderChatPage {
   apiUrls: string;
   client_name: any;
   sub: Subscription;
+  apiUrl: string;
 
   constructor(public view: ViewController, private loadingCtrl: LoadingController, public alertCtrl: AlertController, private nativeStorage: NativeStorage, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.provider_email = this.navParams.get('client_email');
@@ -115,10 +116,22 @@ export class ProviderChatPage {
    this.contentArea.scrollToBottom();
    this.sent=data
    this.message="";
+   this.post_notification();
      }),error=>{
    
      }
    }
+   }
+
+   post_notification()
+   {
+     this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/sendMessageProv.php?email=' + this.client_email;
+     console.log(this.apiUrl);
+     this.http.get(this.apiUrl).map(res => res.json())
+       .subscribe(data => {
+       }, error => {
+         console.log(error); // Error getting the data
+       });
    }
 
 }

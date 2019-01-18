@@ -33,6 +33,7 @@ export class HomePage {
 
   constructor(public events: Events, public platform: Platform, public menuCtrl: MenuController , private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, public modalCtrl: ModalController) {
   this.get_data();
+  this.events.publish('user:login');
     if (this.platform.is('android')) {
       console.log('I am an android Device!');
     }
@@ -80,8 +81,8 @@ export class HomePage {
   do()
   {
     //this.events.publish('user:login');
-    this.activeMenu = 'menu1';
-    this.menuCtrl.open(this.activeMenu);
+    //this.activeMenu = 'menu1';
+    this.menuCtrl.open();
   }
 
   get_data()
@@ -117,7 +118,6 @@ export class HomePage {
 
    displayGoogleMap() {
             let latLng = new google.maps.LatLng(51.5014, 0.1419);
-
             let mapOptions = {
               center: latLng,
               draggable: false,

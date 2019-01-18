@@ -121,6 +121,7 @@ export class LaundryPage {
                   if(this.imageURI != undefined || this.imageURI != null || this.imageURI != 'undefined')
                   {
                     this.uploadImage();
+                    this.post_notification();
                   }
 
                   else{
@@ -129,11 +130,9 @@ export class LaundryPage {
                       buttons: ['OK']
                     });
                     alert.present();
-                    
                     //this.navCtrl.setRoot(HomePage);
                     this.navCtrl.pop();
-                  }
-                    
+                  }    
                 }
             }, error => {
                 console.log(error);// Error getting the data
@@ -141,6 +140,16 @@ export class LaundryPage {
     }
   }
 
+  post_notification()
+  {
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/post_job_notification.php';
+    console.log(this.apiUrl);
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+      }, error => {
+        console.log(error); // Error getting the data
+      });
+  }
 
   currentco(){
     //Getting Data When Signup!

@@ -1,8 +1,5 @@
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
       <ion-title>My Connections</ion-title>
     </ion-navbar>
   </ion-header>
@@ -10,6 +7,12 @@
   
   <ion-content no-bounce class="home-background">
       <ion-list>
+
+          <div align="center" style="margin-top:10%" *ngIf="chat_value === '1'">
+              <img src="imgs/chats_bg.png" style="width:55%"/>
+            </div>
+
+            
           <ion-item *ngFor="let post of posts" (click)="open_chatbox(post.client_email, post.name, post.title, post.playerid)">
             <ion-avatar item-start>
               <img src="{{post.profile_pic}}">
@@ -18,5 +21,9 @@
             <p>{{post.title}}</p>
           </ion-item>
         </ion-list>
+
+        <div style="margin-top:10%">
+          <p style="color:white">Here</p>
+          </div>
   </ion-content>
   

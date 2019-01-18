@@ -10,10 +10,11 @@ import { RateproviderPage } from '../rateprovider/rateprovider';
   templateUrl: 'reviewprovider.html',
 })
 export class ReviewproviderPage {
-  project_id: any = '17';
+  project_id: any;
   apiUrl: string;
   posts: any;
   rate : any = '3.5';
+  provider_email: string;
   constructor(public modalCtrl: ModalController, public alertCtrl : AlertController, private nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.project_id = this.navParams.get('project_id');
     this.get_inprogress_jobs();
@@ -21,11 +22,11 @@ export class ReviewproviderPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewproviderPage');
+    console.log("project id reviewprovider" + this.project_id);
   }
 
   get_inprogress_jobs() 
   {
-   // this.project_id = '17';
     let loader = this.loadingCtrl.create({
       content: "Loading Status..."
     });
@@ -37,6 +38,7 @@ export class ReviewproviderPage {
       .subscribe(data => {
 
         this.posts = data;
+       // this.posts = Array.of(this.posts);
         console.log(this.posts);
           loader.dismiss();
       }, error => {
@@ -44,8 +46,10 @@ export class ReviewproviderPage {
       });
   }
 
-  complete_job(provider_email : string, project_id : string, provider_name : string)
+  complete_job(provider_email : string,provider_name : string)
   {
+    console.log("Project_id" + this.project_id);
+    this.provider_email = provider_email;
     const confirm = this.alertCtrl.create({
       title: 'Are you sure the Job is finished ?',
       message: 'Once completed there is no going back...',
@@ -58,7 +62,7 @@ export class ReviewproviderPage {
         },
         {
           text: 'Ok',
-          handler: () => {
+          handler: () => {  // complete_job_status.php
             console.log('Agree clicked');
             console.log("Post job function called");
             let loader = this.loadingCtrl.create({
@@ -72,8 +76,22 @@ export class ReviewproviderPage {
                 var status = data.Status;
                 if (status === 'success') {
                   loader.dismiss();
-                  const modal = this.modalCtrl.create(RateproviderPage, {provider_email , project_id, provider_name});
-                  modal.present();  
+                  this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/complete_job_status.php?id=' + this.project_id;  
+                  this.http.get(this.apiUrl).map(res => res.json())
+                    .subscribe(data => {
+                      console.log(data);
+                      var status = data.Status;
+                      if (status === 'success') {
+                        console.log("Operation success:" + this.project_id);
+                        const modal = this.modalCtrl.create(RateproviderPage, {provider_email , project_id : this.project_id , provider_name});
+                        modal.present();  
+                      }
+                      else {
+                        loader.dismiss();
+                      }
+                    }, error => {
+                      console.log(error);
+                    });
                 }
                 else {
                   loader.dismiss();
@@ -87,5 +105,17 @@ export class ReviewproviderPage {
     });
     confirm.present();
   }
+
+  post_notification()
+  {
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/job_complete_notfication.php?email=' + this.provider_email;
+    console.log(this.apiUrl);
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+      }, error => {
+        console.log(error); // Error getting the data
+      });
+  }
+
 
 }

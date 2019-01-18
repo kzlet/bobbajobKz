@@ -20,7 +20,7 @@
 
     <div [ngSwitch]="archive">
         <ion-list *ngSwitchCase="'Going'">
-            <ion-list>
+            <ion-list style="margin-bottom:35%">
             <ion-item *ngFor="let post of posts, let i = index">
                 <ion-grid>
                   <ion-row>
@@ -37,10 +37,13 @@
                 <p align="right" style="color:green;margin-top:-20px">View Proposals</p>
               </ion-item>
             </ion-list>
+            <div style="margin-top:5%">
+              <p style="color:white">Here</p>
+              </div>
           </ion-list>
 
           <ion-list *ngSwitchCase="'Completed'">
-              <ion-list>
+              <ion-list style="margin-bottom:35%">
               <ion-item *ngFor="let cost of coasts, let i = index">
                   <ion-grid>
                     <ion-row>
@@ -53,12 +56,16 @@
                     </ion-row>
                   </ion-grid>
                   <h3>{{cost.jd}}</h3>
+                  <p style="color:green"><b>Status:</b>&nbsp;Completed</p>
                 </ion-item>
               </ion-list>
+              <div style="margin-top:5%">
+                <p style="color:white">Here</p>
+                </div>
             </ion-list>
 
             <ion-list *ngSwitchCase="'proposals'">
-              <ion-list>
+              <ion-list style="margin-bottom:35%">
               <ion-item *ngFor="let tost of toast, let i = index">
                 <ion-grid>
                   <ion-row>
@@ -76,7 +83,9 @@
                     <p *ngIf="tost.progress === 3 || tost.progress === '3'" style="color:blue"><b>Status:</b>&nbsp;Completed</p>
                   </ion-item>
               </ion-list>
-
+              <div style="margin-top:5%">
+                <p style="color:white">Here</p>
+                </div>
               </ion-list>
 
               </div>

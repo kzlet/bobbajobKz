@@ -17,6 +17,7 @@ export class ProviderConnectionsPage {
   client_name: any;
   provider_email: any;
   provider_name: any;
+  chat_value : any = '0';
 
   constructor(public modalCtrl: ModalController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
   }
@@ -73,6 +74,7 @@ export class ProviderConnectionsPage {
             buttons: ['OK']
           });
           alert.present();
+          this.chat_value = '1';
           loader.dismiss();
         }
         else

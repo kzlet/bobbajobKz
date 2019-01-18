@@ -36,16 +36,18 @@
       </ion-item>
     
       <div *ngIf="current_check === false">
-        <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 12px;background-color: transparent">
+        <ion-item class="item-ios" style="border-radius: 30px 30px;margin-top: 5px;background-color: transparent">
           <ion-input type="text" placeholder="Your City" [(ngModel)]="city"></ion-input>
         </ion-item>
       </div>
    
-            <div align="center" style="padding-top:5px;">
+            <div align="center" style="padding-top:5px;margin-bottom:25%">
                 <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="signup()">Save and Update</button>
               </div>
 
-            
+              <div style="margin-top:20%">
+                <p style="color:black">Here</p>
+                </div>
 
 </ion-content>
 

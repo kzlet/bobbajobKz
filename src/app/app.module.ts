@@ -62,6 +62,9 @@ import { ProviderConnectionsPage } from '../pages/provider-connections/provider-
 import { ProviderChatPage } from '../pages/provider-chat/provider-chat';
 import { JobHistoryPage } from '../pages/job-history/job-history';
 
+//image viewer
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
   authDomain: "bobbajob-f14c9.firebaseapp.com",
@@ -109,6 +112,7 @@ const firebaseAuth = {
   ],
   imports: [    
     BrowserModule,
+    IonicImageViewerModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     Ionic2RatingModule, // Put ionic2-rating module here

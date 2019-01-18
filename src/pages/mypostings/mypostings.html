@@ -14,6 +14,9 @@
         <ion-segment-button value="progress">
           In-Progress
         </ion-segment-button>
+        <ion-segment-button value="completed">
+          Completed
+        </ion-segment-button>
       </ion-segment>
   </ion-header>
 
@@ -44,12 +47,15 @@
                 <p *ngIf="post.progress === 1 || post.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
                 <p align="right" style="color:green;margin-top:-20px">View Proposals</p>
               </ion-item>
+              <div style="margin-top:10%">
+                <p style="color:white">Here</p>
+                </div>
         </ion-list>
 
         <ion-list *ngSwitchCase="'progress'">
 
           
-            <div align="center" *ngIf="progress_value === '1'">
+            <div align="center" style="margin-top:10%" *ngIf="progress_value === '1'">
                 <img src="imgs/no-posts.png" style="width:50%"/>
               </div>
 
@@ -70,7 +76,40 @@
                 <p *ngIf="cost.progress === 2 || cost.progress === '2'" style="color:red"><b>Status:</b>&nbsp;In-progress</p>
                 <p align="right" style="color:red;margin-top:-20px">View Job Details</p>
               </ion-item>
+              <div style="margin-top:10%">
+                <p style="color:white">Here</p>
+                </div>
           </ion-list>
+
+          <ion-list *ngSwitchCase="'completed'">
+
+          
+            <div align="center" style="margin-top:10%" *ngIf="completed_value === '1'">
+                <img src="imgs/no-posts.png" style="width:50%"/>
+              </div>
+
+
+            <ion-item *ngFor="let fost of foasts">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-10>
+                      {{fost.title}}
+                    </ion-col>
+                    <ion-col col-2>
+                      ${{fost.budget}}
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <h3>{{fost.jd}}</h3>
+                <p>{{fost.date}} {{fost.month}}</p>
+                <!-- <p *ngIf="fost.progress === 3 || fost.progress === '3'" style="color:green"><b>Status:</b>&nbsp;In-progress</p> -->
+                <p align="right" style="color:green;margin-top:-20px">Job Done</p>
+              </ion-item>
+              <div style="margin-top:10%">
+                <p style="color:white">Here</p>
+                </div>
+          </ion-list>
+
         </div>
         
 </ion-content>

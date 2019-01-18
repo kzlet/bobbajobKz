@@ -22,54 +22,49 @@ export class ProvdashboardPage {
   posts: any;
   apiUrl: string;
   current_time: any = new Date(new Date().getTime()).toLocaleDateString();
+  provider_email: any = 'stan@gmail.com';
+  images: { "photo": string; "id": string; }[];
   constructor(public events: Events, public alertCtrl: AlertController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private loadingCtrl: LoadingController, private http: Http) {
+  this.provider_email = this.navParams.get('provider_email');
+  this.fetchdata();
+
+  this.images = [
+    {"photo": "imgs/32.jpg" , "id" : "1"},
+    {"photo": "imgs/32.jpg" , "id" : "2"},
+    {"photo": "imgs/32.jpg" , "id" : "3"},
+    {"photo": "imgs/32.jpg" , "id" : "4"},
+  ]
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProvdashboardPage');
+  }
+
+
+  fetchdata()
+  {
+
     let loader = this.loadingCtrl.create({
-      content: "Loading your settings..."
+      content: "Loading your Profile..."
     });
     loader.present();
-    this.nativeStorage.getItem('provider_email')
-    .then(
-      data => {
-        console.log("Checking for City name:" + data);
-        this.email = data;
-      },
-      error => console.error(error)
-    );
 
-    this.nativeStorage.getItem('provider_name')
-    .then(
-      data => {
-        console.log("Checking for available:" + data);
-        this.name = data;
-      },
-      error => console.error(error)
-    );
-    loader.dismiss();
-  }
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_provider_profile_data.php?email=' + this.provider_email;
+     console.log(this.apiUrl);
 
-  do()
-  {
-    this.events.publish('provider:login');
-    console.log("Clicked menu 2");
-    this.activeMenu = 'menu2';
-    this.menuCtrl.enable(false, 'menu1');
-    this.menuCtrl.enable(true, 'menu2');
-    this.menuCtrl.open(this.activeMenu);
-  }
+     this.http.get(this.apiUrl).map(res => res.json())
+     .subscribe(data => {
+        
+      this.posts = data;
+     this.posts = Array.of(this.posts); 
 
-  provider()
-  {
-    this.navCtrl.push(ProvprofilePage);
-  }
-
-
-send()
-{
-  this.navCtrl.push(LaundrySamedayPage);
-}
+      loader.dismiss();
+      console.log(this.posts);
+ 
+      }, error => {
+        console.log(error); // Error getting the data
+  
+      });
+    }
 
 }

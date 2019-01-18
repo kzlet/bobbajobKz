@@ -47,7 +47,7 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   posting = MypostingsPage;
   serlogin = SerloginPage;
   home  = HomePage;
@@ -82,7 +82,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-   // this.getOnesignaldata();
+    this.getOnesignaldata();
     this.filePermission();
   }
 
@@ -201,7 +201,7 @@ export class MyApp {
   getOnesignaldata()
   {
     this.oneSignal.startInit('26a97309-9952-4593-b5d7-7bd884799045','234181533936');
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
     this.oneSignal.handleNotificationReceived().subscribe(() => {
      // do something when notification is received
     });

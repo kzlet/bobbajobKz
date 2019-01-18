@@ -19,6 +19,8 @@ export class MypostingsPage {
   coasts: any;
   job_value : any = '0';
   progress_value : any = '0';
+  foasts: any;
+  completed_value: any = '0';
   constructor(private nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
     this.nativeStorage.getItem('user_email')
     .then(
@@ -27,6 +29,7 @@ export class MypostingsPage {
         this.email = data;
         this.get_All_jobs(); 
         this.get_inprogress_jobs();
+        this.get_completed_jobs();
       },
       error => console.error(error)
     );
@@ -93,6 +96,31 @@ export class MypostingsPage {
       });
   }
 
+  get_completed_jobs() 
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Loading Jobs..."
+    });
+    loader.present();
+
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_my_completed_jobs.php?user_email=' + this.email;
+
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+        this.foasts = data;
+        console.log(this.foasts);
+
+        if(this.foasts.Status === 'failed')
+        {
+            this.completed_value = '1';
+        }
+
+          loader.dismiss();
+      }, error => {
+        console.log(error); // Error getting the data
+      });
+  }
+
   view_job(project_id : string)
   {
     console.log("project_id" + project_id);
@@ -102,7 +130,7 @@ export class MypostingsPage {
 
   check_status(project_id : string)
   {
-   console.log("Project id:" + project_id);
+   console.log("Project id posting page:" + project_id);
    this.navCtrl.push(ReviewproviderPage , {project_id : project_id});
   }
 }
