@@ -25,7 +25,12 @@ export class ProvprofilePage {
   current_time: any = new Date(new Date().getTime()).toLocaleDateString();
   provider_email: any;
   provider_name: any;
-  rate : any = '3.5';
+  rate : any;
+  coasts: any;
+  on_going_jobs: any;
+  on_completed_jobs: any;
+  foasts: any;
+  tester: any;
 
   constructor( public events: Events, private loadingCtrl: LoadingController, private http: Http, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -38,6 +43,9 @@ export class ProvprofilePage {
         console.log("Checking for name:" + data);
         this.provider_email = data;  //user email
         this.fetchdata();
+        this.get_going_jobs();
+        this.get_completed_jobs();
+        this.get_rating();
       },
       error => console.error(error)
     );
@@ -61,6 +69,74 @@ export class ProvprofilePage {
     );
 
   }
+
+  get_going_jobs()
+  {
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/provider_ongoing.php?provider_email=' + this.provider_email;
+  
+      console.log(this.apiUrl);
+  
+      this.http.get(this.apiUrl).map(res => res.json())
+        .subscribe(data => {
+  
+          this.foasts = data;
+
+          this.on_going_jobs = this.foasts.length;
+  
+          if(data.Status === 'failed')
+          {
+          }
+        }, error => {
+          console.log(error); // Error getting the data
+        }); 
+  }
+
+  get_completed_jobs()
+  {
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_prov_completed_projects.php?provider_email=' + this.provider_email;
+  
+      console.log(this.apiUrl);
+  
+      this.http.get(this.apiUrl).map(res => res.json())
+        .subscribe(data => {
+  
+          this.coasts = data;
+
+          this.on_completed_jobs = this.coasts.length;
+  
+        }, error => {
+          console.log(error); // Error getting the data
+        });
+    
+  }
+
+  get_rating()
+  {
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_stars.php?provider_email=' + this.provider_email;
+  
+      console.log(this.apiUrl);
+  
+      this.http.get(this.apiUrl).map(res => res.json())
+        .subscribe(data => {
+  
+         console.log(data);
+
+         this.tester = data;
+         this.rate = this.tester.average_rating;
+
+         console.log(this.rate);
+
+         if ( this.tester === undefined || this.rate === undefined )
+         {
+           this.rate = '3';
+         }
+          
+  
+        }, error => {
+          console.log(error); // Error getting the data
+        });
+  }
+
 
 
   fetchdata()
