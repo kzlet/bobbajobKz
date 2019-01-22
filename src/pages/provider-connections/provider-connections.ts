@@ -19,6 +19,7 @@ export class ProviderConnectionsPage {
   provider_name: any;
   chat_value : any = '0';
   toast: any;
+  chatter: any;
 
   constructor(public modalCtrl: ModalController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
   }
@@ -57,16 +58,20 @@ export class ProviderConnectionsPage {
       content: "Loading Data..."
     });
     loader.present();
-
-    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_user_caller_data.php?provider_email=' + this.provider_email;
-
-  //  console.log(this.apiUrl);
-
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/sample_provider_chat.php?provider_email=' + this.provider_email;
     this.http.get(this.apiUrl).map(res => res.json())
       .subscribe(data => {
         this.posts = data;
-        console.log("Here" + this.posts);
-       //this.posts= Array.of(this.posts);
+        
+      //  this.chatter = data.chat_data;
+        
+        console.log("Here" + JSON.stringify(this.posts));
+     //   console.log("Here" + JSON.stringify(this.chatter));
+      //  console.log("Chatter:" + this.chatter);
+       
+      //  console.log("For chat message:" + this.posts.chat_data.message);
+     //   console.log("For chat time:" + this.posts.chat_data.time);
+
         if(this.posts.Status === 'failed')
         {
           let alert = this.alertCtrl.create({
@@ -78,35 +83,6 @@ export class ProviderConnectionsPage {
           loader.dismiss();
         }
         else
-
-        //getting last chat info
-
-        for(var i = 0; i < this.posts.length ; i++)
-        {
-          var client_new_id;
-          client_new_id = this.posts[i].client_email;
-
-          console.log("Client new id" + client_new_id);
-
-          this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_last_chat_id_provider.php?client_email=' + client_new_id + '&provider_email=' + this.provider_email;
-
-          console.log(this.apiUrl);
-      
-          this.http.get(this.apiUrl).map(res => res.json())
-            .subscribe(data => {
-      
-              this.toast = data;
-          //    this.posts= Array.of(this.posts);
-
-            
-              console.log("After toast run"+ this.toast);           
-            }, error => {
-              console.log(error); 
-            });
-
-        }
-          //getting last chat info completed
-
           loader.dismiss();
       }, error => {
         console.log(error); 

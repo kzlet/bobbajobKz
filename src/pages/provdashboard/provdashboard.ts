@@ -24,9 +24,18 @@ export class ProvdashboardPage {
   current_time: any = new Date(new Date().getTime()).toLocaleDateString();
   provider_email: any = 'stan@gmail.com';
   images: { "photo": string; "id": string; }[];
+  rate : any;
+  coasts: any;
+  on_going_jobs: any;
+  on_completed_jobs: any;
+  foasts: any;
+  tester: any;
   constructor(public events: Events, public alertCtrl: AlertController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private loadingCtrl: LoadingController, private http: Http) {
   this.provider_email = this.navParams.get('provider_email');
   this.fetchdata();
+  this.get_going_jobs();
+  this.get_completed_jobs();
+  this.get_rating();
 
   this.images = [
     {"photo": "imgs/32.jpg" , "id" : "1"},
@@ -66,5 +75,78 @@ export class ProvdashboardPage {
   
       });
     }
+
+    get_going_jobs()
+    {
+        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/provider_ongoing.php?provider_email=' + this.provider_email;
+    
+        console.log(this.apiUrl);
+    
+        this.http.get(this.apiUrl).map(res => res.json())
+          .subscribe(data => {
+    
+            this.foasts = data;
+  
+            this.on_going_jobs = this.foasts.length;
+    
+            if(data.Status === 'failed')
+            {
+              this.on_going_jobs = '-';
+            }
+          }, error => {
+            console.log(error); // Error getting the data
+          }); 
+    }
+  
+    get_completed_jobs()
+    {
+        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_prov_completed_projects.php?provider_email=' + this.provider_email;
+    
+        console.log(this.apiUrl);
+    
+        this.http.get(this.apiUrl).map(res => res.json())
+          .subscribe(data => {
+    
+            this.coasts = data;
+  
+            this.on_completed_jobs = this.coasts.length;
+  
+            if(data.Status === 'failed')
+            {
+              this.on_completed_jobs = '-';
+            }
+    
+          }, error => {
+            console.log(error); // Error getting the data
+          });
+      
+    }
+  
+    get_rating()
+    {
+      this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_stars.php?provider_email=' + this.provider_email;
+    
+        console.log(this.apiUrl);
+    
+        this.http.get(this.apiUrl).map(res => res.json())
+          .subscribe(data => {
+    
+           console.log(data);
+  
+           this.tester = data;
+           this.rate = this.tester.average_rating;
+  
+           console.log(this.rate);
+  
+           if ( this.tester === undefined || this.rate === undefined || this.rate === null || this.rate === 'null' )
+           {
+             this.rate = '5';
+           }
+            
+          }, error => {
+            console.log(error); // Error getting the data
+          });
+    }
+  
 
 }

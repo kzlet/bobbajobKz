@@ -1,6 +1,6 @@
 <ion-content no-bounce>
 
-  <div *ngFor="let post of posts" align="center" style="background-color:#9a4081">
+  <div *ngFor="let post of posts" align="center" style="background-color:#84527c">
     <ion-avatar item-start>
       <img src="{{post.profile_picture}}" style="padding-top:4px">
     </ion-avatar>
@@ -16,12 +16,12 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-            <h4><b style="color:#9a4081">Jobs Completed</b></h4>
+            <h4><b style="color:#84527c">Jobs Completed</b></h4>
             <p>{{on_completed_jobs}}</p>
           </ion-col>
 
           <ion-col col-6>
-            <h4><b style="color:#9a4081">On-going Jobs</b></h4>
+            <h4><b style="color:#84527c">On-going Jobs</b></h4>
             <p>{{on_going_jobs}}</p>
           </ion-col>
         </ion-row>
@@ -33,13 +33,13 @@
 
     <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;">
       
-      <div style="padding:10px" align="left"><ion-icon name="information-circle" style="color:#9a4081"><b style="color:black">&nbsp;&nbsp;&nbsp;Details:</b></ion-icon></div>
+      <div style="padding:10px" align="left"><ion-icon name="information-circle" style="color:#84527c"><b style="color:black">&nbsp;&nbsp;&nbsp;Details:</b></ion-icon></div>
       <p nowrap style="padding:10px" align="left">{{post.past_exp}}</p>
           
     </ion-card>
 
     <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;padding:7px">
-    <div align="left"><ion-icon name="information-circle" style="color:#9a4081"><b style="color:black">&nbsp;&nbsp;&nbsp;Personal Details</b></ion-icon></div>
+    <div align="left"><ion-icon name="information-circle" style="color:#84527c"><b style="color:black">&nbsp;&nbsp;&nbsp;Personal Details</b></ion-icon></div>
     <div style="padding-left:10px;padding-top:5px">
     <p align="left">Email ID:<b>&nbsp;&nbsp;{{post.email}}</b></p>
     <p align="left">Contact Number:<b>&nbsp;&nbsp;{{post.number}}</b></p>

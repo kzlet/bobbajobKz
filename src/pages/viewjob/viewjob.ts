@@ -104,7 +104,7 @@ export class ViewjobPage {
 
            console.log("Post job function called");
            let loader = this.loadingCtrl.create({
-             content: "Updating Prayer Timings..."
+             content: "Assigning Job, Please wait..."
            });
            loader.present();
            this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/assign_job.php?provider_email=' + provider_email + '&client_email=' + this.client_email + '&project_id=' + this.project_id + '&amount_charged=' + amount_charged;  //change api

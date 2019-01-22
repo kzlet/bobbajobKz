@@ -7,7 +7,7 @@
 
 <ion-content no-bounce>
 
-  <div *ngFor="let post of posts" align="center" style="background-color:#9a4081">
+  <!-- <div *ngFor="let post of posts" align="center" style="background-color:#9a4081">
       <ion-avatar item-start>
           <img src="{{post.profile_picture}}" style="padding-top:4px">
         </ion-avatar>
@@ -60,13 +60,35 @@
         <h4 ><b >{{post.budget}} £</b></h4>
         <h4><p>Day :{{post.month}} / Time: {{post.date}}</p></h4>
         </div>
+      </ion-card> -->
+
+  <div align="center">
+
+    <div class="card-background-page">
+      <ion-card *ngFor="let post of posts">
+          <img src="{{post.job_image}}" style="height:200px"/>
+          <div class="card-title"></div>
+          <div class="card-subtitle"></div>
+        </ion-card>
+
+        <h3 *ngFor="let post of posts">{{post.title}}</h3>
+      </div>
+
+      <ion-card style="margin-top:5px;padding:10px" *ngFor="let post of posts">
+         
+         <p><b>Description:</b></p>
+         <p>{{post.jd}}</p>
+         <p><b>Date of Posting:</b> &nbsp; {{post.month}}</p>
+        
+        <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#84527c" (click)="complete_job(post.provider_email , post.name)">Job Completed</button>
+
       </ion-card>
-
-      <div *ngFor="let post of posts" align="center">
-          <button ion-button round full style="width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="complete_job(post.provider_email , post.name)">Job Completed</button>
-          </div>
-
   </div>
+
+      
+        
+
+
 
   <div style="margin-bottom:20%">
     <p style="color:white">Here</p>

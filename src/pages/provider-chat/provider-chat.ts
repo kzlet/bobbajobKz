@@ -37,7 +37,7 @@ export class ProviderChatPage {
     this.provider_email = this.navParams.get('client_email');
     this.provider_name = this.navParams.get('name');
     this.client_email = this.navParams.get('provider_email');
-    this.client_name = this.navParams.get('client_name');
+    this.client_name = this.navParams.get('provider_name');
 
     this.title = this.navParams.get('title');
     this.playerid = this.navParams.get('playerid');

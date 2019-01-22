@@ -31,7 +31,7 @@
               </div>
 
 
-            <ion-item *ngFor="let post of posts, let i = index" (click)="view_job(post.id)">
+            <ion-item *ngFor="let post of posts, let i = index">
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10>
@@ -45,7 +45,9 @@
                 <p no-wrap>{{post.jd}}</p>
                 <p>{{post.date}} {{post.month}}</p>
                 <p *ngIf="post.progress === 1 || post.progress === '1'" style="color:green"><b>Status:</b>&nbsp;Open</p>
-                <p align="right" style="color:green;margin-top:-20px">View Proposals</p>
+                <p *ngIf="post.progress === 2 || post.progress === '2'" style="color:red"><b>Status:</b>&nbsp;In-progress</p>
+                <p *ngIf="post.progress === 3 || post.progress === '3'" style="color:blue"><b>Status:</b>&nbsp;Completed</p>
+                <p align="right" *ngIf="post.progress === 1 || post.progress === '1'" style="color:green;margin-top:-20px"><b (click)="view_job(post.id)">View Proposals</b></p>
               </ion-item>
               <div style="margin-top:10%">
                 <p style="color:white">Here</p>

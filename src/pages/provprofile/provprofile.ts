@@ -85,6 +85,7 @@ export class ProvprofilePage {
   
           if(data.Status === 'failed')
           {
+            this.on_going_jobs = '-';
           }
         }, error => {
           console.log(error); // Error getting the data
@@ -103,6 +104,11 @@ export class ProvprofilePage {
           this.coasts = data;
 
           this.on_completed_jobs = this.coasts.length;
+
+          if(data.Status === 'failed')
+          {
+            this.on_completed_jobs = '-';
+          }
   
         }, error => {
           console.log(error); // Error getting the data
@@ -126,12 +132,11 @@ export class ProvprofilePage {
 
          console.log(this.rate);
 
-         if ( this.tester === undefined || this.rate === undefined )
+         if ( this.tester === undefined || this.rate === undefined || this.rate === null || this.rate === 'null' )
          {
-           this.rate = '3';
+           this.rate = '5';
          }
           
-  
         }, error => {
           console.log(error); // Error getting the data
         });
