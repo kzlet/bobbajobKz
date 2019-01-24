@@ -5,33 +5,33 @@
 
 <ion-content padding no-bounce  class="home-background">
  
-  <div align="left" style="padding-top:15px">
-    <h4 style="color:white">Upload Resume</h4>
+  <div align="left" style="padding-top:15px" *ngIf="resume_value === '1'">
+    <progress-bar [progress]="resumeProgress" [color]="'#9a4081'"></progress-bar>
   </div>
 
   <div align="center" style="margin-top:10px">
     <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="get_resume()">Upload Resume</button>
   </div>
 
-  <div align="left" style="padding-top:15px">
-      <h4 style="color:white">Upload Passport</h4>
-    </div>
+  <div align="left" style="padding-top:15px" *ngIf="passport_value === '1'">
+    <progress-bar [progress]="passportProgress" [color]="'#9a4081'"></progress-bar>
+  </div>
   
     <div align="center" style="margin-top:10px">
       <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="get_passport()">Upload Passport</button>
     </div>
 
-    <div align="left" style="padding-top:15px">
-        <h4 style="color:white">Proof of Current Address</h4>
-      </div>
+    <div align="left" style="padding-top:15px" *ngIf="paermit_value === '1'">
+      <progress-bar [progress]="proofProgress" [color]="'#9a4081'"></progress-bar>
+    </div>
     
       <div align="center" style="margin-top:10px">
         <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="get_address()">Upload Proof</button>
       </div>
 
-      <div align="left" style="padding-top:15px">
-          <h4 style="color:white">Work Permit <b style="color:grey">(optional)</b></h4>
-        </div>
+      <div align="left" style="padding-top:15px" *ngIf="address_value === '1'">
+        <progress-bar [progress]="permitProgress" [color]="'#9a4081'"></progress-bar>
+      </div>
       
         <div align="center" style="margin-top:10px">
           <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="get_permit()">Upload Work Permit</button>
@@ -44,13 +44,12 @@
 
     <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding-top:10px">
       <ion-item class="item-ios" style="border-radius: 12px 12px">
-        <ion-input type="text" placeholder="Tell us something about you...." [(ngModel)]="past_exp"></ion-input>
+        <ion-textarea placeholder="Tell us Something about you..." [(ngModel)]="past_exp"></ion-textarea>
       </ion-item>
     </div>
-
    
         <div align="center" style="margin-top:10px">
-            <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081"  (click)="send()">Confirm</button>
+            <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="send()">Confirm</button>
           </div>
 
 </ion-content>

@@ -23,7 +23,7 @@ export class ProvservicenamePage {
   past_exp: any;
   q_name: any;
   apiUrl: string;
-  email: any;
+  email: any ;
   per = 'HOUR';
   work_exp: any;
 
@@ -32,9 +32,18 @@ export class ProvservicenamePage {
   paermit_value: any = '0';
   address_value: any = '0';
   tests: any;
+  resu: string;
+  puri: string;
+  auri: string;
+  peuri: string;
+
+  public resumeProgress : number = 0;
+  public passportProgress : number = 0;
+  public permitProgress : number = 0;
+  public proofProgress : number = 0;
 
   constructor(private fileTransfer: FileTransferObject, private fileChooser: FileChooser, private transfer: FileTransfer, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
-     this.email = this.navParams.get('email');
+   //  this.email = this.navParams.get('email');
   }
 
   ionViewDidLoad() {
@@ -89,9 +98,20 @@ export class ProvservicenamePage {
   get_resume() {
     this.resume_value = '1';
     this.fileChooser.open()
-      .then(uri => {
-        console.log(uri)
-        this.nativeStorage.setItem('resume', uri)
+      .then(ruri => {
+        console.log(ruri);
+        this.resu = 'resume uploaded';
+
+        //progress bar
+        setInterval(() => {
+          if (this.resumeProgress < 100)
+            this.resumeProgress += 1;
+          else
+            clearInterval(this.resumeProgress);
+        }, 50);
+        //
+
+        this.nativeStorage.setItem('resume', ruri)
           .then(
             () => console.log('Resume Stored!'),
             error => console.error('Error storing item', error)
@@ -104,9 +124,21 @@ export class ProvservicenamePage {
   get_passport() {
     this.passport_value = '1';
     this.fileChooser.open()
-      .then(uri => {
-        console.log(uri)
-        this.nativeStorage.setItem('passport', uri)
+      .then(puri => {
+        console.log(puri);
+        this.puri = 'passport uploaded';
+
+          //progress bar
+          setInterval(() => {
+            if (this.passportProgress < 100)
+              this.passportProgress += 1;
+            else
+              clearInterval(this.passportProgress);
+          }, 50);
+          //
+
+
+        this.nativeStorage.setItem('passport', puri)
           .then(
             () => console.log('Resume Stored!'),
             error => console.error('Error storing item', error)
@@ -119,9 +151,20 @@ export class ProvservicenamePage {
   get_address() {
     this.paermit_value = '1';
     this.fileChooser.open()
-      .then(uri => {
-        console.log(uri)
-        this.nativeStorage.setItem('current_address', uri)
+      .then(auri => {
+        console.log(auri);
+        this.auri = 'address upload';
+
+           //progress bar
+           setInterval(() => {
+            if (this.proofProgress < 100)
+              this.proofProgress += 1;
+            else
+              clearInterval(this.proofProgress);
+          }, 50);
+          //
+
+        this.nativeStorage.setItem('current_address', auri)
           .then(
             () => console.log('Resume Stored!'),
             error => console.error('Error storing item', error)
@@ -131,12 +174,23 @@ export class ProvservicenamePage {
       .catch(e => console.log(e));
   }
 
-  get_permit() {
+  get_permit() { 
     this.address_value = '1';
     this.fileChooser.open()
-      .then(uri => {
-        console.log(uri)
-        this.nativeStorage.setItem('work_permit', uri)
+      .then(peuri => {
+        console.log(peuri);
+        this.peuri = 'permit uploaded';
+
+            //progress bar
+            setInterval(() => {
+              if (this.permitProgress < 100)
+                this.permitProgress += 1;
+              else
+                clearInterval(this.permitProgress);
+            }, 50);
+            //
+
+        this.nativeStorage.setItem('work_permit', peuri)
           .then(
             () => console.log('Resume Stored!'),
             error => console.error('Error storing item', error)
@@ -147,43 +201,81 @@ export class ProvservicenamePage {
   }
 
 
-  uploadresume() {
-    this.nativeStorage.getItem('resume')
-      .then(
-        data => {
-          console.log("Checking for resume:" + data);
-          this.uri = data;
-          console.log(this.uri)
-          var targetPath = this.uri
-          var filename = this.uri;
-          var options = {
-            fileKey: "file",
-            fileName: filename,
-            chunkedMode: false,
-            mimeType: "application/pdf",
-            headers: {}
-          };
-          const fileTransfer: FileTransferObject = this.transfer.create();
-          let loadingCtrl = this.loadingCtrl.create({
-            content: 'Uploading Resume...',
-          });
-          loadingCtrl.present();
-          this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_resume.php?email=" + this.email;
-          console.log(this.url2)
-          fileTransfer.upload(this.uri, this.url2, options).then(data => {
-            loadingCtrl.dismissAll()
-            console.log("image uploaded");
-            this.uploadpassport();
-            console.log("data", data)
-          }, err => {
-            loadingCtrl.dismissAll()
-            console.log("Failed uploading image", err);
-          });
-        },
-        error => console.error(error)
-      );
+  // uploadresume() {
+  //   this.nativeStorage.getItem('resume')
+  //     .then(
+  //       data => {
+  //         console.log("Checking for resume:" + data);
+  //         this.uri = data;
+  //         console.log(this.uri)
+  //         var targetPath = this.uri
+  //         var filename = this.uri;
+  //         var options = {
+  //           fileKey: "file",
+  //           fileName: filename,
+  //           chunkedMode: false,
+  //           mimeType: "application/pdf",
+  //           headers: {}
+  //         };
+  //         const fileTransfer: FileTransferObject = this.transfer.create();
+  //         let loadingCtrl = this.loadingCtrl.create({
+  //           content: 'Uploading Resume...',
+  //         });
+  //         loadingCtrl.present();
+  //         this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_resume.php?email=" + this.email;
+  //         console.log(this.url2)
+  //         fileTransfer.upload(this.uri, this.url2, options).then(data => {
+  //           loadingCtrl.dismissAll()
+  //           console.log("image uploaded");
+  //           this.uploadpassport();
+  //           console.log("data", data)
+  //         }, err => {
+  //           loadingCtrl.dismissAll()
+  //           console.log("Failed uploading image", err);
+  //         });
+  //       },
+  //       error => console.error(error)
+  //     );
 
-  }
+  // }
+
+  uploadresume(){
+    this.nativeStorage.getItem('resume')
+    .then(
+      data => {
+        console.log("Checking for resume:" + data);
+        this.uri = data;
+        console.log(this.uri)
+        var filename = this.uri;
+
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    let options: FileUploadOptions = {
+      fileKey: "file",
+      fileName: filename,
+      chunkedMode: false,
+      mimeType: "image/jpeg",
+      params: { 'fileName': filename }
+    }
+
+    let loadingCtrl = this.loadingCtrl.create({
+      content: 'Uploading Resume...',
+    });
+    loadingCtrl.present();
+    this.url2 = "https://purpledimes.com/BoobaJob/WebServices/upload_resume.php?email=" + this.email;
+    
+    fileTransfer.upload(this.uri, this.url2, options).then(data => {
+      loadingCtrl.dismissAll()
+      console.log("File uploaded");
+      this.uploadpassport();
+      console.log("data", data)
+    }, err => {
+      loadingCtrl.dismissAll()
+      console.log("Failed uploading file", err);
+    });
+  },
+  error => console.error(error)
+);
+    }
 
   uploadpassport() {
     this.nativeStorage.getItem('passport')

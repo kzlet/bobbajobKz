@@ -65,6 +65,9 @@ import { JobHistoryPage } from '../pages/job-history/job-history';
 //image viewer
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 
+//progress bar
+import {ProgressBarModule} from "angular-progress-bar"
+
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
   authDomain: "bobbajob-f14c9.firebaseapp.com",
@@ -115,6 +118,7 @@ const firebaseAuth = {
     IonicImageViewerModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    ProgressBarModule,
     Ionic2RatingModule, // Put ionic2-rating module here
     AngularFireModule.initializeApp(firebaseAuth),
     AngularFireAuthModule,

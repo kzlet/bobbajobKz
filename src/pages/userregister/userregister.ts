@@ -129,12 +129,6 @@ export class UserregisterPage {
                       error => console.error('Error storing item', error)
                     );
 
-                    let alert = this.alertCtrl.create({
-                      title: 'Registeration Successful ! Login to proceed',
-                      buttons: ['OK']
-                    });
-                    alert.present();
-
                     this.uploadImage();
                      
                   }
@@ -239,10 +233,11 @@ public uploadImage() {
     this.navCtrl.setRoot(UserloginPage);
     console.log("data",data)
     let alert = this.alertCtrl.create({
-      title: 'Profile Created Successfully!',
+      title: 'Registeration Successful ! Login to proceed',
       buttons: ['OK']
     });
     alert.present();
+
   }, err => {
     loadingCtrl.dismissAll()
     console.log("Failed uploading image", err);

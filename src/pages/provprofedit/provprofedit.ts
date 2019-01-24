@@ -135,12 +135,6 @@ export class ProvprofeditPage {
 
                 if(status === 'success')
                 {
-                  let alert = this.alertCtrl.create({
-                    title: 'Updated Successful',
-                    buttons: ['OK']
-                  });
-                  alert.present();
-
                   if(this.image_value === '1')
                   {
                     this.uploadImage();
@@ -257,7 +251,7 @@ export class ProvprofeditPage {
     loadingCtrl.dismissAll()
     console.log("image uploaded");
     let alert = this.alertCtrl.create({
-      title: 'Registeration Successful',
+      title: 'Profile Updated Successfully',
       buttons: ['OK']
     });
     alert.present();

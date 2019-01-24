@@ -23,6 +23,7 @@ import { JobHistoryPage } from '../pages/job-history/job-history';
 import { ProvidertabPage } from '../pages/providertab/providertab';
 import { ProvprofeditPage } from '../pages/provprofedit/provprofedit';
 import { LaundryPage } from '../pages/laundry/laundry';
+import { ProvservicenamePage } from '../pages/provservicename/provservicename';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {
@@ -47,7 +48,7 @@ export class MyApp {
   auth: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProvidertabPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
+  rootPage: any = UserselectPage;   // ProvdashboardPag    1= available     0 = Un-available    2 = busy  LaundrySamedayPage
   posting = MypostingsPage;
   serlogin = SerloginPage;
   home  = HomePage;
