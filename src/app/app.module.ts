@@ -70,6 +70,10 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import {ProgressBarModule} from "angular-progress-bar"
 import { JobimagemodalPage } from '../pages/jobimagemodal/jobimagemodal';
 
+//Social Login
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
   authDomain: "bobbajob-f14c9.firebaseapp.com",
@@ -181,6 +185,8 @@ const firebaseAuth = {
     AndroidPermissions,
     OneSignal,
     PayPal,
+    Facebook,
+    GooglePlus,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

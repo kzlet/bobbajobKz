@@ -8,6 +8,9 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 
 @Component({
   selector: 'page-userlogin',
@@ -28,7 +31,7 @@ export class UserloginPage {
   codes: NativeGeocoderReverseResult[];
   lat: number;
   long: number;
-  constructor(private nativeGeocoder: NativeGeocoder, private geo : Geolocation, public platform : Platform ,public events : Events, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
+  constructor(private googlePlus: GooglePlus, private fb: Facebook, private nativeGeocoder: NativeGeocoder, private geo : Geolocation, public platform : Platform ,public events : Events, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
   }
 
   ionViewDidLoad() {
@@ -44,6 +47,53 @@ export class UserloginPage {
   goto2()
   {
     this.navCtrl.push(HomePage);
+  }
+
+  gmail_login()
+  {
+    this.googlePlus.login({})
+  .then(res => console.log("result" + res))
+  .catch(err => console.error("Error" + err));
+  }
+
+  loginWithFB() {
+    this.fb.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
+        this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+        console.log("Profile email:"+ JSON.stringify(this.userData.email));
+        console.log("Profile name:"+ JSON.stringify(this.userData.first_name));
+        console.log("Profile picture:"+ JSON.stringify(this.userData.picture));
+        console.log("Profile username:" + JSON.stringify(this.userData.username));
+
+        // let alert = this.alertCtrl.create({
+        //   title: 'Login Successful',
+        //   subTitle: 'Welcome to BobbaJob',
+        //   buttons: ['OK']
+        // });
+        // alert.present();
+
+        this.nativeStorage.setItem('user_email', this.userData.email)
+        .then(
+          () => console.log('User Email Stored!'),
+          error => console.error('Error storing item', error)
+        );
+
+        this.nativeStorage.setItem('user_name', this.userData.username)
+        .then(
+          () => console.log('name Stored!'),
+          error => console.error('Error storing item', error)
+        );
+
+        this.nativeStorage.setItem('user_profile_pic', this.userData.picture)
+        .then(
+          () => console.log('profile_pic Stored!'),
+          error => console.error('Error storing item', error)
+        );
+        this.events.publish('user:login');
+         this.navCtrl.setRoot(HomePage);
+
+      });
+    });
   }
 
   direct()

@@ -4,6 +4,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { LaundryPage } from '../laundry/laundry';
+import { UserloginPage } from '../userlogin/userlogin';
+import { UserselectPage } from '../userselect/userselect';
 
 declare var google;
 
@@ -42,6 +44,18 @@ export class HomePage {
       data => {
         console.log("Checking for User email:" + data);
         this.user_email = data;
+
+        if( this.user_email === null || this.user_email === 'undefined')
+        {
+          let alert = this.alertCtrl.create({
+            title: 'Restriction Error',
+            subTitle: 'Facebook is restricting User Email, To Continue change your settings',
+            buttons: ['OK']
+          });
+          alert.present();
+          this.navCtrl.setRoot(UserselectPage);
+        }
+
       },
       error => console.error(error)
       );
@@ -120,7 +134,7 @@ export class HomePage {
             let latLng = new google.maps.LatLng(51.5014, 0.1419);
             let mapOptions = {
               center: latLng,
-              draggable: false,
+              draggable: true,
               disableDefaultUI: true,
               zoom: 12,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -146,7 +160,7 @@ export class HomePage {
             let latLng = new google.maps.LatLng(this.user_lat, this.user_long);
             let mapOptions = {
               center: latLng,
-              draggable: false,
+              draggable: true,
               disableDefaultUI: true,
               zoom: 12,
               mapTypeId: google.maps.MapTypeId.ROADMAP,     
@@ -183,7 +197,7 @@ export class HomePage {
       var dogwalkMarker = new google.maps.Marker({
         position: position,
         title: marker.name,
-        icon: iconBase + 'custom_marker.png'
+        icon: iconBase + 'new_image_marker.png'
       });
       var dogwalkMarker = new google.maps.Marker({position: position, title: marker.title, location_name: marker.location_name, id : marker.id , event_type : marker.event_type, icon: dogwalkMarker.icon  , event_time:marker.event_time, event_date : marker.event_date, event_description : marker.event_description});
       dogwalkMarker.setMap(this.map);
