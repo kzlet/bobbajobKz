@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+
+//Camera options
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { JobimagemodalPage } from '../jobimagemodal/jobimagemodal';
 
 @Component({
   selector: 'page-job-history',
@@ -16,11 +21,33 @@ export class JobHistoryPage {
   provider_email: any;
   toast: any;
   coasts: any;
-  constructor(public alertCtrl : AlertController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http) {
+  imageURI: any;
+  tests: any;
+  bid_status : any = '0';
+  constructor(public modalCtrl: ModalController, private transfer: FileTransfer, private camera: Camera, public actionSheetCtrl: ActionSheetController, public alertCtrl : AlertController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http) {
   }
 
   ionViewDidLoad() {
    
+  }
+
+  upload(project_id :  string)
+  {
+    const modal = this.modalCtrl.create(JobimagemodalPage, {project_id , provider_email : this.provider_email });
+
+    modal.onDidDismiss(data => {
+      console.log(data);
+      this.bid_status = data.bid_status;
+      console.log(data.bid_status);
+      this.get_completed_jobs()
+    });
+
+    modal.present();
+  }
+
+  checkfilter()
+  {
+    console.log(this.bid_status);
   }
 
   ionViewWillEnter()
@@ -105,4 +132,5 @@ export class JobHistoryPage {
         });
     
   }
+
 }

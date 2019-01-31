@@ -14,7 +14,6 @@ import { File } from '@ionic-native/file';
   templateUrl: 'provservicename.html',
 })
 export class ProvservicenamePage {
-
   uri: any;
   url2: string;
   cat: any;
@@ -23,7 +22,7 @@ export class ProvservicenamePage {
   past_exp: any;
   q_name: any;
   apiUrl: string;
-  email: any ;
+  email: any;
   per = 'HOUR';
   work_exp: any;
 
@@ -43,7 +42,7 @@ export class ProvservicenamePage {
   public proofProgress : number = 0;
 
   constructor(private fileTransfer: FileTransferObject, private fileChooser: FileChooser, private transfer: FileTransfer, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
-   //  this.email = this.navParams.get('email');
+     this.email = this.navParams.get('email');
   }
 
   ionViewDidLoad() {

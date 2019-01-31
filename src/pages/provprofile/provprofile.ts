@@ -32,6 +32,8 @@ export class ProvprofilePage {
   foasts: any;
   tester: any;
 
+  profile : any = 'view';
+
   constructor( public events: Events, private loadingCtrl: LoadingController, private http: Http, private nativeStorage: NativeStorage, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
   }
 

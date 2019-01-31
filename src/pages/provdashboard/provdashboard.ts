@@ -22,7 +22,7 @@ export class ProvdashboardPage {
   posts: any;
   apiUrl: string;
   current_time: any = new Date(new Date().getTime()).toLocaleDateString();
-  provider_email: any = 'stan@gmail.com';
+  provider_email: any;
   images: { "photo": string; "id": string; }[];
   rate : any;
   coasts: any;
@@ -36,6 +36,7 @@ export class ProvdashboardPage {
   this.get_going_jobs();
   this.get_completed_jobs();
   this.get_rating();
+  this.fetch_images();
 
   this.images = [
     {"photo": "imgs/32.jpg" , "id" : "1"},
@@ -47,6 +48,31 @@ export class ProvdashboardPage {
   }
 
   ionViewDidLoad() {
+  }
+
+  fetch_images()
+  {
+    let loader = this.loadingCtrl.create({
+      content: "Loading Profile Images..."
+    });
+    loader.present();
+
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/get_complete_job_images.php?provider_email=' + this.provider_email;
+     console.log(this.apiUrl);
+
+     this.http.get(this.apiUrl).map(res => res.json())
+     .subscribe(data => {
+        
+      this.images = data;
+     //this.posts = Array.of(this.posts); 
+
+      loader.dismiss();
+      console.log(this.images);
+ 
+      }, error => {
+        console.log(error); // Error getting the data
+  
+      });
   }
 
 

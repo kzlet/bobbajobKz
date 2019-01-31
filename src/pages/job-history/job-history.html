@@ -56,6 +56,16 @@
                   </ion-grid>
                   <h3>{{cost.jd}}</h3>
                   <p style="color:green"><b>Status:</b>&nbsp;Completed</p>
+
+                  <div align="right" *ngIf="cost.job_image === null || cost.job_image === 'null'">
+                  <button ion-button round class="btn-color" (click)="upload(cost.project_id)">Upload Picture</button>
+                  </div>
+
+                  <div align="right" *ngIf="cost.job_image != null || cost.job_image != 'null'">
+                      <button ion-button round class="btn-color-green">Uploaded</button>
+                      </div>
+
+                    
                 </ion-item>
               </ion-list>
               <div style="margin-top:5%">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
 import { SerregisterPage } from '../serregister/serregister';
 import { ProvdashboardPage } from '../provdashboard/provdashboard';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -7,6 +7,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ProvservicenamePage } from '../provservicename/provservicename';
 import { ProvidertabPage } from '../providertab/providertab';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-serlogin',
@@ -17,11 +19,15 @@ export class SerloginPage {
   password: any;
   email: any;
   apiUrl: any;
-  constructor(private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
+  codes: any[];
+  lat: number;
+  long: number;
+  constructor(public platform : Platform , private nativeGeocoder: NativeGeocoder, private geo : Geolocation, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SerloginPage');
+    this.currentco();
   }
 
   reg()
@@ -162,5 +168,66 @@ export class SerloginPage {
      });
    }
 
+   currentco(){
+    //Getting Data When Signup!
+    this.platform.ready().then(() => {
+      
+              var options = {
+                timeout : 10000
+              };
+              this.geo.getCurrentPosition(options).then(resp =>{
+               console.log(resp.coords.latitude);
+               console.log(resp.coords.longitude);
+
+               this.lat = resp.coords.latitude;
+               this.long = resp.coords.longitude;
+
+               var drop_value = '1';
+               this.nativeStorage.setItem('got_values', drop_value)
+               .then(
+                 () => console.log('Drop value 1'),
+                 error => console.error('Error storing item', error)
+               );
+
+               this.nativeStorage.setItem('user_lat', resp.coords.latitude)
+               .then(
+                 () => console.log('User lat Stored!'),
+                 error => console.error('Error storing item', error)
+               );
+
+               this.nativeStorage.setItem('user_long', resp.coords.longitude)
+               .then(
+                 () => console.log('User long Stored!'),
+                 error => console.error('Error storing item', error)
+               );
+
+
+               this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude)
+               .then((result: NativeGeocoderReverseResult[]) =>{
+
+                this.codes = result;
+
+                console.log(this.codes);
+              
+                console.log(JSON.stringify(this.codes));
+
+                }
+              )
+               
+               .catch((error: any) => console.log(error));
+            
+              }).catch(()=>{
+               console.log("Error to get location");
+
+               var drop_value = '0';
+               this.nativeStorage.setItem('got_values', drop_value)
+               .then(
+                 () => console.log('Drop value 0'),
+                 error => console.error('Error storing item', error)
+               );
+
+              });
+              });
+}
 
 }

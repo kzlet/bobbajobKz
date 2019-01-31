@@ -33,13 +33,13 @@
 
     <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;">
       
-      <div style="padding:10px" align="left"><ion-icon name="information-circle" style="color:#84527c"><b style="color:black">&nbsp;&nbsp;&nbsp;Details:</b></ion-icon></div>
+      <div style="padding:10px" align="left"><ion-icon name="information-circle" style="color:#84527c"><b style="color:black">&nbsp;&nbsp;&nbsp;About Me:</b></ion-icon><ion-icon class="switch-icon" name="create" style="color:grey"></ion-icon></div>
       <p nowrap style="padding:10px" align="left">{{post.past_exp}}</p>
           
     </ion-card>
 
     <ion-card *ngFor="let post of posts" style="border-radius:12px 12px;background-color:#f8f9fd;padding:7px">
-    <div align="left"><ion-icon name="information-circle" style="color:#84527c"><b style="color:black">&nbsp;&nbsp;&nbsp;Personal Details</b></ion-icon></div>
+    <div align="left"><ion-icon name="information-circle" style="color:#84527c"><b style="color:black">&nbsp;&nbsp;&nbsp;Personal Details</b></ion-icon><ion-icon class="switch-icon" name="create" style="color:grey"></ion-icon></div>
     <div style="padding-left:10px;padding-top:5px">
     <p align="left">Email ID:<b>&nbsp;&nbsp;{{post.email}}</b></p>
     <p align="left">Contact Number:<b>&nbsp;&nbsp;{{post.number}}</b></p>

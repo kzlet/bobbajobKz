@@ -124,87 +124,6 @@ export class HomePage {
               disableDefaultUI: true,
               zoom: 12,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
-              styles: [
-                {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-                {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-                {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-                {
-                  featureType: 'administrative.locality',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#d59563'}]
-                },
-                {
-                  featureType: 'poi',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#d59563'}]
-                },
-                {
-                  featureType: 'poi.park',
-                  elementType: 'geometry',
-                  stylers: [{color: '#263c3f'}]
-                },
-                {
-                  featureType: 'poi.park',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#6b9a76'}]
-                },
-                {
-                  featureType: 'road',
-                  elementType: 'geometry',
-                  stylers: [{color: '#38414e'}]
-                },
-                {
-                  featureType: 'road',
-                  elementType: 'geometry.stroke',
-                  stylers: [{color: '#212a37'}]
-                },
-                {
-                  featureType: 'road',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#9ca5b3'}]
-                },
-                {
-                  featureType: 'road.highway',
-                  elementType: 'geometry',
-                  stylers: [{color: '#746855'}]
-                },
-                {
-                  featureType: 'road.highway',
-                  elementType: 'geometry.stroke',
-                  stylers: [{color: '#1f2835'}]
-                },
-                {
-                  featureType: 'road.highway',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#f3d19c'}]
-                },
-                {
-                  featureType: 'transit',
-                  elementType: 'geometry',
-                  stylers: [{color: '#2f3948'}]
-                },
-                {
-                  featureType: 'transit.station',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#d59563'}]
-                },
-                {
-                  featureType: 'water',
-                  elementType: 'geometry',
-                  stylers: [{color: '#17263c'}]
-                },
-                {
-                  featureType: 'water',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#515c6d'}]
-                },
-                {
-                  featureType: 'water',
-                  elementType: 'labels.text.stroke',
-                  stylers: [{color: '#17263c'}]
-                }
-              ]
-            
             }
             this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
   }
@@ -230,88 +149,7 @@ export class HomePage {
               draggable: false,
               disableDefaultUI: true,
               zoom: 12,
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              styles: [
-                {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-                {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-                {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-                {
-                  featureType: 'administrative.locality',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#d59563'}]
-                },
-                {
-                  featureType: 'poi',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#d59563'}]
-                },
-                {
-                  featureType: 'poi.park',
-                  elementType: 'geometry',
-                  stylers: [{color: '#263c3f'}]
-                },
-                {
-                  featureType: 'poi.park',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#6b9a76'}]
-                },
-                {
-                  featureType: 'road',
-                  elementType: 'geometry',
-                  stylers: [{color: '#38414e'}]
-                },
-                {
-                  featureType: 'road',
-                  elementType: 'geometry.stroke',
-                  stylers: [{color: '#212a37'}]
-                },
-                {
-                  featureType: 'road',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#9ca5b3'}]
-                },
-                {
-                  featureType: 'road.highway',
-                  elementType: 'geometry',
-                  stylers: [{color: '#746855'}]
-                },
-                {
-                  featureType: 'road.highway',
-                  elementType: 'geometry.stroke',
-                  stylers: [{color: '#1f2835'}]
-                },
-                {
-                  featureType: 'road.highway',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#f3d19c'}]
-                },
-                {
-                  featureType: 'transit',
-                  elementType: 'geometry',
-                  stylers: [{color: '#2f3948'}]
-                },
-                {
-                  featureType: 'transit.station',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#d59563'}]
-                },
-                {
-                  featureType: 'water',
-                  elementType: 'geometry',
-                  stylers: [{color: '#17263c'}]
-                },
-                {
-                  featureType: 'water',
-                  elementType: 'labels.text.fill',
-                  stylers: [{color: '#515c6d'}]
-                },
-                {
-                  featureType: 'water',
-                  elementType: 'labels.text.stroke',
-                  stylers: [{color: '#17263c'}]
-                }
-              ]
-            
+              mapTypeId: google.maps.MapTypeId.ROADMAP,     
             }
             this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
           },
@@ -341,13 +179,13 @@ export class HomePage {
   addMarkersToMap(markers) {
     for(let marker of markers) {
       var position = new google.maps.LatLng(marker.latitude, marker.longitude);
+      var iconBase = 'https://purpledimes.com/BoobaJob/WebServices/image/';         
       var dogwalkMarker = new google.maps.Marker({
         position: position,
         title: marker.name,
-        image: "../assets/imgs/marker.png",
-      //  scaledSize: new google.maps.Size(30, 30)   
+        icon: iconBase + 'custom_marker.png'
       });
-      var dogwalkMarker = new google.maps.Marker({position: position, title: marker.title, location_name: marker.location_name, id : marker.id , event_type : marker.event_type, image : marker.image  , event_time:marker.event_time, event_date : marker.event_date, event_description : marker.event_description});
+      var dogwalkMarker = new google.maps.Marker({position: position, title: marker.title, location_name: marker.location_name, id : marker.id , event_type : marker.event_type, icon: dogwalkMarker.icon  , event_time:marker.event_time, event_date : marker.event_date, event_description : marker.event_description});
       dogwalkMarker.setMap(this.map);
       //this.addInfoWindowToMarker(dogwalkMarker);
     }

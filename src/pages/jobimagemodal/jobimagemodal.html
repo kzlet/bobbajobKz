@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar (click)="close()">
+    <ion-title>
+      <p style="color:white"></p>
+    </ion-title>
+    <ion-buttons end>
+      <ion-icon name="ios-close-circle-outline" style="color:white"></ion-icon>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <div align="center">
+    <ion-card class="item-ios" style="border-radius: 12px 12px;">
+      <img *ngIf="!imageURI" src="imgs/job_image.png" style="border-radius:12px 12px;width: 22%;padding-top:15px" />
+      <img *ngIf="imageURI" src="{{imageURI}}" style="border-radius:12px 12px;width: 27%;padding-top:15px" />
+      <p (click)="presentActionSheet()" style="padding-top:15px;padding-bottom:15px">Upload Job Image</p>
+    </ion-card>
+  </div>
+
+  <div align="center" style="padding-left:15px; padding-right:15px;margin-top: 12px;">
+      <button ion-button round full style="border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" (click)="uploadImage()">Upload</button>
+      </div>
+
+</ion-content>

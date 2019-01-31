@@ -42,6 +42,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 
+
 //firebase setup
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -67,6 +68,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 //progress bar
 import {ProgressBarModule} from "angular-progress-bar"
+import { JobimagemodalPage } from '../pages/jobimagemodal/jobimagemodal';
 
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
@@ -111,7 +113,8 @@ const firebaseAuth = {
     ProvsettingsPage,
     ProviderConnectionsPage,
     ProviderChatPage,
-    JobHistoryPage
+    JobHistoryPage,
+    JobimagemodalPage
   ],
   imports: [    
     BrowserModule,
@@ -158,7 +161,8 @@ const firebaseAuth = {
     ProvsettingsPage,
     ProviderConnectionsPage,
     ProviderChatPage,
-    JobHistoryPage
+    JobHistoryPage,
+    JobimagemodalPage
   ],
   providers: [
     StatusBar,

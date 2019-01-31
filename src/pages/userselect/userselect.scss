@@ -22,3 +22,22 @@ ion-tabs.hidden div.tabbar {
     border-left: 2px solid;
     border-right: 2px solid;
 }
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+    color: white;
+    background-color: transparent;
+}
+.back-button-ios {
+    margin: 0;
+    z-index: 99;
+    overflow: visible;
+    -webkit-box-ordinal-group: 1;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    color: white;
+    min-height: 3.2rem;
+    line-height: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
