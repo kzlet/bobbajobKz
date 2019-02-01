@@ -4,7 +4,6 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { LaundryPage } from '../laundry/laundry';
-import { UserloginPage } from '../userlogin/userlogin';
 import { UserselectPage } from '../userselect/userselect';
 
 declare var google;
@@ -20,7 +19,7 @@ export class HomePage {
   apiUrl: string;
   expenses: any[];
   activeMenu: string;
-  user_email: any = "v@gmail.com";
+  user_email: any;
   posts: any;
   data: string;
   dash_data: { "id": string; "image": string; "title": string; }[];
@@ -34,7 +33,7 @@ export class HomePage {
   got_values: any;
 
   constructor(public events: Events, public platform: Platform, public menuCtrl: MenuController , private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, public modalCtrl: ModalController) {
-  this.get_data();
+  //this.get_data();
   this.events.publish('user:login');
     if (this.platform.is('android')) {
       console.log('I am an android Device!');
@@ -54,6 +53,10 @@ export class HomePage {
           });
           alert.present();
           this.navCtrl.setRoot(UserselectPage);
+        }
+
+        else{
+          this.get_data();
         }
 
       },

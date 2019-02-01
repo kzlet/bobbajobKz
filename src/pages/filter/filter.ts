@@ -39,7 +39,7 @@ export class FilterPage {
   user_long: any;
 
   //distance matrix
-  isKM:any=500;
+  isKM:any=1;
   isType:any="";
   markers: any;
   latLng: any;
@@ -48,9 +48,6 @@ export class FilterPage {
   constructor(private ngZone: NgZone, private geolocation : Geolocation, public nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, private view: ViewController, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
    // this.get_storage_markers();
     this.getMarkers();
-    this.loadMap();
-
-    
   }
 
   ionViewDidLoad() {
@@ -62,8 +59,8 @@ export class FilterPage {
     this.view.dismiss();
   }
 
-  send(job_category: string, budget: string, work_location: string) {
-    let data = { job_category: this.job_category, budget: this.budget, work_location: this.work_location };
+  send(job_category: string, budget: string, work_location: string, isKM : string) {
+    let data = { job_category: this.job_category, budget: this.budget, work_location: this.work_location, isKM : this.isKM };
     this.view.dismiss(data);
   }
 
@@ -91,8 +88,8 @@ export class FilterPage {
 
     this.lat1 = 53.547550;
     this.lon1 = -113.491798;
-    this.lat2 = 53.545883;
-    this.lon2 = -113.490112;
+    this.lat2 = this.user_lat;
+    this.lon2 = this.user_long;
 
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(this.lat2 - this.lat1);  // deg2rad below
@@ -171,73 +168,6 @@ export class FilterPage {
       dogwalkMarker.setMap(this.map);
       //this.addInfoWindowToMarker(dogwalkMarker);
     }
-  }
-
-
-  //matrix Api
-
-  loadMap(){
-
-    this.geolocation.getCurrentPosition().then((position) => {
-
-this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-          console.log('latLng',this.latLng);
-     
-      this.mapOptions = {
-        center: this.latLng,
-        zoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }   
-
-this.map = new google.maps.Map(this.mapContainer.nativeElement, this.mapOptions);
-
-    }, (err) => {
-      alert('err '+err);
-    });
-
-  }
-
-
- /*--------------------Find Nearby Place------------------------*/ 
-
-  nearbyPlace(){
-    this.loadMap();
-    this.markers = [];
-    let service = new google.maps.places.PlacesService(this.map);
-    service.nearbySearch({
-              location: this.latLng,
-              radius: this.isKM,
-              types: [this.isType]
-            }, (results, status) => {
-                this.callback(results, status);
-            });
-  }
-
-  callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        this.createMarker(results[i]);
-      }
-    }
-  }
-
-  createMarker(place){
-    var placeLoc = place;
-    console.log('placeLoc',placeLoc);
-    this.markers = new google.maps.Marker({
-        map: this.map,
-        position: place.geometry.location
-    });
-
-    let infowindow = new google.maps.InfoWindow();
-
-    google.maps.event.addListener(this.markers, 'click', () => {
-      this.ngZone.run(() => {
-        infowindow.setContent(place.name);
-        infowindow.open(this.map, this.markers);
-      });
-    });
   }
 
 }

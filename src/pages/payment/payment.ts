@@ -57,32 +57,8 @@ export class PaymentPage {
         //Task add function here... And then naviagate to Home Screen.
         //Assign job function Started
 
-        console.log("Post job function called");
-        let loader = this.loadingCtrl.create({
-          content: "Updating Prayer Timings..."
-        });
-        loader.present();
-        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/assign_job.php?provider_email=' + this.provider_email + '&client_email=' + this.client_email + '&project_id=' + this.project_id + '&amount_charged=' + this.value1;  //change api
-        this.http.get(this.apiUrl).map(res => res.json())
-          .subscribe(data => {
-            console.log(data);
-            var status = data.Status;
-            if (status === 'success') {
-              let alert = this.alertCtrl.create({
-                title: 'Assigning your Job ! Please wait...',
-                buttons: ['OK']
-              });
-              alert.present();
-              loader.dismiss();
-              this.navCtrl.setRoot(HomePage);  
-            }
-            else {
-              loader.dismiss();
-            }
-          }, error => {
-            console.log(error);
-          });
-    
+         this.post_task();
+
         //Assign job function completed
 
         console.log(response);
@@ -96,5 +72,65 @@ export class PaymentPage {
     console.error('Error in initialization, maybe PayPal isn\'t supported or something else');
   });
  }
+
+
+ post_task()
+ {
+  console.log("Post job function called");
+  let loader = this.loadingCtrl.create({
+    content: "Assigning Job, Please wait..."
+  });
+  loader.present();
+  this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/assign_job.php?provider_email=' + this.provider_email + '&client_email=' + this.client_email + '&project_id=' + this.project_id + '&amount_charged=' + this.value1;  //change api
+  this.http.get(this.apiUrl).map(res => res.json())
+    .subscribe(data => {
+      console.log(data);
+      var status = data.Status;
+      if (status === 'success') {
+        loader.dismiss();
+
+        //updating progress status = 2 in Jobs table
+        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/change_job_status.php?id=' + this.project_id;  //change api
+        this.http.get(this.apiUrl).map(res => res.json())
+          .subscribe(data => {
+            console.log(data);
+            var status = data.Status;
+            if (status === 'success') {
+              let alert = this.alertCtrl.create({
+                title: 'Job Assigned Successfully',
+                buttons: ['OK']
+              });
+              alert.present();
+              loader.dismiss();
+              this.post_notification();
+              this.view.dismiss();
+            }
+            else {
+              loader.dismiss();
+            }
+          }, error => {
+            console.log(error);
+          });
+
+          //function end
+      }
+      else {
+        loader.dismiss();
+      }
+    }, error => {
+      console.log(error);
+    });
+ }
+
+ post_notification()
+  {
+    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/jobassignnotification.php?email=' +  this.provider_email;
+    console.log(this.apiUrl);
+    this.http.get(this.apiUrl).map(res => res.json())
+      .subscribe(data => {
+      }, error => {
+        console.log(error); // Error getting the data
+      });
+  }
 
 }

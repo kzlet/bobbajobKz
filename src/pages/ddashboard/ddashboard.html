@@ -1,0 +1,71 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title><div align="center"><p style="color:white;margin-left:-15px">Dashboard</p></div></ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+
+<ion-content padding no-bounce>
+
+  <div align="center">
+    <img src="imgs/logo.png" style="width:50%"/>
+  </div>
+
+  <ion-list no-lines>
+    <ion-item>
+      <ion-icon class="app-icon-color" name="globe" item-start></ion-icon>
+        Browse
+        <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="signin()">
+      <ion-icon class="app-icon-color" name="log-in" item-start></ion-icon>
+      Sign In
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="app-icon-color" name="apps" item-start></ion-icon>
+      Profile
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="find_jobs()">
+      <ion-icon class="app-icon-color" name="list-box" item-start></ion-icon>
+      Find Jobs
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="find_help()">
+      <ion-icon class="app-icon-color" name="hand" item-start></ion-icon>
+      Find Help
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="app-icon-color" name="card" item-start></ion-icon>
+      Payment
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="app-icon-color" name="settings" item-start></ion-icon>
+      Settings
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="app-icon-color" name="wifi" item-start></ion-icon>
+      T&Cs
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="logout()">
+      <ion-icon class="app-icon-color" name="power" item-start></ion-icon>
+      Logout
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

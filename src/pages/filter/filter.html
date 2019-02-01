@@ -36,12 +36,12 @@
 
         <ion-item>
             <ion-label>Select Distance</ion-label>
-              <ion-select [(ngModel)]="isKM" (ionChange)="nearbyPlace()">
-              <ion-option value="500">Select</ion-option>
-                  <ion-option value="2000">2 KM</ion-option>
-                  <ion-option value="4000">4 KM</ion-option>
-                  <ion-option value="6000">6 KM</ion-option>
-                  <ion-option value="8000">8 KM</ion-option>
+              <ion-select [(ngModel)]="isKM">
+              <ion-option value="0.5">Select</ion-option>
+                  <ion-option value="2">2 KM</ion-option>
+                  <ion-option value="4">4 KM</ion-option>
+                  <ion-option value="6">6 KM</ion-option>
+                  <ion-option value="8">8 KM</ion-option>
               </ion-select>
             </ion-item>
     
@@ -58,7 +58,7 @@
     
   <button ion-button (click)="getDistanceFromLatLonInKm()">Check Distance</button>
     
-        <button ion-button round full style="width:80%; color:white;background-color:#f9c04c;margin-top:25px" (click)="send(job_category, budget)">APPLY</button>
+        <button ion-button round full style="width:80%; color:white;background-color:#f9c04c;margin-top:25px" (click)="send(job_category, budget, isKM)">APPLY</button>
       </div>
     
     

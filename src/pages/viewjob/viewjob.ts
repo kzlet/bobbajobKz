@@ -99,53 +99,8 @@ export class ViewjobPage {
           text: 'Ok',
           handler: () => {
             console.log('Agree clicked');
-           // const modal = this.modalCtrl.create(PaymentPage, {project_id , amount_charged, client_email : this.client_email, provider_email});
-           // modal.present();
-
-           console.log("Post job function called");
-           let loader = this.loadingCtrl.create({
-             content: "Assigning Job, Please wait..."
-           });
-           loader.present();
-           this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/assign_job.php?provider_email=' + provider_email + '&client_email=' + this.client_email + '&project_id=' + this.project_id + '&amount_charged=' + amount_charged;  //change api
-           this.http.get(this.apiUrl).map(res => res.json())
-             .subscribe(data => {
-               console.log(data);
-               var status = data.Status;
-               if (status === 'success') {
-                 loader.dismiss();
-    
-                 //updating progress status = 2 in Jobs table
-                 this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/change_job_status.php?id=' + this.project_id;  //change api
-                 this.http.get(this.apiUrl).map(res => res.json())
-                   .subscribe(data => {
-                     console.log(data);
-                     var status = data.Status;
-                     if (status === 'success') {
-                       let alert = this.alertCtrl.create({
-                         title: 'Job Assigned Successfully',
-                         buttons: ['OK']
-                       });
-                       alert.present();
-                       loader.dismiss();
-                       this.post_notification();
-                       this.navCtrl.setRoot(HomePage);  
-                     }
-                     else {
-                       loader.dismiss();
-                     }
-                   }, error => {
-                     console.log(error);
-                   });
-
-                   //function end
-               }
-               else {
-                 loader.dismiss();
-               }
-             }, error => {
-               console.log(error);
-             });
+           const modal = this.modalCtrl.create(PaymentPage, {project_id , amount_charged, client_email : this.client_email, provider_email});
+           modal.present();
              
           }
         }
@@ -159,14 +114,14 @@ export class ViewjobPage {
    this.navCtrl.push(ProvdashboardPage , {provider_email});
   }
 
-  post_notification()
-  {
-    this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/jobassignnotification.php?email=' +  this.provider_email;
-    console.log(this.apiUrl);
-    this.http.get(this.apiUrl).map(res => res.json())
-      .subscribe(data => {
-      }, error => {
-        console.log(error); // Error getting the data
-      });
-  }
+  // post_notification()
+  // {
+  //   this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/jobassignnotification.php?email=' +  this.provider_email;
+  //   console.log(this.apiUrl);
+  //   this.http.get(this.apiUrl).map(res => res.json())
+  //     .subscribe(data => {
+  //     }, error => {
+  //       console.log(error); // Error getting the data
+  //     });
+  // }
 }
