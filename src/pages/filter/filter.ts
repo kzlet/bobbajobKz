@@ -1,12 +1,11 @@
-import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { NavController, NavParams, AlertController, ViewController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController, NavParams, AlertController, ViewController, Platform,  LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 //distance api
-import { googlemaps } from 'googlemaps';
-import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -44,10 +43,30 @@ export class FilterPage {
   markers: any;
   latLng: any;
   mapOptions: { center: any; zoom: number; mapTypeId: any; };
+  got_values: any;
 
-  constructor(private ngZone: NgZone, private geolocation : Geolocation, public nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, private view: ViewController, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-   // this.get_storage_markers();
-    this.getMarkers();
+  constructor(public platform : Platform , private geolocation : Geolocation, public nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, private view: ViewController, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.platform.ready().then(() => { 
+
+      this.nativeStorage.getItem('got_values')
+      .then(
+        data => {
+          console.log("Checking for Values" + data);
+          this.got_values = data;
+
+          if(this.got_values === '1' || this.got_values === 1)
+          {
+            this.get_storage_markers();
+          }
+
+          else  if(this.got_values === '0' || this.got_values === 0)
+          {
+           this.displayGoogleMap();
+          }
+        },
+        error => console.error(error)
+        );
+     });
   }
 
   ionViewDidLoad() {
@@ -83,6 +102,19 @@ export class FilterPage {
         console.log(error); // Error getting the data
       });
   }
+
+  displayGoogleMap() {
+    let latLng = new google.maps.LatLng(51.5014, 0.1419);
+    let mapOptions = {
+      center: latLng,
+      draggable: true,
+      disableDefaultUI: true,
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    }
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+}
+
 
   getDistanceFromLatLonInKm() {  //lat1,lon1,lat2,lon2
 
@@ -142,32 +174,6 @@ export class FilterPage {
       );
   }
 
-  getMarkers() {
-    let url = 'https://purpledimes.com/BoobaJob/WebServices/get_jobs_markers.php';
-    this.http.get(url)
-      .map((res) =>
-        res.json()
-        //  console.log("REs:" + JSON.stringify(res));
-      )
-      .subscribe(data => {
-        console.log(data);
-        this.addMarkersToMap(data);
-      });
-  }
-
-  addMarkersToMap(markers) {
-    for (let marker of markers) {
-      var position = new google.maps.LatLng(marker.latitude, marker.longitude);
-      var iconBase = 'https://purpledimes.com/BoobaJob/WebServices/image/';         
-      var dogwalkMarker = new google.maps.Marker({
-        position: position,
-        title: marker.name,
-        icon: iconBase + 'new_image_marker.png'
-      });
-      var dogwalkMarker = new google.maps.Marker({ position: position, title: marker.title, location_name: marker.location_name, id: marker.id, event_type: marker.event_type, icon: dogwalkMarker.icon, event_time: marker.event_time, event_date: marker.event_date, event_description: marker.event_description });
-      dogwalkMarker.setMap(this.map);
-      //this.addInfoWindowToMarker(dogwalkMarker);
-    }
-  }
+ 
 
 }
