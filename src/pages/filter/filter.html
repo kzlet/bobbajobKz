@@ -9,19 +9,25 @@
 
   <ion-content no-bounce>
 
-    <div #mapContainer id="map"></div>
+  
+
+    <div #mapContainer id="map">
+        <div id="pngdiv"></div>
+        </div>
+
+    <!-- <div class="range-circle" align="center"><img src="imgs/range-circle.png"/></div> -->
     
       <div align="center" style="margin-top:-15px">
     
-        <p style="font-size:1.1em">Budget</p>
+        <!-- <p style="font-size:1.1em">Budget</p>
         <ion-item no-lines style="margin-top: -38px;background-color: transparent;">
           <ion-range min="20" max="100" pin="true" [(ngModel)]="budget" color="primary">
             <ion-label range-left class="small-text" style="color:white">4000</ion-label>
             <ion-label range-right style="color:white">0</ion-label>
           </ion-range>
-        </ion-item>
+        </ion-item> -->
     
-        <ion-grid style="margin-top: -37px;">
+        <!-- <ion-grid style="margin-top: -37px;">
           <ion-row>
             <ion-col col-6>
               <p style="text-align:left">20 USD</p>
@@ -30,11 +36,20 @@
               <p style="text-align:right">4000 USD</p>
             </ion-col>
           </ion-row>
-        </ion-grid>
+        </ion-grid> -->
 
+      
+          <ion-list-header style="padding-top:15px">
+            <b>Select Distance</b>
+          </ion-list-header>
+          <ion-item>
+            <ion-range min="0" step="2" snaps="true" [(ngModel)]="isKM">
+              <ion-label range-left class="small-text"><ion-icon name="navigate"></ion-icon></ion-label>
+              <ion-label range-right><ion-icon name="navigate" style="color:blue"></ion-icon></ion-label>
+            </ion-range>
+          </ion-item>
 
-
-        <ion-item>
+        <!-- <ion-item>
             <ion-label>Select Distance</ion-label>
               <ion-select [(ngModel)]="isKM">
               <ion-option value="0.5">Select</ion-option>
@@ -43,11 +58,11 @@
                   <ion-option value="6">6 KM</ion-option>
                   <ion-option value="8">8 KM</ion-option>
               </ion-select>
-            </ion-item>
+            </ion-item> -->
     
   
     
-        <div>
+        <!-- <div>
           <ion-item>
             <ion-label>Job Category</ion-label>
             <ion-select [(ngModel)]="job_category">
@@ -56,7 +71,7 @@
           </ion-item>
         </div>
     
-  <button ion-button (click)="getDistanceFromLatLonInKm()">Check Distance</button>
+  <button ion-button (click)="getDistanceFromLatLonInKm()">Check Distance</button> -->
     
         <button ion-button round full style="width:80%; color:white;background-color:#f9c04c;margin-top:25px" (click)="send(job_category, budget, isKM)">APPLY</button>
       </div>

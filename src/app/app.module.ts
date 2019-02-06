@@ -74,6 +74,7 @@ import { JobimagemodalPage } from '../pages/jobimagemodal/jobimagemodal';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { DdashboardPage } from '../pages/ddashboard/ddashboard';
+import { TermsPage } from '../pages/terms/terms';
 
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
@@ -120,7 +121,8 @@ const firebaseAuth = {
     ProviderChatPage,
     JobHistoryPage,
     JobimagemodalPage,
-    DdashboardPage
+    DdashboardPage,
+    TermsPage
   ],
   imports: [    
     BrowserModule,
@@ -169,7 +171,8 @@ const firebaseAuth = {
     ProviderChatPage,
     JobHistoryPage,
     JobimagemodalPage,
-    DdashboardPage
+    DdashboardPage,
+    TermsPage
   ],
   providers: [
     StatusBar,

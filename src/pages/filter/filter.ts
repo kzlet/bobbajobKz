@@ -38,7 +38,7 @@ export class FilterPage {
   user_long: any;
 
   //distance matrix
-  isKM:any=1;
+  isKM:any;
   isType:any="";
   markers: any;
   latLng: any;

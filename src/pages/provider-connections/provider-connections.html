@@ -17,9 +17,9 @@
             <ion-avatar item-start>
               <img src="{{post.profile_pic}}">
             </ion-avatar>
-            <h2>{{post.name}}</h2>   <!-- &nbsp; {{post.title}}--> 
-            <p align="right" *ngFor="let tost of post.chat_data">{{tost.time}}</p>
-            <p *ngFor="let tost of post.chat_data"><b>{{tost.message}}</b></p>
+            <h2>{{post.name}}</h2>
+            <p align="right" style="margin-top:-4px" *ngFor="let tost of post.chat_data">{{tost.time}}</p>
+            <p style="margin-top:-5px" *ngFor="let tost of post.chat_data"><b>{{tost.message}}</b></p>
 
           </ion-item>
         </ion-list>

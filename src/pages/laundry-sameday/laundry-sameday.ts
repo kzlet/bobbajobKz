@@ -140,6 +140,7 @@ export class LaundrySamedayPage {
 
   get_jobs() 
   {
+    this.expenses = []; 
     let loader = this.loadingCtrl.create({
       content: "Loading Jobs..."
     });
@@ -154,8 +155,6 @@ export class LaundrySamedayPage {
 
         this.posts = data;
      //   console.log(this.posts.length);
-        
-        this.expenses = []; 
         for(var i = 0; i < this.posts.length; i++)
         {
           this.expenses.push({ id: this.posts[i].id, user_email: this.posts[i].user_email, month: this.posts[i].month,  date: this.posts[i].date,  jd: this.posts[i].jd,  budget: this.posts[i].budget,  title: this.posts[i].title,  is_active: this.posts[i].is_active,  progress: this.posts[i].progress,  latitude: this.posts[i].latitude,  longitude: this.posts[i].longitude })
@@ -226,7 +225,7 @@ export class LaundrySamedayPage {
       .subscribe(data => {
         this.posts = data;
         console.log(this.posts.length);
-
+        this.expenses = []; 
         for(var i = 0; i < this.posts.length ; i++)
         {
         //Distance Calculation system
@@ -252,17 +251,23 @@ export class LaundrySamedayPage {
         this.distance = this.distance.charAt(0);
 
         console.log("Distance: " + this.distance);
-
-        this.expenses = []; 
-       
-        if( this.distance < this.isKM)
+              
+        if( +this.distance < +this.isKM)
         {
             console.log("Value is in range:" + this.posts[i].id);
-            this.expenses.push({ id: this.posts[i].id, user_email: this.posts[i].user_email, month: this.posts[i].month,  date: this.posts[i].date,  jd: this.posts[i].jd,  budget: this.posts[i].budget,  title: this.posts[i].title,  is_active: this.posts[i].is_active,  progress: this.posts[i].progress,  latitude: this.posts[i].latitude,  longitude: this.posts[i].longitude })
-          
-        }
-
+            this.expenses.push({ id: this.posts[i].id, user_email: this.posts[i].user_email, month: this.posts[i].month,  date: this.posts[i].date,  jd: this.posts[i].jd,  budget: this.posts[i].budget,  title: this.posts[i].title,  is_active: this.posts[i].is_active,  progress: this.posts[i].progress,  latitude: this.posts[i].latitude,  longitude: this.posts[i].longitude }) 
+            console.log("Added in the stack : " + this.posts[i].id + " Length : " + this.expenses.length); 
+          }
         
+      }
+
+        if(this.expenses.length === 0)
+        {
+          const alert = this.alertCtrl.create({
+            title: 'No Data found on these parameters !',
+            buttons: ['OK']
+          });
+          alert.present();
         }
  
           loader.dismiss();

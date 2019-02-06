@@ -25,6 +25,7 @@ import { ProvprofeditPage } from '../pages/provprofedit/provprofedit';
 import { LaundryPage } from '../pages/laundry/laundry';
 import { ProvservicenamePage } from '../pages/provservicename/provservicename';
 import { LaundrySamedayPage } from '../pages/laundry-sameday/laundry-sameday';
+import { DdashboardPage } from '../pages/ddashboard/ddashboard';
 
 // Initialize Firebase  BoobaJob (Firebase project name)
 var config = {

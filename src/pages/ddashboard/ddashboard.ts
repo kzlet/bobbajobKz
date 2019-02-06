@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import { UserselectPage } from '../userselect/userselect';
 import { SerloginPage } from '../serlogin/serlogin';
 import { UserloginPage } from '../userlogin/userlogin';
+import { TermsPage } from '../terms/terms';
 
 @Component({
   selector: 'page-ddashboard',
@@ -32,5 +33,10 @@ export class DdashboardPage {
   logout()
   {
     this.platform.exitApp();
+  }
+
+  terms()
+  {
+    this.navCtrl.push(TermsPage);
   }
 }

@@ -200,7 +200,7 @@ export class HomePage {
       var dogwalkMarker = new google.maps.Marker({
         position: position,
         title: marker.name,
-        icon: iconBase + 'new_image_marker.png'
+        icon: iconBase + 'custom_marker.png'  //new_image_marker.png
       });
       var dogwalkMarker = new google.maps.Marker({position: position, title: marker.title, location_name: marker.location_name, id : marker.id , event_type : marker.event_type, icon: dogwalkMarker.icon  , event_time:marker.event_time, event_date : marker.event_date, event_description : marker.event_description});
       dogwalkMarker.setMap(this.map);
