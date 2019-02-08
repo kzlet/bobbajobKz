@@ -39,11 +39,11 @@
         </ion-grid> -->
 
       
-          <ion-list-header style="padding-top:15px">
+          <ion-list-header style="padding-top:15px" no-lines>
             <b>Select Distance</b>
           </ion-list-header>
-          <ion-item>
-            <ion-range min="0" step="2" snaps="true" [(ngModel)]="isKM">
+          <ion-item no-lines>
+            <ion-range min="0" max="500" pin="true" [(ngModel)]="isKM" color="primary">
               <ion-label range-left class="small-text"><ion-icon name="navigate"></ion-icon></ion-label>
               <ion-label range-right><ion-icon name="navigate" style="color:blue"></ion-icon></ion-label>
             </ion-range>

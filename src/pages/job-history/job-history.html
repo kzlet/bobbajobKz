@@ -21,7 +21,7 @@
     <div [ngSwitch]="archive">
         <ion-list *ngSwitchCase="'Going'">
             <ion-list style="margin-bottom:35%">
-            <ion-item *ngFor="let post of posts, let i = index">
+            <ion-item *ngFor="let post of posts, let i = index" (click)="view_comp1(post.project_id)">
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10>
@@ -43,7 +43,7 @@
 
           <ion-list *ngSwitchCase="'Completed'">
               <ion-list style="margin-bottom:35%">
-              <ion-item *ngFor="let cost of coasts, let i = index">
+              <ion-item *ngFor="let cost of coasts, let i = index" (click)="view_comp2(cost.project_id)">
                   <ion-grid>
                     <ion-row>
                       <ion-col col-10>

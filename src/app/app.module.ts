@@ -76,6 +76,10 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { DdashboardPage } from '../pages/ddashboard/ddashboard';
 import { TermsPage } from '../pages/terms/terms';
 
+//media streaming
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { ViewActiveJobPage } from '../pages/view-active-job/view-active-job';
+
 const firebaseAuth = {
   apiKey: "AIzaSyAyXiH-4XapuocumZskNZM3l15XJ8bAeqc",
   authDomain: "bobbajob-f14c9.firebaseapp.com",
@@ -122,7 +126,8 @@ const firebaseAuth = {
     JobHistoryPage,
     JobimagemodalPage,
     DdashboardPage,
-    TermsPage
+    TermsPage,
+    ViewActiveJobPage
   ],
   imports: [    
     BrowserModule,
@@ -172,7 +177,8 @@ const firebaseAuth = {
     JobHistoryPage,
     JobimagemodalPage,
     DdashboardPage,
-    TermsPage
+    TermsPage,
+    ViewActiveJobPage
   ],
   providers: [
     StatusBar,
@@ -193,6 +199,7 @@ const firebaseAuth = {
     PayPal,
     Facebook,
     GooglePlus,
+    StreamingMedia,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

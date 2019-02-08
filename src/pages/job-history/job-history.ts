@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { JobimagemodalPage } from '../jobimagemodal/jobimagemodal';
+import { ViewActiveJobPage } from '../view-active-job/view-active-job';
 
 @Component({
   selector: 'page-job-history',
@@ -74,11 +75,21 @@ export class JobHistoryPage {
     );
   }
 
-  //get on going jobs: https://purpledimes.com/BoobaJob/WebServices/provider_ongoing.php?provider_email=
+  view_comp1(project_id : string)
+  {
+     var value = '1';
+     const modal = this.modalCtrl.create(ViewActiveJobPage,{project_id, value});
+     modal.present();
+  }
 
-  //get all proposals : https://purpledimes.com/BoobaJob/WebServices/get_providers_proposals.php?provider_email=
+  view_comp2(project_id : string)
+  {
+     var value = '2';
+     const modal = this.modalCtrl.create(ViewActiveJobPage,{project_id, value});
+     modal.present();
+  }
 
-  //get completed jobs : https://purpledimes.com/BoobaJob/WebServices/get_prov_completed_projects.php?provider_email=
+  
 
   get_going_jobs()
   {
