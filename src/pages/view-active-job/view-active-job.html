@@ -6,8 +6,8 @@
       </div>
     </ion-title>
     <ion-buttons end>
-      <button ion-button style="color:white;" (click)="close()"><p>Close</p></button>
-      </ion-buttons>
+      <ion-icon name="ios-close-circle-outline" (click)="close()" style="color:white"></ion-icon>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -15,58 +15,89 @@
 
   <div *ngIf="pr_value === 1 || pr_value === '1'" align="center" style="margin-top:6%;padding-left:5px">
     <ion-card style="border-radius:12px 12px;padding-top:10px" *ngFor="let post of posts">
-      <img src="{{post.profile_pic}}" style="width: 35%;padding-top:10px"/>
+      <img src="{{post.profile_pic}}" style="width: 35%;padding-top:10px" />
       <h2 style="color: black;font-size: 2.5em;"><b>{{post.name}}</b></h2>
       <p>Posted On: {{post.posted_on}}</p>
-    
-  <h3>Task Budget</h3>
-  <h1><b>{{post.budget}}$</b></h1>
+      <h3>Task Budget</h3>
+      <h1><b>{{post.budget}}$</b></h1>
 
-  <div align="left" style="padding-left:10px">
-  <h2><b>Description:</b></h2>
-  <p>{{post.jd}}</p>
-  </div>
+      <div align="left" style="padding-left:10px">
+        <h2><b>Description:</b></h2>
+        <p>{{post.jd}}</p>
+      </div>
 
-  <div align="center">
-    <img src="{{post.job_image}}" style="border-radius:12px 12px;height:12rem;width:12rem;" imageViewer/>
-  </div>
+      <div align="center">
+        <img src="{{post.job_image}}" style="border-radius:12px 12px;height:12rem;width:12rem;" imageViewer />
+      </div>
 
     </ion-card>
 
-</div>
+  </div>
 
 
 
-<div *ngIf="pr_value === 2 || pr_value === '2'" align="center" style="margin-top:6%;padding-left:5px">
-  <ion-card style="border-radius:12px 12px;padding-top:10px" *ngFor="let post of posts">
-    <img src="{{post.profile_pic}}" style="width: 35%;padding-top:10px"/>
-    <h2 style="color: black;font-size: 2.5em;"><b>{{post.name}}</b></h2>
+  <div *ngIf="pr_value === 2 || pr_value === '2'" align="center" style="margin-top:6%;padding-left:5px">
+    <ion-card style="border-radius:12px 12px;padding-top:10px" *ngFor="let post of posts">
+      <img src="{{post.profile_pic}}" style="width: 35%;padding-top:10px" />
+      <h2 style="color: black;font-size: 2.5em;"><b>{{post.name}}</b></h2>
+      <p>Posted On: {{post.posted_on}}</p>
 
-    <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+      <h3>Task Budget</h3>
+      <h1><b>{{post.budget}}$</b></h1>
 
-    
-    <p>Posted On: {{post.posted_on}}</p>
-  
-<h3>Task Budget</h3>
-<h1><b>{{post.budget}}$</b></h1>
+      <div align="left" style="padding-left:10px">
+        <h2><b>Description:</b></h2>
+        <p>{{post.jd}}</p>
+      </div>
 
-<div align="left" style="padding-left:10px">
-<h2><b>Description:</b></h2>
-<p>{{post.jd}}</p>
-</div>
+      <!-- <div>
+        <button ion-button round full
+          style="padding-left:10px; width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081"
+          (click)="upload(post.project_id)">Upload Job Picture</button>
+      </div>
 
-<div align="center">
-  <img src="{{post.job_image}}" style="border-radius:12px 12px;height:12rem;width:12rem;" imageViewer/>
-</div>
+      <div>
+        <button ion-button round full
+          style="padding-left:10px; width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081"
+          (click)="upload1(post.project_id)">Rate & Review</button>
+      </div> -->
 
-<div>
-  <button ion-button round full style="padding-left:10px; width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081" >Upload Job Picture</button>
-</div>
+      <div align="center">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <p>Upload Picture</p>
+            </ion-col>
+            <ion-col col-8>
+              <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;"  (click)="upload(post.project_id)" style="color:#9a4081"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>
+              <p>Rate Client</p>
+            </ion-col>
+            <ion-col col-8>
+              <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;"  (click)="upload1(post.project_id)" style="color:#9a4081"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>
+              <p>Review Client</p>
+            </ion-col>
+            <ion-col col-8>
+              <ion-icon name="ios-checkmark-circle-outline"  style="font-size: 1em;" (click)="upload2(post.project_id)" style="color:#9a4081"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
 
 
-  </ion-card>
 
-</div>
+    </ion-card>
+
+  </div>
 
 
 </ion-content>

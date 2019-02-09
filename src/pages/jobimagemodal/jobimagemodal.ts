@@ -24,9 +24,12 @@ export class JobimagemodalPage {
   project_id: any;
   bid_status : any;
   data: { job_category: any; budget: any; work_location: any; };
+  value: any;
   constructor(private view: ViewController, public toastCtrl : ToastController ,private transfer: FileTransfer, private camera: Camera, public actionSheetCtrl: ActionSheetController, public alertCtrl : AlertController, private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private http: Http) {
   this.project_id = this.navParams.get('project_id');
   this.provider_email = this.navParams.get('provider_email'); 
+  this.value = this.navParams.get('value');
+  console.log(this.value);
   }
 
   ionViewDidLoad() {
@@ -35,9 +38,7 @@ export class JobimagemodalPage {
 
   close()
   {
-    this.bid_status = '0';
-    let gata = { bid_status : this.bid_status};
-    this.view.dismiss(gata);
+    this.view.dismiss();
   }
 
    //Upload image:
@@ -138,10 +139,7 @@ public uploadImage() {
     });
     alert.present();
     
-    //returning value after success
-    this.bid_status = '1';
-    let gata = { bid_status : this.bid_status};
-    this.view.dismiss(gata);
+    this.view.dismiss();
 
   }, err => {
     loadingCtrl.dismissAll()

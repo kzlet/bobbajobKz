@@ -32,19 +32,6 @@ export class JobHistoryPage {
    
   }
 
-  upload(project_id :  string)
-  {
-    const modal = this.modalCtrl.create(JobimagemodalPage, {project_id , provider_email : this.provider_email });
-
-    modal.onDidDismiss(data => {
-      console.log(data);
-      this.bid_status = data.bid_status;
-      console.log(data.bid_status);
-      this.get_completed_jobs()
-    });
-
-    modal.present();
-  }
 
   checkfilter()
   {

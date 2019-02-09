@@ -43,7 +43,7 @@
 
           <ion-list *ngSwitchCase="'Completed'">
               <ion-list style="margin-bottom:35%">
-              <ion-item *ngFor="let cost of coasts, let i = index" (click)="view_comp2(cost.project_id)">
+              <ion-item *ngFor="let cost of coasts, let i = index">   <!--(click)="view_comp2(cost.project_id)"-->
                   <ion-grid>
                     <ion-row>
                       <ion-col col-10>
@@ -57,14 +57,9 @@
                   <h3>{{cost.jd}}</h3>
                   <p style="color:green"><b>Status:</b>&nbsp;Completed</p>
 
-                  <div align="right" *ngIf="cost.job_image === null || cost.job_image === 'null'">
-                  <button ion-button round class="btn-color" (click)="upload(cost.project_id)">Upload Picture</button>
+                  <div align="right">
+                  <button ion-button round full class="btn-color" (click)="view_comp2(cost.project_id)">Rate User</button>
                   </div>
-
-                  <div align="right" *ngIf="cost.job_image != null || cost.job_image != 'null'">
-                      <button ion-button round class="btn-color-green">Uploaded</button>
-                      </div>
-
                     
                 </ion-item>
               </ion-list>
