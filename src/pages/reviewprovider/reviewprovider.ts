@@ -13,11 +13,20 @@ export class ReviewproviderPage {
   project_id: any;
   apiUrl: string;
   posts: any;
-  rate : any = '3.5';
+  rate: any = '3.5';
   provider_email: string;
-  constructor(public modalCtrl: ModalController, public alertCtrl : AlertController, private nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  client_email: any;
+  constructor(public modalCtrl: ModalController, public alertCtrl: AlertController, private nativeStorage: NativeStorage, private loadingCtrl: LoadingController, private http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.project_id = this.navParams.get('project_id');
     this.get_inprogress_jobs();
+    this.nativeStorage.getItem('user_email')
+    .then(
+      data => {
+        console.log("Checking for User email:" + data);
+        this.client_email = data;
+      },
+      error => console.error(error)
+    );
   }
 
   ionViewDidLoad() {
@@ -25,8 +34,7 @@ export class ReviewproviderPage {
     console.log("project id reviewprovider" + this.project_id);
   }
 
-  get_inprogress_jobs() 
-  {
+  get_inprogress_jobs() {
     let loader = this.loadingCtrl.create({
       content: "Loading Status..."
     });
@@ -38,16 +46,15 @@ export class ReviewproviderPage {
       .subscribe(data => {
 
         this.posts = data;
-       // this.posts = Array.of(this.posts);
+        // this.posts = Array.of(this.posts);
         console.log(this.posts);
-          loader.dismiss();
+        loader.dismiss();
       }, error => {
         console.log(error); // Error getting the data
       });
   }
 
-  complete_job(provider_email : string,provider_name : string)
-  {
+  complete_job(provider_email: string, provider_name: string) {
     console.log("Project_id" + this.project_id);
     this.provider_email = provider_email;
     const confirm = this.alertCtrl.create({
@@ -69,22 +76,36 @@ export class ReviewproviderPage {
               content: "Reviewing Job Status..."
             });
             loader.present();
-            this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_job_status.php?project_id=' + this.project_id;  
+            this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/update_job_status.php?project_id=' + this.project_id;
             this.http.get(this.apiUrl).map(res => res.json())
               .subscribe(data => {
                 console.log(data);
                 var status = data.Status;
                 if (status === 'success') {
                   loader.dismiss();
-                  this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/complete_job_status.php?id=' + this.project_id;  
+                  this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/complete_job_status.php?id=' + this.project_id;
                   this.http.get(this.apiUrl).map(res => res.json())
                     .subscribe(data => {
                       console.log(data);
                       var status = data.Status;
                       if (status === 'success') {
-                        console.log("Operation success:" + this.project_id);
-                        const modal = this.modalCtrl.create(RateproviderPage, {provider_email , project_id : this.project_id , provider_name});
-                        modal.present();  
+                        this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/insert_client_rating.php?project_id=' + this.project_id + '&client_email=' + this.client_email;
+                        this.http.get(this.apiUrl).map(res => res.json())
+                          .subscribe(data => {
+                            console.log(data);
+                            var status = data.Status;
+                            if (status === 'success') {
+                              console.log("Operation success:" + this.project_id);
+                              const modal = this.modalCtrl.create(RateproviderPage, { provider_email, project_id: this.project_id, provider_name });
+                              modal.present();
+                            }
+                            else {
+                              loader.dismiss();
+                            }
+                          }, error => {
+                            console.log(error);
+                          });
+
                       }
                       else {
                         loader.dismiss();
@@ -106,8 +127,7 @@ export class ReviewproviderPage {
     confirm.present();
   }
 
-  post_notification()
-  {
+  post_notification() {
     this.apiUrl = 'https://purpledimes.com/BoobaJob/WebServices/job_complete_notfication.php?email=' + this.provider_email;
     console.log(this.apiUrl);
     this.http.get(this.apiUrl).map(res => res.json())

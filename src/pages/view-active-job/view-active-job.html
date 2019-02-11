@@ -50,47 +50,40 @@
         <p>{{post.jd}}</p>
       </div>
 
-      <!-- <div>
-        <button ion-button round full
-          style="padding-left:10px; width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081"
-          (click)="upload(post.project_id)">Upload Job Picture</button>
-      </div>
-
-      <div>
-        <button ion-button round full
-          style="padding-left:10px; width:75%; border-top: 2px solid; border-bottom: 2px solid; border-left: 2px solid; border-right: 2px solid;background-color:white;color:#9a4081"
-          (click)="upload1(post.project_id)">Rate & Review</button>
-      </div> -->
-
       <div align="center">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-4>
-              <p>Upload Picture</p>
-            </ion-col>
-            <ion-col col-8>
-              <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;"  (click)="upload(post.project_id)" style="color:#9a4081"></ion-icon>
-            </ion-col>
-          </ion-row>
+        <ion-list>
+          <ion-item *ngIf="image_status === success  || image_status === 'success'">
+            Upload Picture
+            <ion-icon name="ios-checkmark-circle" style="font-size: 1em;" style="color:green" item-end></ion-icon>
+          </ion-item>
 
-          <ion-row>
-            <ion-col col-4>
-              <p>Rate Client</p>
-            </ion-col>
-            <ion-col col-8>
-              <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;"  (click)="upload1(post.project_id)" style="color:#9a4081"></ion-icon>
-            </ion-col>
-          </ion-row>
+          <ion-item *ngIf="image_status === failed || image_status === 'failed'">
+            Upload Picture
+            <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;" (click)="upload()" style="color:#9a4081" item-end></ion-icon>
+          </ion-item>
+        
+      
+          <ion-item *ngIf="rate_status != null  || rate_status != 'null'">
+            Rate Client
+          <ion-icon name="ios-checkmark-circle" style="font-size: 1em;"  style="color:green" item-end></ion-icon>
+        </ion-item>
 
-          <ion-row>
-            <ion-col col-4>
-              <p>Review Client</p>
-            </ion-col>
-            <ion-col col-8>
-              <ion-icon name="ios-checkmark-circle-outline"  style="font-size: 1em;" (click)="upload2(post.project_id)" style="color:#9a4081"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-item *ngIf="rate_status === null  || rate_status === 'null'">
+            Rate Client
+          <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;"  (click)="upload1()" style="color:#9a4081" item-end></ion-icon>
+        </ion-item>
+
+        <ion-item *ngIf="review_status != null  || review_status != null">
+          Review Client
+        <ion-icon name="ios-checkmark-circle" style="font-size: 1em;" style="color:green" item-end></ion-icon>
+      </ion-item>
+
+      <ion-item *ngIf="review_status === null  || review_status === null">
+          Review Client
+          <ion-icon name="ios-checkmark-circle-outline" style="font-size: 1em;" (click)="upload2()" style="color:#9a4081" item-end></ion-icon>
+      </ion-item>
+      
+    </ion-list>
       </div>
 
 

@@ -63,15 +63,8 @@ export class ProviderConnectionsPage {
       .subscribe(data => {
         this.posts = data;
         
-      //  this.chatter = data.chat_data;
-        
         console.log("Here" + JSON.stringify(this.posts));
-     //   console.log("Here" + JSON.stringify(this.chatter));
-      //  console.log("Chatter:" + this.chatter);
-       
-      //  console.log("For chat message:" + this.posts.chat_data.message);
-     //   console.log("For chat time:" + this.posts.chat_data.time);
-
+ 
         if(this.posts.Status === 'failed')
         {
           let alert = this.alertCtrl.create({
